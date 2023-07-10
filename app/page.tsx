@@ -1,10 +1,22 @@
 "use client";
 import Image from "next/image";
 import React from "react";
+import { useForm } from "react-hook-form";
 import Beaker from "./assets/vial.svg";
 
 export default function Home() {
   const [isInterested, setIsInterested] = React.useState(false);
+  const [isSaved, setIsSaved] = React.useState(false);
+  const form = useForm({
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const onSubmit = form.handleSubmit((data) => {
+    console.log(data);
+    setIsSaved(true);
+  });
 
   return (
     <main>
@@ -22,24 +34,34 @@ export default function Home() {
               src={Beaker}
             />
             <div className="h-24">
-              {isInterested ? (
-                <form className="flex flex-col">
-                  <input
-                    type="text"
-                    placeholder="Your Email"
-                    className="mb-8 input input-bordered input-primary w-full max-w-xs"
-                  />
-                  <button className="btn btn-primary" type="submit">
-                    Join Waitlist
-                  </button>
-                </form>
-              ) : (
-                <button
-                  onClick={() => setIsInterested(true)}
-                  className="btn btn-primary"
-                >
-                  Join Waitlist
-                </button>
+              {isSaved && (
+                <h2 className="text-lg">
+                  😎 <span className="italic">Awesome, Thanks</span>
+                </h2>
+              )}
+              {!isSaved && (
+                <>
+                  {isInterested ? (
+                    <form className="flex flex-col" onSubmit={onSubmit}>
+                      <input
+                        {...form.register("email")}
+                        type="text"
+                        placeholder="Your Email"
+                        className="mb-8 input input-bordered input-primary w-full max-w-xs"
+                      />
+                      <button className="btn btn-primary" type="submit">
+                        Join Waitlist
+                      </button>
+                    </form>
+                  ) : (
+                    <button
+                      onClick={() => setIsInterested(true)}
+                      className="btn btn-primary"
+                    >
+                      Join Waitlist
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </div>
