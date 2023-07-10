@@ -24,7 +24,7 @@ export default function Home() {
         <div className="hero-content text-center">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold">
-              Welcome to <br /> Friend lab!
+              Welcome to <br /> Friend Lab!
             </h1>
             <Image
               className="m-auto my-4 rotate-12"
@@ -44,11 +44,21 @@ export default function Home() {
                   {isInterested ? (
                     <form className="flex flex-col" onSubmit={onSubmit}>
                       <input
-                        {...form.register("email")}
+                        {...form.register("email", {
+                          pattern: {
+                            value: /\S+@\S+\.\S+/,
+                            message: "That doesn't look like an email",
+                          },
+                        })}
                         type="text"
                         placeholder="Your Email"
                         className="mb-8 input input-bordered input-primary w-full max-w-xs"
                       />
+                      {form.formState.errors && (
+                        <span className="mb-4">
+                          {form.formState.errors?.email?.message}
+                        </span>
+                      )}
                       <button className="btn btn-primary" type="submit">
                         Join Waitlist
                       </button>
