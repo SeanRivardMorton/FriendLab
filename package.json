@@ -10,7 +10,7 @@
     "studio": "dotenv -e .env.local -- npx prisma studio",
     "push": "dotenv -e .env.local -- npx prisma db push",
     "generate": "dotenv -e .env.local -- npx prisma generate",
-    "postinstall": "dotenv -e .env.local prisma generate"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "4.16.2",
