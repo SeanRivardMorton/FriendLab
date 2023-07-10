@@ -4,6 +4,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Beaker from "./assets/vial.svg";
 
+export async function addNewUser() {}
+
 export default function Home() {
   const [isInterested, setIsInterested] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
@@ -13,9 +15,23 @@ export default function Home() {
     },
   });
 
-  const onSubmit = form.handleSubmit((data) => {
+  const onSubmit = form.handleSubmit(async (data) => {
     console.log(data);
+    const response = await fetch("/api/waitlist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((d) => {
+      return d.json();
+    });
+
+    const result = await response;
+    if (result?.error) return;
+
     setIsSaved(true);
+    console.log("heh?", result);
   });
 
   return (
