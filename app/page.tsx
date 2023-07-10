@@ -1,7 +1,11 @@
+"use client";
 import Image from "next/image";
+import React from "react";
 import Beaker from "./assets/vial.svg";
 
 export default function Home() {
+  const [isInterested, setIsInterested] = React.useState(false);
+
   return (
     <main>
       <div className="hero min-h-screen bg-base-200">
@@ -17,7 +21,27 @@ export default function Home() {
               alt="vial"
               src={Beaker}
             />
-            <button className="btn btn-primary">Join Waitlist</button>
+            <div className="h-24">
+              {isInterested ? (
+                <form className="flex flex-col">
+                  <input
+                    type="text"
+                    placeholder="Your Email"
+                    className="mb-8 input input-bordered input-primary w-full max-w-xs"
+                  />
+                  <button className="btn btn-primary" type="submit">
+                    Join Waitlist
+                  </button>
+                </form>
+              ) : (
+                <button
+                  onClick={() => setIsInterested(true)}
+                  className="btn btn-primary"
+                >
+                  Join Waitlist
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
