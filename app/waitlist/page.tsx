@@ -2,7 +2,7 @@
 import { PrismaClient } from "@prisma/client";
 import prisma from "../../lib/prisma";
 
-export async function getAllPosts() {
+async function getAllPosts() {
   const feed = await prisma.post.findMany({
     where: { published: true },
   });
@@ -16,7 +16,7 @@ export default async () => {
   return (
     <div>
       {posts.map((u) => {
-        return <div>{u.title}</div>;
+        return <div key={u.id}>{u.title}</div>;
       })}
     </div>
   );

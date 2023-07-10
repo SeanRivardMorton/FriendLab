@@ -4,8 +4,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Beaker from "./assets/vial.svg";
 
-export async function addNewUser() {}
-
 export default function Home() {
   const [isInterested, setIsInterested] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
