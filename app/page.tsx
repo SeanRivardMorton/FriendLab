@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Beaker from "./assets/vial.svg";
+
 export default function Home() {
   return (
     <main>
@@ -7,7 +10,13 @@ export default function Home() {
             <h1 className="text-5xl font-bold">
               Welcome to <br /> Friend lab!
             </h1>
-            <p className="py-6">Stay tuned!</p>
+            <Image
+              className="m-auto my-4 rotate-12"
+              width={80}
+              height={80}
+              alt="vial"
+              src={Beaker}
+            />
             <button className="btn btn-primary">Join Waitlist</button>
           </div>
         </div>
