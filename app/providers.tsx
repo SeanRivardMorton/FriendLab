@@ -6,8 +6,11 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 if (typeof window !== "undefined") {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || "", {
-    api_host: "https://friendlab.co.uk/ingest",
+  posthog.init("phc_QJgwbbp86My5P4V6b7ey2GYcOn9jvLixeL3hpk4Scma", {
+    api_host:
+      process.env.NODE_ENV === "development"
+        ? "https://eu.posthog.com"
+        : "https://friendlab.co.uk/ingest",
   });
 }
 
