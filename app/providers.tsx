@@ -6,8 +6,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 if (typeof window !== "undefined") {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: "https://eu.posthog.com",
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || "", {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   });
 }
 
@@ -18,8 +18,8 @@ export function PostHogPageview(): any {
   useEffect(() => {
     if (pathname) {
       let url = window.origin + pathname;
-      if (searchParams.toString()) {
-        url = url + `?${searchParams.toString()}`;
+      if (searchParams?.toString()) {
+        url = url + `?${searchParams?.toString()}`;
       }
       posthog.capture("$pageview", {
         $current_url: url,
