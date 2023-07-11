@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { posthog } from "posthog-js";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Beaker from "./assets/vial.svg";
@@ -29,7 +30,7 @@ export default function Home() {
     if (result?.error) return;
 
     setIsSaved(true);
-    console.log("heh?", result);
+    posthog.capture("my event", { property: "value " });
   });
 
   return (

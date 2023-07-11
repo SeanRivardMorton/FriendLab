@@ -1,5 +1,7 @@
 import "./globals.css";
+import { PHProvider, PostHogPageview } from "./providers";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +34,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
     </html>
   );
 }
