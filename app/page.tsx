@@ -92,6 +92,15 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className="card bg-base-100 shadow-xl my-8">
+        <div className="card-body">
+          <h2 className="card-title mx-auto">What is it?</h2>
+          <p>
+            Friend Lab helps friends hangout. Help schedule your next hangout
+            with location, price, and interests in mind.
+          </p>
+        </div>
+      </div>
     </main>
   );
 }
