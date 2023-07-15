@@ -7,6 +7,19 @@ const nextConfig = {};
 
 const { withSentryConfig } = require("@sentry/nextjs");
 
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/avatars/**",
+      },
+    ],
+  },
+};
+
 module.exports = withSentryConfig(
   module.exports,
   {
