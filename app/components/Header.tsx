@@ -32,7 +32,10 @@ export const Header = () => {
         <a className="btn btn-ghost normal-case text-xl">Friend Lab</a>
       </div>
       <div className="flex-none">
-        {status !== "unauthenticated" ? (
+        {status === "loading" && (
+          <span className="loading loading-spinner loading-sm"></span>
+        )}
+        {status === "authenticated" && (
           <button
             onClick={() => signOut()}
             className="btn btn-square btn-ghost"
@@ -45,7 +48,8 @@ export const Header = () => {
               height={48}
             />
           </button>
-        ) : (
+        )}
+        {status === "unauthenticated" && (
           <button
             onClick={() => router.push("/api/auth/signin")}
             className="btn btn-square btn-ghost"

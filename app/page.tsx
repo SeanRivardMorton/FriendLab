@@ -83,7 +83,7 @@ export default function Home() {
                       onClick={() => setIsInterested(true)}
                       className="btn btn-primary"
                     >
-                      Join Waitlist
+                      Sign up
                     </button>
                   )}
                 </>
