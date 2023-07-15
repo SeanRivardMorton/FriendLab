@@ -2,12 +2,11 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const Header = () => {
   const { data, status } = useSession();
   const router = useRouter();
-
-  console.log(status);
 
   return (
     <div className="navbar bg-base-100">
@@ -29,7 +28,9 @@ export const Header = () => {
         </button>
       </div>
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">Friend Lab</a>
+        <Link href="/" className="btn btn-ghost normal-case text-xl">
+          Friend Lab
+        </Link>
       </div>
       <div className="flex-none">
         {status === "loading" && (
