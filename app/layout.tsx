@@ -2,6 +2,9 @@ import "./globals.css";
 import { PHProvider, PostHogPageview } from "./providers";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
+import { SessionProvider } from "next-auth/react";
+import Provider from "./components/Provider";
+import { Header } from "./components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,14 +34,19 @@ export const metadata = {
   description: descriptions[randomIndex],
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, session }) {
   return (
     <html lang="en">
       <Suspense>
         <PostHogPageview />
       </Suspense>
       <PHProvider>
-        <body>{children}</body>
+        <Provider>
+          <body>
+            <Header />
+            {children}
+          </body>
+        </Provider>
       </PHProvider>
     </html>
   );
