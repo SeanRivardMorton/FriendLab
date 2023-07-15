@@ -37,7 +37,7 @@ export default function Home() {
     <main>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content text-center">
-          <div className="max-w-md">
+          <div className="max-w-md flex flex-col">
             <h1 className="text-5xl font-bold">
               Welcome to <br /> Friend Lab!
             </h1>
@@ -79,12 +79,24 @@ export default function Home() {
                       </button>
                     </form>
                   ) : (
-                    <button
-                      onClick={() => setIsInterested(true)}
-                      className="btn btn-primary"
-                    >
-                      Join Waitlist
-                    </button>
+                    <>
+                      <div className="card bg-base-100 shadow-xl my-8">
+                        <div className="card-body">
+                          <h2 className="card-title mx-auto">What is it?</h2>
+                          <p>
+                            Friend Lab helps friends hangout. Help schedule your
+                            next hangout with location, price, and interests in
+                            mind.
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setIsInterested(true)}
+                        className="btn btn-primary"
+                      >
+                        Join Waitlist
+                      </button>
+                    </>
                   )}
                 </>
               )}
