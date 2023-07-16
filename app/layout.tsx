@@ -31,7 +31,8 @@ const randomIndex = Math.floor(Math.random() * descriptions.length);
 
 export const metadata = {
   title: "Friend Lab",
-  description: descriptions[randomIndex],
+  description:
+    "Introducing Friend Lab, the innovative social media platform designed to transform the way adults plan hangouts with their friends. Say goodbye to the hassle of coordinating schedules, setting budgets, and finding the perfect locations, because Friend Lab does the work for you.",
 };
 
 export default function RootLayout({ children, session }) {

@@ -37,10 +37,13 @@ export const Header = () => {
           <span className="loading loading-spinner loading-sm"></span>
         )}
         {status === "authenticated" && (
-          <button
-            onClick={() => signOut()}
-            className="btn btn-square btn-ghost"
-          >
+          <>
+            <button
+              onClick={() => signOut()}
+              className="btn btn-square btn-ghost mr-2"
+            >
+              Logout
+            </button>
             <Image
               className="rounded-md"
               alt="logo"
@@ -48,7 +51,7 @@ export const Header = () => {
               width={48}
               height={48}
             />
-          </button>
+          </>
         )}
         {status === "unauthenticated" && (
           <button
