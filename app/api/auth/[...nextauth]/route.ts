@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import SpotifyProvider from "next-auth/providers/spotify";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 
@@ -10,6 +11,10 @@ const handler = NextAuth({
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID || "",
       clientSecret: process.env.DISCORD_CLIENT_SECRET || "",
+    }),
+    SpotifyProvider({
+      clientId: process.env.SPOTIFY_CLIENT_ID || "",
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET || "",
     }),
   ],
   adapter: PrismaAdapter(prisma),
