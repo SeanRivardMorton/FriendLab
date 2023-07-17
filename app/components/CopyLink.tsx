@@ -3,7 +3,7 @@ import React from "react";
 import { ClipboardCopyIcon } from "@radix-ui/react-icons";
 
 interface Props {
-  link?: string;
+  link: string;
 }
 
 const CopyLink: React.FC<Props> = ({ link }) => {
