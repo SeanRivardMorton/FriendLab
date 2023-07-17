@@ -13,7 +13,8 @@ export default async function Home() {
     },
   });
 
-  const baseUrl = process.env.NEXTAUTH_URL || "https://friendlab.co.uk";
+  const baseUrl =
+    process.env.NEXTAUTH_URL || "https://friendlab.co.uk/api/auth/signin";
 
   // ghetto way to get url
   const url = baseUrl.replace("api/auth/signin", "invite");
