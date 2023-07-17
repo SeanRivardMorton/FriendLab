@@ -37,32 +37,44 @@ export default async function Home() {
   return (
     <main>
       <ClientProtectedPage>
-        <div className="hero text-center min-h-[92vh]">
-          <div className="hero-content flex flex-col w-11/12 lg:w-1/3">
-            <h2>Friends</h2>
-            {friends ? (
-              <>{friends[0].friend.email}</>
-            ) : (
+        <div className="hero text-center">
+          <div className="hero-content flex flex-col w-11 lg:w-1/3">
+            {friends && (
               <>
-                <h1 className="text-2xl my-2">
-                  Invite your friends to get started
-                </h1>
-                <div className="flex flex-col w-full">
-                  <label className="label">
-                    <span className="label-text">Invite Link</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Type here"
-                    className="input input-bordered input-primary w-full"
-                    value={link}
-                    disabled
-                  />
-
-                  <CopyLink link={link} />
-                </div>
+                {friends.map((friend) => {
+                  return (
+                    <div
+                      key={friend.id}
+                      className="flex flex-col justify-between"
+                    >
+                      <h2>Friends</h2>
+                      <div>{friend.friend.email}</div>
+                    </div>
+                  );
+                })}
               </>
             )}
+          </div>
+        </div>
+        <div className="hero text-center min-h-[92vh]">
+          <div className="hero-content flex flex-col w-11/12 lg:w-1/3">
+            <h1 className="text-2xl my-2">
+              Invite your friends to get started
+            </h1>
+            <div className="flex flex-col w-full">
+              <label className="label">
+                <span className="label-text">Invite Link</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered input-primary w-full"
+                value={link}
+                disabled
+              />
+
+              <CopyLink link={link} />
+            </div>
           </div>
         </div>
       </ClientProtectedPage>
