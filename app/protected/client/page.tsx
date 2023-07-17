@@ -3,11 +3,11 @@
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-const ClientProtectedPage = () => {
+const ClientProtectedPage = ({ children }) => {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/api/auth/signin");
+      redirect("/waitlist");
     },
   });
   if (status === "loading") return <p>Loading...</p>;
@@ -17,7 +17,7 @@ const ClientProtectedPage = () => {
   }
   return (
     <>
-      <h1>Client Protected Page</h1>
+      <h1>{children}</h1>
     </>
   );
 };

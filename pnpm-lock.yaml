@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@next-auth/prisma-adapter': ^1.0.7
   '@prisma/client': 4.16.2
+  '@radix-ui/react-icons': ^1.3.0
   '@sentry/nextjs': ^7.57.0
   '@types/node': 20.4.1
   '@types/react': 18.2.14
@@ -13,6 +14,7 @@ specifiers:
   eslint-config-next: 13.4.8
   next: 13.4.8
   next-auth: ^4.22.1
+  nodemailer: ^6.9.3
   postcss: ^8.4.25
   posthog-js: ^1.70.1
   posthog-node: ^3.1.1
@@ -26,12 +28,14 @@ specifiers:
 dependencies:
   '@next-auth/prisma-adapter': 1.0.7_arcl7aimwkiosoj4hoyzp3g5om
   '@prisma/client': 4.16.2_prisma@4.16.2
+  '@radix-ui/react-icons': 1.3.0_react@18.2.0
   '@sentry/nextjs': 7.57.0_next@13.4.8+react@18.2.0
   '@vercel/postgres': 0.4.0
   eslint: 8.44.0
   eslint-config-next: 13.4.8_iqf7tbmerllfqanu4l3d6aqdn4
   next: 13.4.8_biqbaboplfbrettd7655fr4n2y
-  next-auth: 4.22.1_huavqdni4pobvfczobpbvo6vhq
+  next-auth: 4.22.1_mipku7fzrfeqipgqvu53su6kku
+  nodemailer: 6.9.3
   posthog-js: 1.70.1
   posthog-node: 3.1.1
   react: 18.2.0
@@ -170,7 +174,7 @@ packages:
       next-auth: ^4
     dependencies:
       '@prisma/client': 4.16.2_prisma@4.16.2
-      next-auth: 4.22.1_huavqdni4pobvfczobpbvo6vhq
+      next-auth: 4.22.1_mipku7fzrfeqipgqvu53su6kku
     dev: false
 
   /@next/env/13.4.8:
@@ -319,6 +323,14 @@ packages:
   /@prisma/engines/4.16.2:
     resolution: {integrity: sha512-vx1nxVvN4QeT/cepQce68deh/Turxy5Mr+4L4zClFuK1GlxN3+ivxfuv+ej/gvidWn1cE1uAhW7ALLNlYbRUAw==}
     requiresBuild: true
+
+  /@radix-ui/react-icons/1.3.0_react@18.2.0:
+    resolution: {integrity: sha512-jQxj/0LKgp+j9BiTXz3O3sgs26RNet2iLWmsPyRz2SIcR4q/4SbazXfnYwbAr+vLYKSfc7qxzyGQA1HLlYiuNw==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@rollup/plugin-commonjs/24.0.0_rollup@2.78.0:
     resolution: {integrity: sha512-0w0wyykzdyRRPHOb0cQt14mIBLujfAv6GgP6g8nvg/iBxEm112t3YPPq+Buqe2+imvElTka+bjNlJ/gB56TD8g==}
@@ -2242,7 +2254,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: false
 
-  /next-auth/4.22.1_huavqdni4pobvfczobpbvo6vhq:
+  /next-auth/4.22.1_mipku7fzrfeqipgqvu53su6kku:
     resolution: {integrity: sha512-NTR3f6W7/AWXKw8GSsgSyQcDW6jkslZLH8AiZa5PQ09w1kR8uHtR9rez/E9gAq/o17+p0JYHE8QjF3RoniiObA==}
     peerDependencies:
       next: ^12.2.5 || ^13
@@ -2258,6 +2270,7 @@ packages:
       cookie: 0.5.0
       jose: 4.14.4
       next: 13.4.8_biqbaboplfbrettd7655fr4n2y
+      nodemailer: 6.9.3
       oauth: 0.9.15
       openid-client: 5.4.3
       preact: 10.16.0
@@ -2330,6 +2343,11 @@ packages:
   /node-releases/2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
     dev: true
+
+  /nodemailer/6.9.3:
+    resolution: {integrity: sha512-fy9v3NgTzBngrMFkDsKEj0r02U7jm6XfC3b52eoNV+GCrGj+s8pt5OqhiJdWKuw51zCTdiNR/IUD1z33LIIGpg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /normalize-path/3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
