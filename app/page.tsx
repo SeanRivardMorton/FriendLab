@@ -4,6 +4,7 @@ import ClientProtectedPage from "./protected/client/page";
 import CopyLink from "./components/CopyLink";
 import { authOptions } from "./api/auth/[...nextauth]";
 import prisma from "../lib/prisma";
+import Image from "next/image";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -37,25 +38,33 @@ export default async function Home() {
   return (
     <main>
       <ClientProtectedPage>
-        <div className="hero text-center">
-          <div className="hero-content flex flex-col w-11 lg:w-1/3">
-            {friends && (
-              <>
-                {friends.map((friend) => {
-                  return (
-                    <div
-                      key={friend.id}
-                      className="flex flex-col justify-between"
-                    >
-                      <h2>Friends</h2>
-                      <div>{friend.friend.email}</div>
+        <div className="flex flex-col lg:w-1/3">
+          {friends && (
+            <>
+              <h2>Your Friends</h2>
+              {friends.map((friend) => {
+                return (
+                  <div key={friend.id} className="flex flex-row m-2">
+                    <div className="avatar">
+                      <div className="w-8 rounded-xl mr-2">
+                        {friend.friend.image && (
+                          <Image
+                            height={16}
+                            width={16}
+                            src={friend.friend.image}
+                            alt="user avatar"
+                          />
+                        )}
+                      </div>
                     </div>
-                  );
-                })}
-              </>
-            )}
-          </div>
+                    <div>{friend.friend.email}</div>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
+
         <div className="hero text-center min-h-[92vh]">
           <div className="hero-content flex flex-col w-11/12 lg:w-1/3">
             <h1 className="text-2xl my-2">

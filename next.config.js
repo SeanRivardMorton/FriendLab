@@ -22,6 +22,12 @@ module.exports = {
         port: "",
         pathname: "/image/**",
       },
+      {
+        protocol: "https",
+        hostname: "scontent.fmaa10-1.fna.fbcdn.net",
+        port: "",
+        pathname: "/v/**",
+      },
     ],
   },
 };
