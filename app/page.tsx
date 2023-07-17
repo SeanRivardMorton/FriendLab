@@ -13,36 +13,56 @@ export default async function Home() {
     },
   });
 
+  const friends =
+    user &&
+    (await prisma.friendship.findMany({
+      where: {
+        userId: user.id,
+      },
+      include: {
+        friend: true,
+      },
+    }));
+
+  console.log("friends", friends);
+
   const baseUrl =
     process.env.NEXTAUTH_URL || "https://friendlab.co.uk/api/auth/signin";
 
   // ghetto way to get url
   const url = baseUrl.replace("api/auth/signin", "invite");
 
-  const link = user ? `${url}?=${user.id.slice(-6)}` : url;
+  const link = user ? `${url}?ref=${user.id.slice(-6)}` : url;
 
   return (
     <main>
       <ClientProtectedPage>
         <div className="hero text-center min-h-[92vh]">
           <div className="hero-content flex flex-col w-11/12 lg:w-1/3">
-            <h1 className="text-2xl my-2">
-              Invite your friends to get started
-            </h1>
-            <div className="flex flex-col w-full">
-              <label className="label">
-                <span className="label-text">Invite Link</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-primary w-full"
-                value={link}
-                disabled
-              />
+            <h2>Friends</h2>
+            {friends ? (
+              <>{friends[0].friend.email}</>
+            ) : (
+              <>
+                <h1 className="text-2xl my-2">
+                  Invite your friends to get started
+                </h1>
+                <div className="flex flex-col w-full">
+                  <label className="label">
+                    <span className="label-text">Invite Link</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered input-primary w-full"
+                    value={link}
+                    disabled
+                  />
 
-              <CopyLink link={link} />
-            </div>
+                  <CopyLink link={link} />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </ClientProtectedPage>
