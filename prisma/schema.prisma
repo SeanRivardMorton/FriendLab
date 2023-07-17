@@ -30,11 +30,19 @@ model User {
   accounts      Account[]
   posts         Post[]
   sessions      Session[]
+  friendships   Friendship[] @relation("UserFriendships")
+  friendOf      Friendship[] @relation("UserFriendOf")
+}
 
-  friends       User[] @relation("Friendship")
-  friendOf      User[] @relation("Friendship")
+model Friendship {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  userId    String
+  friendId  String
+  user      User      @relation("UserFriendships", fields: [userId], references: [id])
+  friend    User      @relation("UserFriendOf", fields: [friendId], references: [id])
 
-  @@map("users")
+  @@unique([userId, friendId])
 }
 
 model Account {
