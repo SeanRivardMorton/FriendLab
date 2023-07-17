@@ -13,7 +13,7 @@ export default async function Home() {
     },
   });
 
-  const baseUrl = process.env.NEXTAUTH_URL || "localhost:3000";
+  const baseUrl = process.env.NEXTAUTH_URL || "https://friendlab.co.uk";
 
   // ghetto way to get url
   const url = baseUrl.replace("api/auth/signin", "invite");
