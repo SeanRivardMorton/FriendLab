@@ -24,7 +24,7 @@ export default function RootLayout({ children, session }) {
           <body className="text-current">
             <Header />
             <div className="bg-base-200 h-[92vh] p-1 overflow-auto">
-              {children}
+              <div className="lg:w-2/4 lg:mx-auto">{children}</div>
             </div>
           </body>
         </Provider>

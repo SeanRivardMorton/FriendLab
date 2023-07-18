@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Dropdown from "./menu";
+import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 
 export const Header = () => {
   const { data, status } = useSession();
@@ -46,6 +47,9 @@ export const Header = () => {
             >
               Logout
             </button> */}
+            <Link href="/notifications">
+              <EnvelopeClosedIcon className="mr-4 h-4 w-4" />
+            </Link>
             <Image
               className="rounded-md"
               alt="logo"

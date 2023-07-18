@@ -62,7 +62,9 @@ export default async function Home() {
           <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">
             <div className="card-body">
               <h2 className="card-title">Friend Invite Link</h2>
-              <p className="border-2 rounded border-spacing-2 p-1">{link}</p>
+              <p className="border-2 rounded border-spacing-2 p-1 border-primary">
+                {link}
+              </p>
               <CopyLink link={link}></CopyLink>
             </div>
           </div>
@@ -120,11 +122,11 @@ export default async function Home() {
                 ))}
             </ul>
             <div className="card-actions justify-end flex flex-row">
-              <Link href="/friends" className="btn btn-link btn-primary">
+              <Link href="/friends" className="btn btn-link">
                 <PersonIcon />
                 View
               </Link>
-              <Link href="/friends/invite" className="btn btn-primary">
+              <Link href="/friends/invite" className="btn text-white">
                 <PlayIcon />
                 Invite Friends
               </Link>
