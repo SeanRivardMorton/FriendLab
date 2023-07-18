@@ -28,7 +28,7 @@ const NewsPage = () => {
   return (
     <div className="card w-11/12 mx-auto my-4 bg-base-100 shadow-xl">
       <div className="card-body">
-        <h1 className="text-2xl">Friend Lab News</h1>
+        <h1 className="card-title">Friend Lab News</h1>
         <p>Catch the latest news about Friend Lab here</p>
         <br></br>
         <h2 className="text-xl">0.1.0 Pre-Alpha Launch 🎉🎉🎉</h2>
