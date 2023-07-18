@@ -24,6 +24,7 @@ export function DateField(props) {
 }
 
 function DateSegment({ segment, state }) {
+  // TOOD: Refactor all these react-aria components
   let ref: any = useRef();
   let { segmentProps } = useDateSegment(segment, state, ref);
 
