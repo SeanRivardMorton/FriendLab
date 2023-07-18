@@ -9,6 +9,7 @@ import {
   CalendarIcon,
   LightningBoltIcon,
   MagnifyingGlassIcon,
+  PersonIcon,
   PlayIcon,
   ReaderIcon,
 } from "@radix-ui/react-icons";
@@ -77,9 +78,6 @@ export default async function Home() {
                 <ReaderIcon></ReaderIcon>
                 Read More
               </Link>
-              {/* <button className="btn btn-link btn-primary">
-                Read More
-              </button> */}
             </div>
           </div>
         </div>
@@ -115,15 +113,21 @@ export default async function Home() {
                         className="rounded-xl mr-2"
                       />
                     )}
-                    {friend.friend.name}
+                    <Link href={`/friends/${friend.friend.id}`}>
+                      {friend.friend.name}
+                    </Link>
                   </li>
                 ))}
             </ul>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">
+            <div className="card-actions justify-end flex flex-row">
+              <Link href="/friends" className="btn btn-link btn-primary">
+                <PersonIcon />
+                View
+              </Link>
+              <Link href="/friends/invite" className="btn btn-primary">
                 <PlayIcon />
                 Invite Friends
-              </button>
+              </Link>
             </div>
           </div>
         </div>
