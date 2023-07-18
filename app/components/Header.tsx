@@ -38,12 +38,12 @@ export const Header = () => {
         )}
         {status === "authenticated" && (
           <>
-            <button
+            {/* <button
               onClick={() => signOut()}
               className="btn btn-square btn-ghost mr-2"
             >
               Logout
-            </button>
+            </button> */}
             <Image
               className="rounded-md"
               alt="logo"

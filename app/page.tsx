@@ -5,6 +5,13 @@ import CopyLink from "./components/CopyLink";
 import { authOptions } from "./api/auth/[...nextauth]";
 import prisma from "../lib/prisma";
 import Image from "next/image";
+import {
+  CalendarIcon,
+  LightningBoltIcon,
+  MagnifyingGlassIcon,
+  PlayIcon,
+  ReaderIcon,
+} from "@radix-ui/react-icons";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -38,51 +45,81 @@ export default async function Home() {
   return (
     <main>
       <ClientProtectedPage>
-        <div className="flex flex-col lg:w-1/3">
-          {friends && (
-            <>
-              <h2>Your Friends</h2>
-              {friends.map((friend) => {
-                return (
-                  <div key={friend.id} className="flex flex-row m-2">
-                    <div className="avatar">
-                      <div className="w-8 rounded-xl mr-2">
-                        {friend.friend.image && (
-                          <Image
-                            height={16}
-                            width={16}
-                            src={friend.friend.image}
-                            alt="user avatar"
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div>{friend.friend.email}</div>
-                  </div>
-                );
-              })}
-            </>
-          )}
+        <div className="flex flex-col">
+          <div className="flex flex-row justify-between">
+            <button className="btn btn-secondary mt-4 mx-auto">
+              <CalendarIcon />
+              Set availability
+            </button>
+            <button className="btn btn-primary mt-4 mx-auto">
+              <LightningBoltIcon />
+              New Event
+              <LightningBoltIcon />
+            </button>
+          </div>
+          <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">
+            <div className="card-body">
+              <h2 className="card-title">Friend Invite Link</h2>
+              <p className="border-2 rounded border-spacing-2 p-1">{link}</p>
+              <CopyLink link={link}></CopyLink>
+            </div>
+          </div>
         </div>
-
-        <div className="hero text-center min-h-[92vh]">
-          <div className="hero-content flex flex-col w-11/12 lg:w-1/3">
-            <h1 className="text-2xl my-2">
-              Invite your friends to get started
-            </h1>
-            <div className="flex flex-col w-full">
-              <label className="label">
-                <span className="label-text">Invite Link</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-primary w-full"
-                value={link}
-                disabled
-              />
-
-              <CopyLink link={link} />
+        <div className="card w-11/12 mx-auto my-4 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title">Friend Lab News</h2>
+            <p>
+              <strong>Version 0.1.0</strong> Launch 🎉🎉🎉
+            </p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-sm btn-outline btn-primary">
+                <ReaderIcon></ReaderIcon>
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="card w-11/12 mx-auto my-4 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title">Upcoming Events</h2>
+            <ul>
+              <li>Pub</li>
+              <li>Movie</li>
+              <li>Walk</li>
+            </ul>
+            <div className="card-actions justify-end">
+              <button className="btn btn-sm btn-outline btn-primary">
+                <MagnifyingGlassIcon></MagnifyingGlassIcon>
+                Take a look
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="card w-11/12 mx-auto my-4 bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title">Who's around</h2>
+            <ul>
+              {friends &&
+                friends.map((friend) => (
+                  <li className="flex flex-row my-2" key={friend.id}>
+                    {friend.friend.image && (
+                      <Image
+                        src={friend.friend.image}
+                        height={24}
+                        width={24}
+                        alt="friend icon"
+                        className="rounded-xl mr-2"
+                      />
+                    )}
+                    {friend.friend.name}
+                  </li>
+                ))}
+            </ul>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">
+                <PlayIcon />
+                Invite Friends
+              </button>
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Beaker from "../assets/vial.svg";
 
+// This page is to be phased out
 export default function Home() {
   const [isInterested, setIsInterested] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
@@ -14,7 +15,6 @@ export default function Home() {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    console.log(data);
     const response = await fetch("/api/waitlist", {
       method: "POST",
       headers: {

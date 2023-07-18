@@ -15,15 +15,17 @@ export const metadata = {
 
 export default function RootLayout({ children, session }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="fantasy">
       <Suspense>
         <PostHogPageview />
       </Suspense>
       <PHProvider>
         <Provider>
-          <body>
+          <body className="text-current">
             <Header />
-            {children}
+            <div className="bg-base-200 h-[92vh] p-1 overflow-auto">
+              {children}
+            </div>
           </body>
         </Provider>
       </PHProvider>

@@ -14,7 +14,6 @@ const ClientInvite = ({ children, user }) => {
       },
       body: JSON.stringify({
         ref,
-        // user,
       }),
     }).then((d) => {
       return d.json();
