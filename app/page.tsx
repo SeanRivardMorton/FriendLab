@@ -12,6 +12,7 @@ import {
   PlayIcon,
   ReaderIcon,
 } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -47,15 +48,15 @@ export default async function Home() {
       <ClientProtectedPage>
         <div className="flex flex-col">
           <div className="flex flex-row justify-between">
-            <button className="btn btn-secondary mt-4 mx-auto">
+            <Link href="/calendar" className="btn btn-secondary mt-4 mx-auto">
               <CalendarIcon />
               Set availability
-            </button>
-            <button className="btn btn-primary mt-4 mx-auto">
+            </Link>
+            <Link href="/events/new" className="btn btn-primary mt-4 mx-auto">
               <LightningBoltIcon />
               New Event
               <LightningBoltIcon />
-            </button>
+            </Link>
           </div>
           <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">
             <div className="card-body">
@@ -72,10 +73,13 @@ export default async function Home() {
               <strong>Version 0.1.0</strong> Launch 🎉🎉🎉
             </p>
             <div className="card-actions justify-end">
-              <button className="btn btn-sm btn-outline btn-primary">
+              <Link className="btn btn-link" href="/news">
                 <ReaderIcon></ReaderIcon>
                 Read More
-              </button>
+              </Link>
+              {/* <button className="btn btn-link btn-primary">
+                Read More
+              </button> */}
             </div>
           </div>
         </div>
@@ -88,10 +92,10 @@ export default async function Home() {
               <li>Walk</li>
             </ul>
             <div className="card-actions justify-end">
-              <button className="btn btn-sm btn-outline btn-primary">
+              <Link href="/events" className="btn btn-link btn-primary">
                 <MagnifyingGlassIcon></MagnifyingGlassIcon>
                 Take a look
-              </button>
+              </Link>
             </div>
           </div>
         </div>
