@@ -34,8 +34,6 @@ export default async function Home() {
       },
     }));
 
-  console.log("friends", friends);
-
   const baseUrl =
     process.env.NEXTAUTH_URL || "https://friendlab.co.uk/api/auth/signin";
 

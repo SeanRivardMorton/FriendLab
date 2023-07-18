@@ -5,8 +5,10 @@ import {
   DotFilledIcon,
   CheckIcon,
   ChevronRightIcon,
+  ExitIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 const DropdownMenuDemo = () => {
   const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
@@ -32,8 +34,12 @@ const DropdownMenuDemo = () => {
           <DropdownMenu.Group>
             <DropdownMenu.Item className="group text-[13px] leading-none text-primary rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
               <Link href="/settings">Settings</Link>
+              <div className="ml-auto pl-[20px] text-primary group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"></div>
+            </DropdownMenu.Item>
+            <DropdownMenu.Item className="group text-[13px] leading-none text-primary rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
+              <button onClick={() => signOut()}>Sign out</button>
               <div className="ml-auto pl-[20px] text-primary group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">
-                ⌘+T
+                <ExitIcon />
               </div>
             </DropdownMenu.Item>
           </DropdownMenu.Group>
