@@ -101,7 +101,7 @@ export default async function Home() {
         </div>
         <div className="card w-11/12 mx-auto my-4 bg-base-100 shadow-xl">
           <div className="card-body">
-            <h2 className="card-title">Who's around</h2>
+            <h2 className="card-title">Who&apos;s around</h2>
             <ul>
               {friends &&
                 friends.map((friend) => (
