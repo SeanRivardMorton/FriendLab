@@ -24,7 +24,7 @@ export function DateField(props) {
 }
 
 function DateSegment({ segment, state }) {
-  // TOOD: Refactor all these react-aria components
+  // TOOD: Refactor all these react-aria
   let ref: any = useRef();
   let { segmentProps } = useDateSegment(segment, state, ref);
 
@@ -39,8 +39,8 @@ function DateSegment({ segment, state }) {
             String(segment.maxValue).length + "ch") ||
           "",
       }}
-      className={`px-0.5 box-content tabular-nums text-right outline-none rounded-sm focus:bg-primary focus:text-base-100 group ${
-        !segment.isEditable ? "text-gray-500" : "text-gray-800"
+      className={`px-0.5 box-content tabular-nums text-right outline-none rounded-sm text-primary focus:bg-primary focus:text-base-100 group ${
+        !segment.isEditable ? "text-gray-500" : "text-primary"
       }`}
     >
       {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}

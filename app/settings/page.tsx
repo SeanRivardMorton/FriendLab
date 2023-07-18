@@ -54,9 +54,7 @@ const SettingsPage = () => {
               className="input input-bordered w-full max-w-xs"
             />
             <button type="button" className="btn btn-primary mt-8 mx-auto">
-              <LightningBoltIcon />
-              Save Event
-              <LightningBoltIcon />
+              Save
             </button>
           </form>
         </div>
