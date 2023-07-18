@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Dropdown from "./menu";
 
 export const Header = () => {
   const { data, status } = useSession();
@@ -11,7 +12,7 @@ export const Header = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-none">
-        <button className="btn btn-square btn-ghost">
+        {/* <button className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -25,7 +26,8 @@ export const Header = () => {
               d="M4 6h16M4 12h16M4 18h16"
             ></path>
           </svg>
-        </button>
+        </button> */}
+        <Dropdown />
       </div>
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
