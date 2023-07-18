@@ -2,8 +2,9 @@
 import Image from "next/image";
 import React from "react";
 import { useForm } from "react-hook-form";
-import Beaker from "../assets/vial.svg";
+import Vial from "../assets/vial.svg";
 
+// This page is to be phased out
 export default function Home() {
   const [isInterested, setIsInterested] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
@@ -14,7 +15,6 @@ export default function Home() {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    console.log(data);
     const response = await fetch("/api/waitlist", {
       method: "POST",
       headers: {
@@ -44,7 +44,7 @@ export default function Home() {
               width={80}
               height={80}
               alt="vial"
-              src={Beaker}
+              src={Vial}
             />
             <div className="h-24">
               {isSaved && (
