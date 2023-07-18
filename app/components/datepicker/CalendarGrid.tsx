@@ -8,8 +8,6 @@ export function CalendarGrid({ state, ...props }) {
   // Get the number of weeks in the month so we can render the proper number of rows.
   let weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
-  console.log("weeksInMonth", weeksInMonth);
-
   return (
     <table {...gridProps} cellPadding="0" className="flex-1">
       <thead {...headerProps} className="text-primary">

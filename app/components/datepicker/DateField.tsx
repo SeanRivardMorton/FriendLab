@@ -45,7 +45,7 @@ function DateSegment({ segment, state }) {
       {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
       <span
         aria-hidden="true"
-        className="block w-full text-center italic text-base-100 group-focus:text-white"
+        className="block w-full text-center italic text-primary group-focus:text-white"
         style={{
           visibility: segment.isPlaceholder ? undefined : "hidden",
           height: segment.isPlaceholder ? "" : 0,

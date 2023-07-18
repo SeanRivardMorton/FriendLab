@@ -24,11 +24,11 @@ export function DateRangePicker(props) {
 
   return (
     <div className="relative inline-flex flex-col text-left">
-      <span {...labelProps} className="text-sm text-gray-800">
+      <span {...labelProps} className="text-sm text-primary">
         {props.label}
       </span>
       <div {...groupProps} ref={ref} className="flex group">
-        <div className="flex bg-white border border-base-100 group-hover:border-base-100 transition-colors rounded-l-md pr-10 group-focus-within:border-primary group-focus-within:group-hover:border-primary p-1 relative">
+        <div className="flex bg-base-200 border border-base-100 group-hover:border-primary transition-colors rounded-l-md pr-10 group-focus-within:border-primary group-focus-within:group-hover:border-primary p-1 relative">
           <DateField {...startFieldProps} />
           <span aria-hidden="true" className="px-2">
             –
