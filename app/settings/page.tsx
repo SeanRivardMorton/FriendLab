@@ -1,8 +1,9 @@
 import { LightningBoltIcon } from "@radix-ui/react-icons";
+import ClientProtectedPage from "../protected/client/page";
 
 const SettingsPage = () => {
   return (
-    <>
+    <ClientProtectedPage>
       <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">
         <div className="card-body">
           <h1 className="text-xl">Settings</h1>
@@ -59,7 +60,7 @@ const SettingsPage = () => {
           </form>
         </div>
       </div>
-    </>
+    </ClientProtectedPage>
   );
 };
 

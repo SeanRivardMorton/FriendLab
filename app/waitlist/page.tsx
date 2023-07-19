@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Vial from "../assets/vial.svg";
+import SignInButton from "../invite/SignInButton";
 
 // This page is to be phased out
 export default function Home() {
@@ -14,22 +15,22 @@ export default function Home() {
     },
   });
 
-  const onSubmit = form.handleSubmit(async (data) => {
-    const response = await fetch("/api/waitlist", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((d) => {
-      return d.json();
-    });
+  // const onSubmit = form.handleSubmit(async (data) => {
+  //   const response = await fetch("/api/waitlist", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   }).then((d) => {
+  //     return d.json();
+  //   });
 
-    const result = await response;
-    if (result?.error) return;
+  //   const result = await response;
+  //   if (result?.error) return;
 
-    setIsSaved(true);
-  });
+  //   setIsSaved(true);
+  // });
 
   return (
     <main>
@@ -46,57 +47,8 @@ export default function Home() {
               alt="vial"
               src={Vial}
             />
-            <div className="h-24">
-              {isSaved && (
-                <h2 className="text-lg">
-                  😎 <span className="italic">Awesome, Thanks</span>
-                </h2>
-              )}
-              {!isSaved && (
-                <>
-                  {isInterested ? (
-                    <form className="flex flex-col" onSubmit={onSubmit}>
-                      <input
-                        {...form.register("email", {
-                          pattern: {
-                            value: /\S+@\S+\.\S+/,
-                            message: "That doesn't look like an email",
-                          },
-                        })}
-                        type="text"
-                        placeholder="Your Email"
-                        className="mb-8 input input-bordered input-primary w-full max-w-xs"
-                      />
-                      {form.formState.errors && (
-                        <span className="mb-4">
-                          {form.formState.errors?.email?.message}
-                        </span>
-                      )}
-                      <button className="btn btn-primary" type="submit">
-                        Join Waitlist
-                      </button>
-                    </form>
-                  ) : (
-                    <button
-                      onClick={() => setIsInterested(true)}
-                      className="btn btn-primary"
-                    >
-                      Sign up
-                    </button>
-                  )}
-                </>
-              )}
-            </div>
+            <SignInButton />
           </div>
-        </div>
-      </div>
-      <div className="card bg-base-100 shadow-xl my-8">
-        <div className="card-body">
-          <h2 className="card-title mx-auto">What is it?</h2>
-          <p>
-            Friend Lab helps friends hangout. Help schedule your next hangout
-            with location, price, and interests in mind.
-          </p>
         </div>
       </div>
     </main>
