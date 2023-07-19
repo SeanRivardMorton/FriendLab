@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Dropdown from "./menu";
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
+import Vial from "../assets/vial.svg";
 
 export const Header = () => {
   const { data, status } = useSession();
@@ -32,6 +33,13 @@ export const Header = () => {
       </div>
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
+          <Image
+            className="m-auto my-4 rotate-12"
+            width={12}
+            height={12}
+            alt="vial"
+            src={Vial}
+          />
           Friend Lab
         </Link>
       </div>
