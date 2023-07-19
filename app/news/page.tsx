@@ -8,7 +8,7 @@ const news = [
 
 This is a a project about bringing people together. It doesn't really work right now, and I'm sure it will look very different in the future. I have big dreams for what it might become.
 
-If you want to help out, just shoot me a message about why you want to help and what you think you can bring to Friend Lab.
+If you want to help out, just shoot me a message at sean@friendlab.co.uk about why you want to help and what you think you can bring to Friend Lab.
 
 Cheers,
 
