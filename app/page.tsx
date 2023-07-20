@@ -105,12 +105,12 @@ export default async function Home() {
                 friends.map((friend) => (
                   <li className="flex flex-row my-2" key={friend.id}>
                     {friend.friend.image && (
-                      <Image
+                      <img
                         src={friend.friend.image}
-                        height={24}
-                        width={24}
+                        // height={24}
+                        // width={24}
                         alt="friend icon"
-                        className="rounded-xl mr-2"
+                        className="rounded-xl mr-2 h-8 w-8"
                       />
                     )}
                     <Link href={`/friends/${friend.friend.id}`}>
