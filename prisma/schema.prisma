@@ -88,3 +88,11 @@ model VerificationRequest {
 
   @@unique([identifier, token])
 }
+
+model VerificationToken {
+  identifier String   @id @default(cuid()) @map("_id")
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
