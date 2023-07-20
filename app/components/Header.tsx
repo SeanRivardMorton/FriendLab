@@ -49,21 +49,13 @@ export const Header = () => {
         )}
         {status === "authenticated" && (
           <>
-            {/* <button
-              onClick={() => signOut()}
-              className="btn btn-square btn-ghost mr-2"
-            >
-              Logout
-            </button> */}
             <Link href="/notifications">
               <EnvelopeClosedIcon className="mr-4 h-4 w-4" />
             </Link>
-            <Image
-              className="rounded-md"
+            <img
               alt="logo"
               src={data?.user?.image || ""}
-              width={48}
-              height={48}
+              className="rounded-md h-8 w-8"
             />
           </>
         )}
