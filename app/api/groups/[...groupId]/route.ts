@@ -5,9 +5,7 @@ import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const headersInstance = headers();
-  const groupId = headersInstance.get("x-invoke-path")?.split("groups/")[1];
-  const { friendId } = await request.json();
+  const { friendId, groupId } = await request.json();
 
   const updatedGroup = await prisma.group.update({
     where: {

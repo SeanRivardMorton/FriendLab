@@ -2,10 +2,7 @@ import prisma from "../../../lib/prisma";
 import { headers } from "next/headers";
 import AddUserToGroupButton from "./addUserToGroupSelect";
 
-const getGroup = async () => {
-  const headersList = headers();
-  const url = headersList.get("x-invoke-path");
-  const groupId = url?.split("groups/")[1];
+const getGroup = async (groupId) => {
   const group = await prisma.group.findFirst({
     where: {
       id: groupId,
@@ -31,8 +28,9 @@ const getFriendsOfUser = async (userId) => {
   return friends;
 };
 
-const GroupPage = async () => {
-  const group = await getGroup();
+const GroupPage = async ({ params }) => {
+  const groupId = params.groupId[0];
+  const group = await getGroup(groupId);
   const friends = group?.id && (await getFriendsOfUser(group?.creatorId));
 
   return (
