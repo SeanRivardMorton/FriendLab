@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["jsonProtocol"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -20,27 +19,39 @@ model Post {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
   accounts      Account[]
   posts         Post[]
   sessions      Session[]
   friendships   Friendship[] @relation("UserFriendships")
   friendOf      Friendship[] @relation("UserFriendOf")
+  groupsOwned   Group[]      @relation("GroupOwner")
+  groups        Group[]      @relation("GroupMembers")
+}
+
+model Group {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  creator   User     @relation("GroupOwner", fields: [creatorId], references: [id])
+  creatorId String
+  members   User[]   @relation("GroupMembers")
 }
 
 model Friendship {
-  id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
   userId    String
   friendId  String
-  user      User      @relation("UserFriendships", fields: [userId], references: [id])
-  friend    User      @relation("UserFriendOf", fields: [friendId], references: [id])
+  user      User     @relation("UserFriendships", fields: [userId], references: [id])
+  friend    User     @relation("UserFriendOf", fields: [friendId], references: [id])
 
   @@unique([userId, friendId])
 }
@@ -88,6 +99,8 @@ model VerificationRequest {
 
   @@unique([identifier, token])
 }
+
+
 
 model VerificationToken {
   identifier String   @id @default(cuid()) @map("_id")

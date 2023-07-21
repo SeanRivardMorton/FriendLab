@@ -107,8 +107,6 @@ export default async function Home() {
                     {friend.friend.image && (
                       <img
                         src={friend.friend.image}
-                        // height={24}
-                        // width={24}
                         alt="friend icon"
                         className="rounded-xl mr-2 h-8 w-8"
                       />

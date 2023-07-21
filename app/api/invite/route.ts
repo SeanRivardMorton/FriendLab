@@ -5,7 +5,7 @@ import { authOptions } from "../auth/[...nextauth]";
 
 export async function POST(request: Request) {
   const { refferal } = await request.json();
-  console.log(refferal);
+
   const session = await getServerSession(authOptions);
   const currentUser = await prisma.user.findFirst({
     where: {
@@ -47,5 +47,4 @@ export async function POST(request: Request) {
     console.error("oh no", e);
     return NextResponse.json({ error: "Duplicate" }, { status: 500 });
   }
-  // return NextResponse.json({ error: "Duplicate" }, { status: 500 });
 }
