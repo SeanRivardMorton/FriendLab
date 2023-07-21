@@ -30,7 +30,7 @@ const ClientInvite = ({ children, user }) => {
         // console.log(response);
       }
     }
-  }, []);
+  }, [ref, user]);
 
   if (!user) return <div>{children}</div>;
 
