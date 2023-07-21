@@ -8,6 +8,7 @@ specifiers:
   '@radix-ui/react-icons': ^1.3.0
   '@react-aria/overlays': ^3.15.0
   '@sentry/nextjs': ^7.57.0
+  '@tanstack/react-query': ^4.32.0
   '@types/node': 20.4.1
   '@types/react': 18.2.14
   '@vercel/postgres': ^0.4.0
@@ -38,6 +39,7 @@ dependencies:
   '@radix-ui/react-icons': 1.3.0_react@18.2.0
   '@react-aria/overlays': 3.15.0_biqbaboplfbrettd7655fr4n2y
   '@sentry/nextjs': 7.57.0_next@13.4.8+react@18.2.0
+  '@tanstack/react-query': 4.32.0_biqbaboplfbrettd7655fr4n2y
   '@vercel/postgres': 0.4.0
   eslint: 8.44.0
   eslint-config-next: 13.4.8_iqf7tbmerllfqanu4l3d6aqdn4
@@ -2292,6 +2294,28 @@ packages:
     resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
       tslib: 2.6.0
+    dev: false
+
+  /@tanstack/query-core/4.32.0:
+    resolution: {integrity: sha512-ei4IYwL2kmlKSlCw9WgvV7PpXi0MiswVwfQRxawhJA690zWO3dU49igaQ/UMTl+Jy9jj9dK5IKAYvbX7kUvviQ==}
+    dev: false
+
+  /@tanstack/react-query/4.32.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-B8WUMcByYAH9500ENejDCATOmEZhqjtS9wsfiQ3BNa+s+yAynY8SESI8WWHhSqUmjd0pmCSFRP6BOUGSda3QXA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.32.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /@types/estree/1.0.1:
@@ -5183,6 +5207,14 @@ packages:
       detect-node-es: 1.1.0
       react: 18.2.0
       tslib: 2.6.0
+    dev: false
+
+  /use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /utf-8-validate/6.0.3:

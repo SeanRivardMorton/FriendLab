@@ -31,7 +31,7 @@ const FriendsPage = async () => {
     },
   });
 
-  console.log(friends);
+  console.log("grou[s", groups);
 
   return (
     <>
