@@ -6,7 +6,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
 
 const getProfile = async (id) => {
-  const profile = await prisma.user.findFirst({
+  if (!id) return;
+  const profile = await prisma.user.findUnique({
     where: {
       id,
     },
