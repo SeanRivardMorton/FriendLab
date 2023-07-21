@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import prisma from "../../../lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]";
+import { cookies } from "next/headers";
 
 const getProfile = async (id) => {
   if (!id) return;
@@ -33,12 +34,8 @@ const getProfile = async (id) => {
   return enrichedProfile;
 };
 
-const ProfilePage = async () => {
-  const header = headers();
-  const profileId = header.get("x-invoke-path")?.split("profile/")[1];
-  const user = await getProfile(profileId);
-
-  // console.log(user);
+const ProfilePage = async ({ params }) => {
+  const user = await getProfile(params.id[0]);
 
   return (
     <div className="card w-11/12 mx-auto my-4 bg-base-100 shadow-xl">
