@@ -31,8 +31,6 @@ const FriendsPage = async () => {
     },
   });
 
-  console.log("grou[s", groups);
-
   return (
     <>
       <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">

@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 
 const addFriendToGroup = async (friendId, groupId) => {
-  console.log(friendId);
   const response = await fetch(`/api/groups/${groupId}`, {
     method: "POST",
     headers: {

@@ -9,8 +9,6 @@ export async function POST(request: Request) {
   const groupId = headersInstance.get("x-invoke-path")?.split("groups/")[1];
   const { friendId } = await request.json();
 
-  console.log("Group ID", groupId, "Friend ID", friendId);
-
   const updatedGroup = await prisma.group.update({
     where: {
       id: groupId,

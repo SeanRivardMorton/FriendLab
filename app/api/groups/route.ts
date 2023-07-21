@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 import { authOptions } from "../auth/[...nextauth]";
 
-// add a group
 export async function POST(request: Request) {
   const { name } = await request.json();
   const session = await getServerSession(authOptions);
@@ -13,8 +12,6 @@ export async function POST(request: Request) {
       email: session?.user?.email,
     },
   });
-
-  console.log("USER", user);
 
   try {
     if (!user) return NextResponse.json({ error: "No user" }, { status: 500 });

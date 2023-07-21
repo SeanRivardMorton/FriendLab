@@ -13,7 +13,5 @@ export async function GET(request: Request) {
     },
   });
 
-  console.log(profile);
-
   return NextResponse.json({ ...profile });
 }
