@@ -105,15 +105,18 @@ export default async function Home() {
                 friends.map((friend) => (
                   <li className="flex flex-row my-2" key={friend.id}>
                     {friend.friend.image && (
-                      <img
-                        src={friend.friend.image}
-                        alt="friend icon"
-                        className="rounded-xl mr-2 h-8 w-8"
-                      />
+                      <Link
+                        className="flex flex-row"
+                        href={`/profile/${friend.friend.id}`}
+                      >
+                        <img
+                          src={friend.friend.image}
+                          alt="friend icon"
+                          className="rounded-xl mr-2 h-8 w-8"
+                        />
+                        {friend.friend.name}
+                      </Link>
                     )}
-                    <Link href={`/friends/${friend.friend.id}`}>
-                      {friend.friend.name}
-                    </Link>
                   </li>
                 ))}
             </ul>

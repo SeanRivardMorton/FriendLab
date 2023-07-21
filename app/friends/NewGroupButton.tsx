@@ -38,8 +38,8 @@ const NewGroupButton = () => {
         {...form.register("name")}
       />
 
-      <button type="submit" className="btn btn-primary btn-sm">
-        New Group
+      <button type="submit" className="btn btn-primary btn-sm mt-2">
+        Create Group
       </button>
     </form>
   );

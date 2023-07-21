@@ -52,11 +52,13 @@ export const Header = () => {
             <Link href="/notifications">
               <EnvelopeClosedIcon className="mr-4 h-4 w-4" />
             </Link>
-            <img
-              alt="logo"
-              src={data?.user?.image || ""}
-              className="rounded-md h-8 w-8"
-            />
+            <Link href="/profile">
+              <img
+                alt="logo"
+                src={data?.user?.image || ""}
+                className="rounded-md h-8 w-8"
+              />
+            </Link>
           </>
         )}
         {status === "unauthenticated" && (

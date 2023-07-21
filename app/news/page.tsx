@@ -1,5 +1,6 @@
 import ClientProtectedPage from "../protected/client/page";
 
+// obviously move this into datebase..
 const news = [
   {
     title: "0.1.0 Pre-Alpha Launch 🎉🎉🎉",
@@ -14,6 +15,25 @@ Cheers,
 
 Sean`,
   },
+  {
+    title: "0.1.1 Update - Invites, Limited Groups, and more",
+    date: "21/07/23",
+    content: `Ahoy\n
+How's it going?
+
+I've been working on Friend Lab a bit more, and I've got some new features to show you.
+
+You can now authenticate with Google, and you can now share your invite link with friends and family. They will appear in your friends list.
+
+Adding people to groups is coming soon.
+
+Then, scheduling events.
+
+Then, iterate iterate iterate.
+
+Sean
+`,
+  },
 ];
 
 const NewsPage = () => {
@@ -24,9 +44,16 @@ const NewsPage = () => {
           <h1 className="card-title">Friend Lab News</h1>
           <p>Catch the latest news about Friend Lab here</p>
           <br></br>
-          <h2 className="text-xl">0.1.0 Pre-Alpha Launch 🎉🎉🎉</h2>
-          <p className="italic">18/07/23</p>
-          <p className="mt-2 whitespace-pre-wrap">{news[0].content}</p>
+          {news.map((n, i) => {
+            return (
+              <>
+                <h2 className="text-xl">{n.title}</h2>
+                <p className="italic">{n.date}</p>
+                <p className="mt-2 whitespace-pre-wrap">{n.content}</p>
+                <br></br>
+              </>
+            );
+          })}
         </div>
       </div>
     </ClientProtectedPage>

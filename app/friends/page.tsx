@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import Link from "next/link";
 import prisma from "../../lib/prisma";
 import { authOptions } from "../api/auth/[...nextauth]";
 import NewGroupButton from "./NewGroupButton";
@@ -47,14 +48,20 @@ const FriendsPage = async () => {
         </div>
       </div>
       <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title">Groups</h2>
+        <div className="card-body flex flex-col">
+          <h2 className="card-title justify-start">Groups</h2>
           {groups ? (
-            groups.map((group) => <div key={group.id}>{group.name}</div>)
+            groups.map((group) => (
+              <div key={group.id}>
+                <Link className="btn btn-link" href={`/groups/${group.id}`}>
+                  {group.name}
+                </Link>
+              </div>
+            ))
           ) : (
             <p>You have no groups</p>
           )}
-          <div className="card-actions">
+          <div className="card-actions mb-2">
             <NewGroupButton />
           </div>
         </div>
