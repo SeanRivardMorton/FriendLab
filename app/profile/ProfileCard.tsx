@@ -1,6 +1,4 @@
 "use client";
-
-import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
 
 const getProfile = async (id) => {
@@ -12,7 +10,7 @@ const getProfile = async (id) => {
   }).then((d) => {
     return d.json();
   });
-  console.log(response);
+
   return response;
 };
 
