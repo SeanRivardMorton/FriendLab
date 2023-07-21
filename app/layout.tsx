@@ -3,6 +3,7 @@ import { PHProvider, PostHogPageview } from "./providers";
 import { Suspense } from "react";
 import Provider from "./components/Provider";
 import { Header } from "./components/Header";
+import { Analytics } from "@vercel/analytics";
 
 export const metadata = {
   title: "Friend Lab",
@@ -21,7 +22,10 @@ export default function RootLayout({ children }) {
           <body className="text-current">
             <Header />
             <div className="bg-base-200 h-[92vh] p-1 overflow-auto">
-              <div className="lg:w-2/4 lg:mx-auto">{children}</div>
+              <div className="lg:w-2/4 lg:mx-auto">
+                {children}
+                <Analytics />
+              </div>
             </div>
           </body>
         </Provider>
