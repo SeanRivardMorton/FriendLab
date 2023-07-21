@@ -3,7 +3,7 @@ import { PHProvider, PostHogPageview } from "./providers";
 import { Suspense } from "react";
 import Provider from "./components/Provider";
 import { Header } from "./components/Header";
-import { Analytics } from "@vercel/analytics";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Friend Lab",
