@@ -34,6 +34,21 @@ Then, iterate iterate iterate.
 Sean
 `,
   },
+  {
+    title: "0.1.2 Update - Invites, better navigation",
+    date: "22/07/23",
+    content: `Waddup
+I've made a few more improvments, and bug fixes.
+
+Groups are a bit more usable now, I still need to add update and delete functionality.
+
+Friends now have better profile pages, and you can see their friends.
+
+I've also added a bottom navigation bar, and a top navigation bar.
+
+Sean
+    `,
+  },
 ];
 
 const NewsPage = () => {
@@ -44,7 +59,7 @@ const NewsPage = () => {
           <h1 className="card-title">Friend Lab News</h1>
           <p>Catch the latest news about Friend Lab here</p>
           <br></br>
-          {news.map((n, i) => {
+          {news.reverse().map((n, i) => {
             return (
               <>
                 <h2 className="text-xl">{n.title}</h2>

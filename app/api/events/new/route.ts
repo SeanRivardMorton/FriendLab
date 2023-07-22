@@ -29,9 +29,6 @@ export async function POST(request: Request) {
     },
   });
 
-  console.log("user", user);
-  console.log(name, description, date, location, attendees);
-
   if (!name || !description || !date || !location) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
