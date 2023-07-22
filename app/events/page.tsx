@@ -22,6 +22,10 @@ const getEvents = async () => {
 const EventsPage = async () => {
   const events = await getEvents();
 
+  const eventsByDate = events.sort((a, b) => {
+    return a.date > b.date ? 1 : -1;
+  });
+
   return (
     <ClientProtectedPage>
       <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">
@@ -32,7 +36,8 @@ const EventsPage = async () => {
               Add
             </Link>
           </div>
-          {events.map((event) => {
+          {eventsByDate.map((event) => {
+            const time = event.date && new Date(event.date).toLocaleString();
             return (
               <div
                 key={event.id}
@@ -41,6 +46,12 @@ const EventsPage = async () => {
                 <div className="card-body">
                   <h2 className="card-title">{event.name}</h2>
                   <p>{event.description}</p>
+                  <p>{time}</p>
+                  <div className="flex flex-row justify-end">
+                    <Link href={`/events/${event.id}`} className="btn btn-link">
+                      View
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
