@@ -9,6 +9,18 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+model Event {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  location    String?
+  date        DateTime
+  creator     User     @relation("EventCreator", fields: [creatorId], references: [id])
+  creatorId   String
+  attendees   User[]   @relation("EventAttendees")
+  Post        Post[]
+}
+
 model Post {
   id        String  @id @default(cuid())
   title     String
@@ -16,23 +28,27 @@ model Post {
   published Boolean @default(false)
   authorId  String?
   author    User?   @relation(fields: [authorId], references: [id])
+  event     Event?  @relation(fields: [eventId], references: [id])
+  eventId   String?
 }
 
 model User {
-  id            String       @id @default(cuid())
-  name          String?
-  email         String?      @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime     @default(now()) @map("created_at")
-  updatedAt     DateTime     @updatedAt @map("updated_at")
-  accounts      Account[]
-  posts         Post[]
-  sessions      Session[]
-  friendships   Friendship[] @relation("UserFriendships")
-  friendOf      Friendship[] @relation("UserFriendOf")
-  groupsOwned   Group[]      @relation("GroupOwner")
-  groups        Group[]      @relation("GroupMembers")
+  id              String       @id @default(cuid())
+  name            String?
+  email           String?      @unique
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+  accounts        Account[]
+  posts           Post[]
+  sessions        Session[]
+  friendships     Friendship[] @relation("UserFriendships")
+  friendOf        Friendship[] @relation("UserFriendOf")
+  groupsOwned     Group[]      @relation("GroupOwner")
+  groups          Group[]      @relation("GroupMembers")
+  eventsCreated   Event[]      @relation("EventCreator")
+  eventsAttending Event[]      @relation("EventAttendees")
 }
 
 model Group {
@@ -99,8 +115,6 @@ model VerificationRequest {
 
   @@unique([identifier, token])
 }
-
-
 
 model VerificationToken {
   identifier String   @id @default(cuid()) @map("_id")
