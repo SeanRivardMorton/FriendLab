@@ -1,8 +1,10 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 const addFriendToGroup = async (friendId, groupId) => {
+  console.log(friendId);
   const response = await fetch(`/api/groups/${groupId}`, {
     method: "POST",
     headers: {
@@ -10,6 +12,7 @@ const addFriendToGroup = async (friendId, groupId) => {
     },
     body: JSON.stringify({
       friendId,
+      groupId,
     }),
   }).then((d) => {
     return d.json();
@@ -18,11 +21,11 @@ const addFriendToGroup = async (friendId, groupId) => {
   return response;
 };
 
-const AddUserToGroupButton = ({ friends, groupId }) => {
+const AddUserToGroupButton = ({ friends }) => {
+  const groupId = usePathname()?.split("groups/")[1];
   const form = useForm({
     defaultValues: {
       friendId: "",
-      groupId: "",
     },
   });
 

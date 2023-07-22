@@ -47,7 +47,7 @@ const GroupPage = async ({ params }) => {
               Add a friend to the group
             </span>
           </label>
-          <AddUserToGroupButton friends={friends} groupId={group?.id} />
+          <AddUserToGroupButton friends={friends} />
         </div>
       </div>
     </div>
