@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import Provider from "./components/Provider";
 import { Header } from "./components/Header";
 import { Analytics } from "@vercel/analytics/react";
+import BottomNav from "./components/BottomNav";
 
 export const metadata = {
   title: "Friend Lab",
@@ -11,7 +12,8 @@ export const metadata = {
     "Introducing Friend Lab, the innovative social media platform designed to transform the way adults plan hangouts with their friends. Say goodbye to the hassle of coordinating schedules, setting budgets, and finding the perfect locations, because Friend Lab does the work for you.",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, ...rest }) {
+  console.log(rest);
   return (
     <html lang="en-UK">
       <Suspense>
@@ -27,6 +29,7 @@ export default function RootLayout({ children }) {
                 <Analytics />
               </div>
             </div>
+            <BottomNav />
           </body>
         </Provider>
       </PHProvider>

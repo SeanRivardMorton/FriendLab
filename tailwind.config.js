@@ -40,7 +40,7 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["coffee"],
+    themes: ["luxury"],
   },
   plugins: [require("daisyui")],
 };
