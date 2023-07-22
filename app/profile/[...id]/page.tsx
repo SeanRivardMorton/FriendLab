@@ -1,10 +1,4 @@
-import { usePathname, useSearchParams } from "next/navigation";
-
-import { headers } from "next/headers";
 import prisma from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]";
-import { cookies } from "next/headers";
 
 const getProfile = async (id) => {
   if (!id) return;

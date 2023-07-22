@@ -18,12 +18,15 @@ const BottomNav = () => {
       </Link>
       <Link
         href="/friends"
-        className={`${pathname === "/friends" && "active"}`}
+        className={`${pathname?.includes("/friends") && "active"}`}
       >
         <AvatarIcon />
         <span className="btm-nav-label">Friends</span>
       </Link>
-      <Link href="/events" className={`${pathname === "/events" && "active"}`}>
+      <Link
+        href="/events"
+        className={`${pathname?.includes("/events") && "active"}`}
+      >
         <TimerIcon />
         <span className="btm-nav-label">Events</span>
       </Link>
