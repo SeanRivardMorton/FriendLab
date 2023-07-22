@@ -1,5 +1,6 @@
 import "./globals.css";
 import { PHProvider, PostHogPageview } from "./providers";
+import ReactQueryProvider from "./providers";
 import { Suspense } from "react";
 import Provider from "./components/Provider";
 import { Header } from "./components/Header";
@@ -20,20 +21,22 @@ export default function RootLayout({ children }) {
         <PostHogPageview />
       </Suspense>
       <PHProvider>
-        <Provider>
-          <body className="text-current">
-            {/* <Header /> */}
-            <TopNav>
-              <div className="bg-base-200 h-[92vh] p-1 overflow-auto">
-                <div className="lg:w-2/4 lg:mx-auto">
-                  {children}
-                  <Analytics />
+        <ReactQueryProvider>
+          <Provider>
+            <body className="text-current">
+              {/* <Header /> */}
+              <TopNav>
+                <div className="bg-base-200 h-[92vh] p-1 overflow-auto">
+                  <div className="lg:w-2/4 lg:mx-auto">
+                    {children}
+                    <Analytics />
+                  </div>
                 </div>
-              </div>
-            </TopNav>
-            <BottomNav />
-          </body>
-        </Provider>
+              </TopNav>
+              <BottomNav />
+            </body>
+          </Provider>
+        </ReactQueryProvider>
       </PHProvider>
     </html>
   );

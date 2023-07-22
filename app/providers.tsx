@@ -4,6 +4,8 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from "react";
 
 if (typeof window !== "undefined") {
   posthog.init("phc_QJgwbbp86My5P4V6b7ey2GYcOn9jvLixeL3hpk4Scma", {
@@ -33,4 +35,12 @@ export function PostHogPageview(): any {
 
 export function PHProvider({ children }) {
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
+}
+
+export default function Providers({ children }) {
+  const [queryClient] = React.useState(() => new QueryClient());
+
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
 }
