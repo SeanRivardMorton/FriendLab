@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
             <body className="text-current">
               {/* <Header /> */}
               <TopNav>
-                <div className="bg-base-200 h-[92vh] p-1 overflow-auto">
+                <div className="bg-base-200 h-[87vh] p-1 pb-10 overflow-auto">
                   <div className="lg:w-2/4 lg:mx-auto">
                     {children}
                     <Analytics />
