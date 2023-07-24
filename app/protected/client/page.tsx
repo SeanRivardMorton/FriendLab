@@ -11,10 +11,9 @@ const ClientProtectedPage = ({ children }) => {
     },
   });
   // if (status === "loading") return <p>Loading...</p>;
-  if (!session) {
-    // redirect("/api/auth/signin");
-    // return <p>Redirecting...</p>;
-  }
+  // if (!session) {
+  //   redirect("/api/auth/signin");
+  // }
   return (
     <>
       <h1>{children}</h1>

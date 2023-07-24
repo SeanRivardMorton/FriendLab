@@ -1,8 +1,5 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import prisma from "../../../lib/prisma";
-import { getSession } from "../../api/getSession";
-import { getUserGroups } from "../../api/groups/getUserGroups";
 
 const AddGroupButton = () => {
   return (
@@ -21,14 +18,7 @@ const AddGroupButton = () => {
   );
 };
 
-const QuickGroups = async () => {
-  const session = await getSession();
-  if (!session?.user?.id) {
-    return <>Not logged in</>;
-  }
-  const groups = await getUserGroups(session?.user?.id);
-
-  // first 3 groups only
+const QuickGroups = ({ groups }) => {
   const groupsToShow = groups.slice(0, 5);
   return (
     <div className="bg-base-100 m-2 card card-compact">
@@ -51,9 +41,9 @@ const QuickGroups = async () => {
                           {group.name.slice(0, 1)}
                         </span>
                       </div>
-                      <span className="w-12 text-xs line-clamp-1 truncate text-primary">
+                      {/* <span className="w-10 text-xs line-clamp-1 text-elipsis text-primary">
                         {group.name}
-                      </span>
+                      </span> */}
                     </div>
                   </Link>
                 );
