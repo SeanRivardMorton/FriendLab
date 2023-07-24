@@ -58,6 +58,24 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
     mutate.mutate(data);
   });
 
+  const onDelete = (id) => {
+    const res = fetch(`/api/events/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      router.push("/events");
+    });
+
+    return res;
+  };
+
+  const mutateDelete = useMutation({
+    mutationFn: () => onDelete(params?.id),
+    mutationKey: ["event", params?.id],
+    onSuccess: () => {
+      router.push("/events");
+    },
+  });
+
   return (
     <form onSubmit={onSubmit} className="mb-8">
       <div className="form-control">
@@ -97,10 +115,12 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
                 >
                   <div className="avatar">
                     <div className="h-11 mx-1 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src={attendee.image}
-                        alt={`${attendee.name}'s logo`}
-                      />
+                      {attendee.image && (
+                        <img
+                          src={attendee.image}
+                          alt={`${attendee.name}'s logo`}
+                        />
+                      )}
                     </div>
                   </div>
                 </Link>
@@ -126,13 +146,21 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
         </select>
       </div>
 
-      <div className="w-full">
-        <div className="h-4">
-          {mutate.isLoading && (
+      <div className="h-4">
+        {mutate.isLoading ||
+          (mutateDelete.isLoading && (
             <progress className="progress my-2 mx-auto"></progress>
-          )}
-        </div>
-        <button className="mt-2 btn btn-primary w-full">Update</button>
+          ))}
+      </div>
+      <div className="flex flex-row mt-2 mx-4 justify-between">
+        <button
+          type="button"
+          onClick={mutateDelete.mutate}
+          className="mt-2 btn btn-error w-2/6"
+        >
+          Delete
+        </button>
+        <button className="mt-2 btn btn-primary w-2/6">Update</button>
       </div>
     </form>
   );

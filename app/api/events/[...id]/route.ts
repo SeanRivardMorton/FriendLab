@@ -21,3 +21,18 @@ export async function GET(request: NextRequest) {
   const events = await getEventById([id]);
   return NextResponse.json({ ...events });
 }
+
+export async function DELETE(request: NextRequest) {
+  const id = request.url.split("events/")[1];
+  console.log(request.url);
+  try {
+    const res = await prisma.event.delete({
+      where: {
+        id: id,
+      },
+    });
+    return NextResponse.json({ res });
+  } catch (e) {
+    return NextResponse.json({ error: "Duplicate" }, { status: 500 });
+  }
+}
