@@ -29,4 +29,15 @@ export const authOptions: NextAuthOptions = {
   pages: {
     newUser: "/invite",
   },
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user && token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
 };
