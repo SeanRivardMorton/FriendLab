@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-UK">
+    <html lang="en-UK" className="bg-base-200">
       <Suspense fallback={<>When do I happen?</>}>
         <PostHogPageview />
       </Suspense>
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
             <Suspense fallback={<Loading />}>
               <body className="text-current">
                 <TopNav>
-                  <div className="bg-base-200 h-[91vh] p-0.5 overflow-auto">
+                  <div className="p-0.5 overflow-auto">
                     <div className="lg:w-2/4 lg:mx-auto">
                       {children}
                       <Analytics />
