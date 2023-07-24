@@ -4,6 +4,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { EventWithAttendees } from "../../api/events/getEventById";
 import { FrienshipWithFriends } from "../../api/friends/getUserFriends";
+import QuickFriends from "../../friends/components/QuickFriends";
+import Link from "next/link";
 // import { Friendship } from "@prisma/client";
 
 const getEventById = async (id: string): Promise<EventWithAttendees> => {
@@ -54,11 +56,10 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
 
   const onSubmit = form.handleSubmit((data) => {
     mutate.mutate(data);
-    // console.log(data);
   });
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="mb-8">
       <div className="form-control">
         <label className="label">
           <span className="label-text">Name</span>
@@ -84,12 +85,28 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
           className="input input-bordered"
           placeholder="location"
         />
-        <>
+        <label className="label">Attendees</label>
+        <div className="flex flex-row m-2">
           {event.attendees &&
             event.attendees.map((attendee) => {
-              return <div key={attendee.id}>{attendee.name}</div>;
+              return (
+                <Link
+                  key={attendee.id}
+                  className="m-1"
+                  href={`/profile/${attendee.id}`}
+                >
+                  <div className="avatar">
+                    <div className="h-11 mx-1 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img
+                        src={attendee.image}
+                        alt={`${attendee.name}'s logo`}
+                      />
+                    </div>
+                  </div>
+                </Link>
+              );
             })}
-        </>
+        </div>
         <label className="label">
           <span className="label-text">Attendee</span>
         </label>
@@ -109,7 +126,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
         </select>
       </div>
 
-      <div className="w-full mt-8">
+      <div className="w-full">
         <div className="h-4">
           {mutate.isLoading && (
             <progress className="progress my-2 mx-auto"></progress>

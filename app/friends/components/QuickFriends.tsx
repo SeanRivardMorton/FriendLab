@@ -18,9 +18,8 @@ const AddGroupButton = () => {
   );
 };
 
-const QuickFriends = ({ friends }) => {
+const QuickFriends = ({ friends, options = { add: true } }) => {
   const groupsToShow = friends.slice(0, 3);
-
   return (
     <div className="bg-base-100 m-2 card card-compact">
       <div className="card-body">
@@ -29,21 +28,18 @@ const QuickFriends = ({ friends }) => {
           <PersonIcon className="w-6 h-6" />
         </h2>
         <div className="card-actions">
-          <AddGroupButton />
+          {options.add && <AddGroupButton />}
           {friends &&
-            groupsToShow.map((friendShip) => {
+            groupsToShow.map((friend) => {
               return (
                 <Link
-                  key={friendShip.friend.id}
+                  key={friend.id}
                   className="m-1"
-                  href={`/profile/${friendShip.friend.id}`}
+                  href={`/profile/${friend.id}`}
                 >
                   <div className="avatar">
                     <div className="h-11 mx-1 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src={friendShip.friend.image}
-                        alt={`${friendShip.friend.name}'s logo`}
-                      />
+                      <img src={friend.image} alt={`${friend.name}'s logo`} />
                     </div>
                   </div>
                 </Link>
