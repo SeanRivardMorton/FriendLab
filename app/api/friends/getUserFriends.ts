@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../../../lib/prisma";
 
 export const getUserFriends = async (userId: string) => {
@@ -11,3 +12,9 @@ export const getUserFriends = async (userId: string) => {
   });
   return friends;
 };
+
+export type FrienshipWithFriends = Prisma.FriendshipGetPayload<{
+  include: {
+    friend: true;
+  };
+}>;
