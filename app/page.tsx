@@ -18,14 +18,11 @@ import QuickGroups from "./groups/components/QuickGroups";
 import { getUserGroups } from "./api/groups/getUserGroups";
 import { getUserFriends } from "./api/friends/getUserFriends";
 import QuickFriends from "./friends/components/QuickFriends";
+import { getUserEvents } from "./api/events/getUserEvents";
+import QuickEvents from "./events/QuickEvents";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  const user = await prisma.user.findFirst({
-    where: {
-      email: session?.user?.email,
-    },
-  });
 
   if (!session?.user?.id) {
     return <>Not logged in</>;
@@ -33,8 +30,13 @@ export default async function Home() {
 
   const groupData = getUserGroups(session?.user?.id);
   const friendData = getUserFriends(session?.user?.id);
+  const eventData = getUserEvents(session?.user?.id);
 
-  const [groups, friends] = await Promise.all([groupData, friendData]);
+  const [groups, friends, events] = await Promise.all([
+    groupData,
+    friendData,
+    eventData,
+  ]);
 
   const baseUrl =
     process.env.NEXTAUTH_URL || "https://friendlab.co.uk/api/auth/signin";
@@ -47,9 +49,7 @@ export default async function Home() {
       <ClientProtectedPage>
         <QuickGroups groups={groups} />
         <QuickFriends friends={friends} />
-        <div className="bg-base-100 p-3 m-2 card">
-          <h2 className="text-xl">Events</h2>
-        </div>
+        <QuickEvents events={events} />
       </ClientProtectedPage>
     </main>
   );

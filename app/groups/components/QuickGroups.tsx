@@ -1,4 +1,4 @@
-import { PlusIcon } from "@radix-ui/react-icons";
+import { FaceIcon, PlusIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 const AddGroupButton = () => {
@@ -23,7 +23,10 @@ const QuickGroups = ({ groups }) => {
   return (
     <div className="bg-base-100 m-2 card card-compact">
       <div className="card-body">
-        <h2 className="card-title">Groups</h2>
+        <h2 className="card-title flex flex-row justify-between">
+          <span>Groups</span>
+          <FaceIcon className="h-6 w-6" />
+        </h2>
         <div className="card-actions">
           <div className="flex flex-row h-18 overflow-auto w-fit">
             <AddGroupButton />
