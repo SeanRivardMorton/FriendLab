@@ -19,7 +19,7 @@ const AddGroupButton = () => {
 };
 
 const QuickFriends = ({ friends }) => {
-  const groupsToShow = friends.slice(0, 4);
+  const groupsToShow = friends.slice(0, 3);
 
   return (
     <div className="bg-base-100 m-2 card card-compact">
