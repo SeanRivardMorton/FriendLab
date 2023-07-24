@@ -96,7 +96,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
         <select
           className="select select-bordered"
           {...form.register(`attendees.${0}.id`)}
-          defaultValue={event.attendees[0].id}
+          defaultValue={event?.attendees[0]?.id}
         >
           <option disabled>Pick one</option>
           {friends.map((friend) => {
