@@ -16,7 +16,6 @@ export async function PUT(request: Request) {
 }
 
 export async function GET(request: NextRequest) {
-  // get the id from the request
   const id = request.url.split("events/")[1];
   const events = await getEventById([id]);
   return NextResponse.json({ ...events });
@@ -24,7 +23,7 @@ export async function GET(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const id = request.url.split("events/")[1];
-  console.log(request.url);
+
   try {
     const res = await prisma.event.delete({
       where: {

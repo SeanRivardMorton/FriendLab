@@ -155,7 +155,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({
       <div className="flex flex-row mt-2 mx-4 justify-between">
         <button
           type="button"
-          onClick={mutateDelete.mutate}
+          onClick={() => mutateDelete.mutate()}
           className="mt-2 btn btn-error w-2/6"
         >
           Delete
