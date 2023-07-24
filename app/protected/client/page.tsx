@@ -10,7 +10,7 @@ const ClientProtectedPage = ({ children }) => {
       redirect("/waitlist");
     },
   });
-  if (status === "loading") return <p>Loading...</p>;
+  // if (status === "loading") return <p>Loading...</p>;
   if (!session) {
     // redirect("/api/auth/signin");
     // return <p>Redirecting...</p>;

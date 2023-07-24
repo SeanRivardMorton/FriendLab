@@ -7,6 +7,7 @@ import { Header } from "./components/Header";
 import { Analytics } from "@vercel/analytics/react";
 import BottomNav from "./components/BottomNav";
 import TopNav from "./components/TopNav";
+import Loading from "./loading";
 
 export const metadata = {
   title: "Friend Lab",
@@ -17,24 +18,26 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en-UK">
-      <Suspense>
+      <Suspense fallback={<>When do I happen?</>}>
         <PostHogPageview />
       </Suspense>
       <PHProvider>
         <ReactQueryProvider>
           <Provider>
-            <body className="text-current">
-              {/* <Header /> */}
-              <TopNav>
-                <div className="bg-base-200 h-[91vh] pb-32 p-0.5 overflow-auto">
-                  <div className="lg:w-2/4 lg:mx-auto">
-                    {children}
-                    <Analytics />
+            <Suspense fallback={<Loading />}>
+              <body className="text-current">
+                {/* <Header /> */}
+                <TopNav>
+                  <div className="bg-base-200 h-[91vh] pb-32 p-0.5 overflow-auto">
+                    <div className="lg:w-2/4 lg:mx-auto">
+                      {children}
+                      <Analytics />
+                    </div>
                   </div>
-                </div>
-              </TopNav>
-              <BottomNav />
-            </body>
+                </TopNav>
+                <BottomNav />
+              </body>
+            </Suspense>
           </Provider>
         </ReactQueryProvider>
       </PHProvider>

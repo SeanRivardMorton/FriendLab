@@ -2,34 +2,22 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 import prisma from "../../lib/prisma";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { getUserFriends } from "../api/friends/getUserFriends";
+import { getSession } from "../api/getSession";
+import { getUserGroups } from "../api/groups/getUserGroups";
 import NewGroupButton from "./NewGroupButton";
 
 const FriendsPage = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await getSession();
 
-  const user = await prisma.user.findFirst({
-    where: {
-      email: session?.user?.email,
-    },
-  });
+  if (!session?.user?.id) {
+    return <>Not logged in</>;
+  }
 
-  const friends = await prisma.friendship.findMany({
-    where: {
-      userId: user?.id,
-    },
-    include: {
-      friend: true,
-    },
-  });
+  const friendsData = getUserFriends(session?.user?.id);
+  const groupsData = getUserGroups(session?.user?.id);
 
-  const groups = await prisma.group.findMany({
-    where: {
-      creatorId: user?.id,
-    },
-    include: {
-      members: true,
-    },
-  });
+  const [friends, groups] = await Promise.all([friendsData, groupsData]);
 
   return (
     <>
