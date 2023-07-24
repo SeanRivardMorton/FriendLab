@@ -31,7 +31,7 @@ const QuickEvents = ({ events }) => {
     return a.date - b.date;
   });
 
-  const eventsToShow = sortedByMostRecent.slice(0, 5);
+  const eventsToShow = sortedByMostRecent.slice(0, 3);
   return (
     <div className="bg-base-100 m-2 card card-compact">
       <div className="card-body">
@@ -52,11 +52,11 @@ const QuickEvents = ({ events }) => {
                 return (
                   <Link
                     key={event.id}
-                    className="m-1"
+                    className="m-1 "
                     href={`/events/${event.id}`}
                   >
-                    <div className="avatar placeholder flex flex-col">
-                      <div className="text-neutral-content rounded h-18 border-2 border-base-content">
+                    <div className="avatar placeholder flex flex-col ">
+                      <div className="text-neutral-content rounded border-2 border-base-content w-20">
                         <span className="text-xl">{dayOfEvent}</span>
                       </div>
                       <span className="text-xs line-clamp-1 text-elipsis text-primary">
