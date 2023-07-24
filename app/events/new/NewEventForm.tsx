@@ -38,7 +38,7 @@ const NewEventsForm = () => {
     updateForm.mutate(data);
   });
   return (
-    <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl">
+    <div className="card w-11/12 mx-auto mt-4 bg-base-100 shadow-xl mb-20">
       <div className="card-body">
         <div className="flex flex-row justify-between">
           <h1 className="text-xl">New Event</h1>

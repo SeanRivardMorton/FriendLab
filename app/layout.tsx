@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
             <Suspense fallback={<Loading />}>
               <body className="text-current">
                 <TopNav>
-                  <div className="bg-base-200 h-[91vh] pb-32 p-0.5 overflow-auto">
+                  <div className="bg-base-200 h-[91vh] p-0.5 overflow-auto">
                     <div className="lg:w-2/4 lg:mx-auto">
                       {children}
                       <Analytics />
