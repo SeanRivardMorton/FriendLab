@@ -27,7 +27,11 @@ const QuickEvents = ({ events }) => {
     return new Date(event.date) > new Date();
   });
 
-  const eventsToShow = upcomingEvents.slice(0, 5);
+  const sortedByMostRecent = upcomingEvents.sort((a, b) => {
+    return a.date - b.date;
+  });
+
+  const eventsToShow = sortedByMostRecent.slice(0, 5);
   return (
     <div className="bg-base-100 m-2 card card-compact">
       <div className="card-body">
