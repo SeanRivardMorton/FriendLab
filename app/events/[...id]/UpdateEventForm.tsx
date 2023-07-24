@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { EventWithAttendees } from "../../api/events/getEventsById";
+import { EventWithAttendees } from "../../api/events/getEventById";
 import { FrienshipWithFriends } from "../../api/friends/getUserFriends";
 // import { Friendship } from "@prisma/client";
 

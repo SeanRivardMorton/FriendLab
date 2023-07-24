@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import prisma from "../../../lib/prisma";
 
-export const getEventsById = (id) => {
+export const getEventById = (id) => {
   const event = prisma.event.findUnique({
     where: {
       id: id[0],

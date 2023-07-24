@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
-import { getEventsById } from "../getEventsById";
+import { getEventById } from "../getEventById";
 import { UpdateEvent } from "../updateEvent";
 
 export async function PUT(request: Request) {
@@ -18,6 +18,6 @@ export async function PUT(request: Request) {
 export async function GET(request: NextRequest) {
   // get the id from the request
   const id = request.url.split("events/")[1];
-  const events = await getEventsById([id]);
+  const events = await getEventById([id]);
   return NextResponse.json({ ...events });
 }
