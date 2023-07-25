@@ -6,6 +6,7 @@ import Link from "next/link";
 import Dropdown from "./menu";
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 import Vial from "../assets/vial.svg";
+import { LOGIN_ROUTE } from "../constants";
 
 export const Header = () => {
   const { data, status } = useSession();
