@@ -64,8 +64,9 @@ const FriendLabThreads = () => {
             </button>
             <div className="">
               <p>
-                I'm thinking of doing something on Saturday. Anyone up for it?
-                I've added a few options below. Feel free to add your own.
+                I&apos;m thinking of doing something on Saturday. Anyone up for
+                it? I&apos;ve added a few options below. Feel free to add your
+                own.
               </p>
               <div className="flex flex-row justify-end text-primary">
                 <CalendarIcon className="my-auto mx-1" />
