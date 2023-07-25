@@ -12,10 +12,8 @@ const FriendLabGroupSelect: React.FC<FriendLabGroupSelectProps> = ({
   return (
     <div className="card card-compact bg-base-200 rounded-e-full w-4/5">
       <div className="card-body mr-4 flex flex-row">
-        <select className="select w-full max-w-xs">
-          <option disabled selected>
-            All
-          </option>
+        <select defaultValue="All" className="select w-full max-w-xs">
+          <option disabled>All</option>
           {groups?.map((group) => (
             <option key={group.id} value={group.id}>
               {group.name}

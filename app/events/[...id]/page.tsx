@@ -6,7 +6,7 @@ import FriendLabPoll from "../../components/FriendLabPoll";
 import FriendLabThreads from "../../components/FriendLabThreads";
 import { LOGIN_ROUTE } from "../../constants";
 
-export default async function Home() {
+const Home = async () => {
   const session = await getSession();
 
   if (!session?.user?.id) {
@@ -20,4 +20,6 @@ export default async function Home() {
       <FriendLabThreads />
     </main>
   );
-}
+};
+
+export default Home;
