@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import prisma from "../../../lib/prisma";
 import { getUserFriends } from "../../api/friends/getUserFriends";
 import { getSession } from "../../api/getSession";
@@ -11,7 +12,7 @@ const GroupPage = async ({ params }) => {
   const session = await getSession();
 
   if (!session?.user?.id) {
-    return <div>loading...</div>;
+    redirect("/api/auth/signin");
   }
 
   const groupData = getGroupById(groupId);

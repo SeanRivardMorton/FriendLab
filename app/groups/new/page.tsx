@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { getUserFriends } from "../../api/friends/getUserFriends";
 import { getSession } from "../../api/getSession";
 import NewGroupForm from "./components/NewGroupForm";
@@ -5,7 +6,7 @@ import NewGroupForm from "./components/NewGroupForm";
 const NewGroup = async () => {
   const session = await getSession();
   if (!session?.user?.id) {
-    return <div>loading...</div>;
+    redirect("/api/auth/signin");
   }
   const friendships = await getUserFriends(session?.user?.id);
   const friends = friendships.map((friendship) => friendship.friend);

@@ -1,17 +1,17 @@
-import { getServerSession } from "next-auth";
 import Link from "next/link";
-import prisma from "../../lib/prisma";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { redirect } from "next/navigation";
+
 import { getUserFriends } from "../api/friends/getUserFriends";
 import { getSession } from "../api/getSession";
 import { getUserGroups } from "../api/groups/getUserGroups";
+import ClientProtectedPage from "../protected/client/page";
 import NewGroupButton from "./NewGroupButton";
 
 const FriendsPage = async () => {
   const session = await getSession();
 
   if (!session?.user?.id) {
-    return <>Not logged in</>;
+    redirect("/api/auth/signin");
   }
 
   const friendsData = getUserFriends(session?.user?.id);

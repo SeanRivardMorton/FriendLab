@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { getEventById } from "../../api/events/getEventById";
 import { getUserFriends } from "../../api/friends/getUserFriends";
 import { getSession } from "../../api/getSession";
@@ -10,7 +11,7 @@ const EventsPage = async ({ params }) => {
   const event = await getEventById(id);
 
   if (!session?.user?.id) {
-    return <div>loading...</div>;
+    redirect("/api/auth/signin");
   }
 
   const friends = await getUserFriends(session?.user.id);

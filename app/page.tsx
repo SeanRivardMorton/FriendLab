@@ -8,12 +8,13 @@ import { getUserFriends } from "./api/friends/getUserFriends";
 import QuickFriends from "./friends/components/QuickFriends";
 import { getUserEvents } from "./api/events/getUserEvents";
 import QuickEvents from "./events/QuickEvents";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
-    return <>Not logged in</>;
+    redirect("/api/auth/signin");
   }
 
   const groupData = getUserGroups(session?.user?.id);
