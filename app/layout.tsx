@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Loading from "./loading";
 import TopNav from "./components/Layout/TopNav";
 import { Ubuntu, Roboto } from "next/font/google";
+import { getSession } from "./api/getSession";
 
 export const metadata = {
   title: "Friend Lab",
@@ -27,9 +28,10 @@ const font = Ubuntu({
   display: "swap",
 });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getSession();
   return (
-    <html lang="en-UK" className={`${font?.className} bg-base-100 `}>
+    <html lang="en-UK" className={`${font?.className}`}>
       <Suspense fallback={<>When do I happen?</>}>
         <PostHogPageview />
       </Suspense>
@@ -37,8 +39,8 @@ export default function RootLayout({ children }) {
         <ReactQueryProvider>
           <Provider>
             <Suspense fallback={<Loading />}>
-              <body className="text-current bg-base-100 h-screen">
-                <TopNav />
+              <body className="text-current bg-base-100">
+                <TopNav avatar={session?.user?.image || undefined} />
                 <div className="bg-base-100 overflow-auto">
                   <div className="lg:w-2/4 lg:mx-auto">
                     {children}

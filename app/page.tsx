@@ -7,9 +7,15 @@ import { LOGIN_ROUTE } from "./constants";
 import FriendLabPoll from "./components/FriendLabPoll";
 import FriendLabHeader from "./components/FriendLabHeader";
 import FriendLabThreads from "./components/FriendLabThreads";
+import { getSession } from "./api/getSession";
 
 export default async function Home() {
-  const session = await getServerSession({ authOptions });
+  const session = await getSession();
+
+  if (!session?.user?.id) {
+    return redirect(LOGIN_ROUTE);
+  }
+
   return (
     <main>
       <FriendLabHeader />
