@@ -24,7 +24,7 @@ const QuickEvents = ({ events }) => {
 
   const eventsToShow = sortedByMostRecent.slice(0, 3);
   return (
-    <div className="bg-base-100 m-2 card card-compact">
+    <div className="bg-base-100 m-2 card card-compac mb-16">
       <div className="card-body">
         <h2 className="card-title flex flex-row justify-between">
           <span>Events</span>
