@@ -48,7 +48,7 @@ export const Header = () => {
         )}
         {status === "unauthenticated" && (
           <button
-            onClick={() => router.push("/api/auth/signin")}
+            onClick={() => router.push(LOGIN_ROUTE)}
             className="btn btn-square btn-ghost"
           >
             Login

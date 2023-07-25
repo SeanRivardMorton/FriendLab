@@ -7,13 +7,9 @@ const ClientProtectedPage = ({ children }) => {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/waitlist");
+      redirect("/login");
     },
   });
-  // if (status === "loading") return <p>Loading...</p>;
-  // if (!session) {
-  //   redirect("/api/auth/signin");
-  // }
   return (
     <>
       <h1>{children}</h1>

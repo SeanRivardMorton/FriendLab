@@ -4,6 +4,7 @@ import prisma from "../../../lib/prisma";
 import { getUserFriends } from "../../api/friends/getUserFriends";
 import { getSession } from "../../api/getSession";
 import { getGroupById } from "../../api/groups/getGroupById";
+import { LOGIN_ROUTE } from "../../constants";
 import FriendsList from "../../friends/components/FriendsList";
 import DeleteGroupButton from "../components/DeleteGroupButton";
 
@@ -12,7 +13,7 @@ const GroupPage = async ({ params }) => {
   const session = await getSession();
 
   if (!session?.user?.id) {
-    redirect("/api/auth/signin");
+    redirect(LOGIN_ROUTE);
   }
 
   const groupData = getGroupById(groupId);

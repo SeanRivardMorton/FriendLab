@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getEventById } from "../../api/events/getEventById";
 import { getUserFriends } from "../../api/friends/getUserFriends";
 import { getSession } from "../../api/getSession";
+import { LOGIN_ROUTE } from "../../constants";
 import ClientProtectedPage from "../../protected/client/page";
 import UpdateEventForm from "./UpdateEventForm";
 
@@ -11,7 +12,7 @@ const EventsPage = async ({ params }) => {
   const event = await getEventById(id);
 
   if (!session?.user?.id) {
-    redirect("/api/auth/signin");
+    redirect(LOGIN_ROUTE);
   }
 
   const friends = await getUserFriends(session?.user.id);

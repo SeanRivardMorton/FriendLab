@@ -4,14 +4,14 @@ import { redirect } from "next/navigation";
 import { getUserFriends } from "../api/friends/getUserFriends";
 import { getSession } from "../api/getSession";
 import { getUserGroups } from "../api/groups/getUserGroups";
-import ClientProtectedPage from "../protected/client/page";
+import { LOGIN_ROUTE } from "../constants";
 import NewGroupButton from "./NewGroupButton";
 
 const FriendsPage = async () => {
   const session = await getSession();
 
   if (!session?.user?.id) {
-    redirect("/api/auth/signin");
+    redirect(LOGIN_ROUTE);
   }
 
   const friendsData = getUserFriends(session?.user?.id);

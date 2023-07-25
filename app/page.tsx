@@ -9,12 +9,13 @@ import QuickFriends from "./friends/components/QuickFriends";
 import { getUserEvents } from "./api/events/getUserEvents";
 import QuickEvents from "./events/QuickEvents";
 import { redirect } from "next/navigation";
+import { LOGIN_ROUTE } from "./constants";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
-    redirect("/api/auth/signin");
+    redirect(LOGIN_ROUTE);
   }
 
   const groupData = getUserGroups(session?.user?.id);
