@@ -41,7 +41,7 @@ const pages: Page[] = [
 const TopNav = ({ children }) => {
   const { data, status } = useSession();
 
-  if (!data) {
+  if (status !== "authenticated") {
     return <>{children}</>;
   }
 
