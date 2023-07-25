@@ -4,6 +4,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ArrowUpIcon,
+  BarChartIcon,
   BellIcon,
   CalendarIcon,
   CameraIcon,
@@ -26,7 +27,7 @@ const FriendLabThreads = () => {
     <>
       <div className="flex flex-row justify-end pr-2">
         <div className="rounded h-16 w-16 relative -mt-20 border-base-300">
-          <BellIcon className="h-16 w-16 text-base-300" />
+          <BarChartIcon className="h-16 w-16 text-base-300" />
         </div>
       </div>
       <div className="card card-compact bg-base-200 rounded-lg mt-2">
