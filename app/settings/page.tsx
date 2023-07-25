@@ -6,7 +6,7 @@ import SettingsForm from "./settingsform";
 const SettingsPage = () => {
   return (
     <div className="card card-compact">
-      <div className="card-body justify-between h-[90vh]">
+      <div className="card-body justify-between h-[89vh]">
         <div>
           <div className="flex flex-row ">
             <GearIcon className="h-6 w-6" />
