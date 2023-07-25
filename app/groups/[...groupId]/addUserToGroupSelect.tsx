@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 const addFriendToGroup = async (friendId, groupId) => {
-  console.log(friendId);
   const response = await fetch(`/api/groups/${groupId}`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -35,19 +35,6 @@ const AddUserToGroupButton = ({ friends }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <select {...form.register("friendId")} className="select select-bordered">
-        <option disabled>Pick one</option>
-        {friends &&
-          friends?.map((friend) => (
-            <option
-              className="text-white"
-              value={friend.friend.id}
-              key={friend.friend.id}
-            >
-              {friend.friend.name}
-            </option>
-          ))}
-      </select>
       <button type="submit" className="btn btn-primary mt-4">
         Add
       </button>

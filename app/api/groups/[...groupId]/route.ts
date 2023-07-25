@@ -1,24 +1,19 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]";
-import { headers } from "next/headers";
-import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
+import { updateGroup } from "./updateGroup";
+import { deleteGroup } from "./deleteGroup";
 
-export async function POST(request: Request) {
+export async function PUT(request: Request) {
   const { friendId, groupId } = await request.json();
 
-  const updatedGroup = await prisma.group.update({
-    where: {
-      id: groupId,
-    },
-    data: {
-      members: {
-        connect: {
-          id: friendId,
-        },
-      },
-    },
-  });
+  const updatedGroup = await updateGroup({ groupId, friendId });
+
+  return NextResponse.json({ updatedGroup });
+}
+
+export async function DELETE(request: Request) {
+  const { groupId } = await request.json();
+
+  const updatedGroup = deleteGroup({ groupId });
 
   return NextResponse.json({ updatedGroup });
 }

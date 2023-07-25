@@ -4,9 +4,9 @@ import prisma from "../../../lib/prisma";
 import { authOptions } from "../auth/[...nextauth]";
 
 export async function POST(request: Request) {
-  const { name } = await request.json();
+  const { name, members } = await request.json();
   const session = await getServerSession(authOptions);
-
+  console.log(members);
   const user = await prisma.user.findFirst({
     where: {
       email: session?.user?.email,
@@ -20,9 +20,11 @@ export async function POST(request: Request) {
         name: name,
         creatorId: user?.id,
         members: {
-          connect: {
-            id: user?.id,
-          },
+          connect: members.map((member) => {
+            return {
+              id: member.id,
+            };
+          }),
         },
       },
     });

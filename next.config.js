@@ -34,6 +34,12 @@ module.exports = {
         port: "",
         pathname: "/a/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.fbcdn.net",
+        port: "",
+        pathname: "/v/**",
+      },
     ],
   },
 };
