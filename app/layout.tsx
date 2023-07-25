@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-UK">
+    <html lang="en-UK" className="bg-base-100">
       <Suspense fallback={<>When do I happen?</>}>
         <PostHogPageview />
       </Suspense>
@@ -25,9 +25,9 @@ export default function RootLayout({ children }) {
         <ReactQueryProvider>
           <Provider>
             <Suspense fallback={<Loading />}>
-              <body className="text-current bg-base-100 h-screen ">
+              <body className="text-current">
                 <TopNav>
-                  <div className="p-0.5 overflow-auto">
+                  <div className="bg-base-100 overflow-auto">
                     <div className="lg:w-2/4 lg:mx-auto">
                       {children}
                       <Analytics />

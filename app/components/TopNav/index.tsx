@@ -5,12 +5,17 @@ import {
   GearIcon,
   HomeIcon,
 } from "@radix-ui/react-icons";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import Vial from "../../assets/vial.svg";
 
-const pages = [
+type Page = {
+  name: string;
+  href?: string;
+  icon: React.ReactNode;
+  onClick?: () => void;
+};
+
+const pages: Page[] = [
   {
     name: "Home",
     href: "/",
@@ -28,8 +33,8 @@ const pages = [
   },
   {
     name: "Sign Out",
-    href: "/signout",
     icon: <ExitIcon className="h-8 w-8" />,
+    onClick: () => signOut(),
   },
 ];
 
@@ -86,14 +91,25 @@ const TopNav = ({ children }) => {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-base-200">
+        <ul className="menu p-4 w-80 h-full bg-base-100">
           {pages.map((page) => {
             return (
-              <li key={page.name} className="flex flex-row">
-                <Link href={page.href}>
-                  <div className="h-8 w-8">{page.icon}</div>
-                  {page.name}
-                </Link>
+              <li
+                onClick={page?.onClick}
+                key={page.name}
+                className="flex flex-row"
+              >
+                {page?.href ? (
+                  <Link href={page?.href}>
+                    <div className="h-8 w-8">{page.icon}</div>
+                    {page.name}
+                  </Link>
+                ) : (
+                  <div>
+                    <div className="h-8 w-8">{page.icon}</div>
+                    {page.name}
+                  </div>
+                )}
               </li>
             );
           })}

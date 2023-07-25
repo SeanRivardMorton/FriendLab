@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const AddGroupButton = () => {
   return (
-    <Link className="m-1" href={`/groups/new`}>
+    <Link className="m-1" href={`/friends/invite`}>
       <div className="avatar placeholder flex flex-col">
         <div className="text-neutral-content rounded-full h-12 border-2 border-base-content">
           <span className="text-xl">
