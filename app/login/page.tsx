@@ -1,21 +1,18 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content text-center">
-        <div className="max-w-md">
-          <h1 className="text-5xl font-bold">Welcome to Friend Lab.</h1>
-          <div className="flex flex-col w-full border-opacity-50 mt-16">
-            <Link href="/api/auth/signin" className="btn btn-primary">
-              Login
-            </Link>
-            <div className="divider">OR</div>
-            <Link href="/api/auth/signin" className="btn btn-primary">
-              Register
-            </Link>
-          </div>
-        </div>
+    <div className="card">
+      <div className="card-body">
+        <div className="card-title mb-4">You&apos;re not logged in!</div>
+        <Link href="/api/auth/signin" className="btn btn-primary">
+          Register
+        </Link>
+        <div className="divider"></div>
+        <Link href="/api/auth/signin" className="btn btn-primary btn-link">
+          Login
+        </Link>
       </div>
     </div>
   );
