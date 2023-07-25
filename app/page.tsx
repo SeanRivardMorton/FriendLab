@@ -33,8 +33,10 @@ export default async function Home() {
     <main>
       <div className="flex flex-col justify-between h-[89vh]">
         <FriendLabGroupSelect groups={groups} />
-        {!created && !attendee && <NoEvents />}
-        {(created || attendee) && <QuickEvents event={created[0]} />}
+        {created.length === 0 && attendee.length === 0 && <NoEvents />}
+        {(created.length > 0 || attendee.length > 0) && (
+          <QuickEvents event={created[0]} />
+        )}
         <BottomTray />
       </div>
     </main>

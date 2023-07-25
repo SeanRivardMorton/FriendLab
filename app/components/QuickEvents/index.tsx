@@ -15,7 +15,7 @@ const QuickEvents = ({ event }) => {
           <h1 className="text-5xl font-bold">Next Event</h1>
           <h2 className="text-primary">{event.name}</h2>
           <Link
-            href="/groups"
+            href={`/events/${event.id}`}
             style={{ boxShadow: `${primary} 0px 0px 10px` }}
             className="btn mx-auto w-fill border-white border-dashed border-2 rounded-full h-32 w-32 my-6 shadow-primary"
           >
@@ -28,7 +28,7 @@ const QuickEvents = ({ event }) => {
             />
           </Link>
           <span className="mb-2">{date}</span>
-          <Link href="/groups" className="btn btn-primary">
+          <Link href={`/events/${event.id}`} className="btn btn-primary">
             View
           </Link>
         </div>
