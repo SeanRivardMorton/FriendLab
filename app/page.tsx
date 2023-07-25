@@ -12,6 +12,8 @@ import FriendLabGroupSelect from "./components/FriendLabGroupSelect";
 import { getGroupsByUserId } from "./api/groups/getGroupsById";
 import NoEvents from "./components/NoEvents";
 import BottomTray from "./components/BottomTray";
+import getEventsByUserId from "./api/events/getEventsByUserId";
+import QuickEvents from "./components/QuickEvents";
 
 export default async function Home() {
   const session = await getSession();
@@ -19,13 +21,20 @@ export default async function Home() {
   if (!session?.user?.id) redirect("/login");
 
   if (!session?.user?.id) redirect(LOGIN_ROUTE);
-  const groups = await getGroupsByUserId(session?.user?.id);
+  const groupsData = getGroupsByUserId(session?.user?.id);
+  const eventsData = getEventsByUserId(session?.user?.id);
+
+  const [groups, { created, attendee }] = await Promise.all([
+    groupsData,
+    eventsData,
+  ]);
 
   return (
     <main>
       <div className="flex flex-col justify-between h-[89vh]">
         <FriendLabGroupSelect groups={groups} />
-        <NoEvents />
+        {!created && !attendee && <NoEvents />}
+        {(created || attendee) && <QuickEvents />}
         <BottomTray />
       </div>
     </main>
