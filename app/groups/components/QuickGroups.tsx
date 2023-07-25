@@ -3,17 +3,8 @@ import Link from "next/link";
 
 const AddGroupButton = () => {
   return (
-    <Link className="m-1" href={`/groups/new`}>
-      <div className="avatar placeholder flex flex-col">
-        <div className="text-neutral-content rounded-full h-12 border-2 border-base-content">
-          <span className="text-xl">
-            <PlusIcon />
-          </span>
-        </div>
-        <span className="w-8 text-xs text-elipsis m-auto text-primary">
-          Add
-        </span>
-      </div>
+    <Link className="btn btn-circle btn-outline" href={`/groups/new`}>
+      <PlusIcon className="h-8 w-8" />
     </Link>
   );
 };
@@ -34,16 +25,16 @@ const QuickGroups = ({ groups }) => {
               return (
                 <Link
                   key={group.id}
-                  className="m-1"
+                  className="m-1 btn btn-ghost -mx-2"
                   href={`/groups/${group.id}`}
                 >
                   <div className="avatar placeholder flex flex-col">
                     <div className="text-neutral-content rounded-full h-12 border-2 border-base-content">
                       <span className="text-xl">{group.name.slice(0, 1)}</span>
                     </div>
-                    {/* <span className="w-10 text-xs line-clamp-1 text-elipsis text-primary">
-                        {group.name}
-                      </span> */}
+                    <span className="w-10 text-xs line-clamp-1 text-elipsis text-primary">
+                      {group.name}
+                    </span>
                   </div>
                 </Link>
               );

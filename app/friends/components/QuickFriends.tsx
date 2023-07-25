@@ -3,17 +3,8 @@ import Link from "next/link";
 
 const AddGroupButton = () => {
   return (
-    <Link className="m-1" href={`/friends/invite`}>
-      <div className="avatar placeholder flex flex-col">
-        <div className="text-neutral-content rounded-full h-12 border-2 border-base-content">
-          <span className="text-xl">
-            <PlusIcon />
-          </span>
-        </div>
-        <span className="w-8 text-xs text-elipsis m-auto text-primary">
-          Add
-        </span>
-      </div>
+    <Link className="btn btn-circle btn-outline" href={`/friends/invite`}>
+      <PlusIcon className="h-8 w-8" />
     </Link>
   );
 };
@@ -34,13 +25,16 @@ const QuickFriends = ({ friends, options = { add: true } }) => {
               return (
                 <Link
                   key={friend.id}
-                  className="m-1"
+                  className="m-1 btn btn-ghost -mx-2"
                   href={`/profile/${friend.id}`}
                 >
-                  <div className="avatar">
+                  <div className="avatar flex flex-col">
                     <div className="h-11 mx-1 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                       <img src={friend.image} alt={`${friend.name}'s logo`} />
                     </div>
+                    <span className="w-10 text-xs line-clamp-1 text-elipsis text-primary mt-1">
+                      {friend.name}
+                    </span>
                   </div>
                 </Link>
               );

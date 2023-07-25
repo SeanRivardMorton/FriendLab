@@ -3,17 +3,8 @@ import Link from "next/link";
 
 const AddEventButton = () => {
   return (
-    <Link className="m-1" href={`/events/new`}>
-      <div className="avatar placeholder flex flex-col">
-        <div className="text-neutral-content rounded-full h-12 border-2 border-base-content">
-          <span className="text-xl">
-            <PlusIcon />
-          </span>
-        </div>
-        <span className="w-8 text-xs text-elipsis m-auto text-primary">
-          Add
-        </span>
-      </div>
+    <Link className="btn btn-circle btn-outline" href={`/events/new`}>
+      <PlusIcon className="h-8 w-8" />
     </Link>
   );
 };
@@ -40,7 +31,7 @@ const QuickEvents = ({ events }) => {
           <CalendarIcon className="h-6 w-6" />
         </h2>
         <div className="card-actions">
-          <div className="flex flex-row h-18 overflow-auto w-fit">
+          <div className="flex flex-row">
             <AddEventButton />
             {events &&
               eventsToShow.map((event) => {
@@ -52,11 +43,11 @@ const QuickEvents = ({ events }) => {
                 return (
                   <Link
                     key={event.id}
-                    className="m-1 "
+                    className="m-1 btn btn-ghost -mx-2"
                     href={`/events/${event.id}`}
                   >
-                    <div className="avatar placeholder flex flex-col ">
-                      <div className="text-neutral-content rounded border-2 border-base-content w-20">
+                    <div className="avatar placeholder flex flex-col">
+                      <div className="text-neutral-content rounded border-2 border-base-content w-14">
                         <span className="text-xl">{dayOfEvent}</span>
                       </div>
                       <span className="text-xs line-clamp-1 text-elipsis text-primary">
