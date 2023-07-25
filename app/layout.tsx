@@ -3,11 +3,12 @@ import { PHProvider, PostHogPageview } from "./providers";
 import ReactQueryProvider from "./providers";
 import { Suspense } from "react";
 import Provider from "./components/Provider";
-import { Header } from "./components/Header";
+
 import { Analytics } from "@vercel/analytics/react";
-import BottomNav from "./components/BottomNav";
-import TopNav from "./components/TopNav";
+
 import Loading from "./loading";
+import TopNav from "./components/Layout/TopNav";
+import { Ubuntu, Roboto } from "next/font/google";
 
 export const metadata = {
   title: "Friend Lab",
@@ -15,9 +16,20 @@ export const metadata = {
     "Introducing Friend Lab, the innovative social media platform designed to transform the way adults plan hangouts with their friends. Say goodbye to the hassle of coordinating schedules, setting budgets, and finding the perfect locations, because Friend Lab does the work for you.",
 };
 
+// const inter = Inter({
+//   subsets: ["latin", "latin-ext"],
+//   display: "swap",
+// });
+
+const font = Ubuntu({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-UK" className="bg-base-100">
+    <html lang="en-UK" className={`${font?.className} bg-base-100 `}>
       <Suspense fallback={<>When do I happen?</>}>
         <PostHogPageview />
       </Suspense>
@@ -25,16 +37,14 @@ export default function RootLayout({ children }) {
         <ReactQueryProvider>
           <Provider>
             <Suspense fallback={<Loading />}>
-              <body className="text-current">
-                <TopNav>
-                  <div className="bg-base-100 overflow-auto">
-                    <div className="lg:w-2/4 lg:mx-auto">
-                      {children}
-                      <Analytics />
-                    </div>
+              <body className="text-current bg-base-100 h-screen">
+                <TopNav />
+                <div className="bg-base-100 overflow-auto">
+                  <div className="lg:w-2/4 lg:mx-auto">
+                    {children}
+                    <Analytics />
                   </div>
-                </TopNav>
-                <BottomNav />
+                </div>
               </body>
             </Suspense>
           </Provider>
