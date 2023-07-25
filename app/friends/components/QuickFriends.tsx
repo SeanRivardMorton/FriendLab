@@ -1,5 +1,6 @@
 import { PersonIcon, PlusIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import Image from "next/image";
 
 const AddGroupButton = () => {
   return (
@@ -30,7 +31,14 @@ const QuickFriends = ({ friends, options = { add: true } }) => {
                 >
                   <div className="avatar flex flex-col">
                     <div className="h-11 mx-1 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img src={friend.image} alt={`${friend.name}'s logo`} />
+                      {friend?.image && (
+                        <Image
+                          width={44}
+                          height={44}
+                          src={friend.image}
+                          alt={`${friend.name}'s logo`}
+                        />
+                      )}
                     </div>
                     <span className="w-10 text-xs line-clamp-1 text-elipsis text-primary mt-1">
                       {friend.name}

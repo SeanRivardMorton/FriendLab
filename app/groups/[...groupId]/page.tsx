@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import prisma from "../../../lib/prisma";
@@ -34,7 +35,9 @@ const GroupPage = async ({ params }) => {
         <Link href={`/profile/${group?.creator.id}`} className="avatar my-2">
           <div className="h-11 mx-1 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
             {group?.creator.image && (
-              <img
+              <Image
+                height={44}
+                width={44}
                 src={group?.creator.image}
                 alt={`${group?.creator.name}'s logo`}
               />

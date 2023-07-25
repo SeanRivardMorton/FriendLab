@@ -1,3 +1,4 @@
+import Image from "next/image";
 import prisma from "../../../lib/prisma";
 
 const getProfile = async (id) => {
@@ -37,7 +38,13 @@ const ProfilePage = async ({ params }) => {
         <h1 className="card-title">
           <div className="h-16 w-16 ">
             {user?.image && (
-              <img src={user?.image} alt="test" className="rounded-xl" />
+              <Image
+                width={44}
+                height={44}
+                src={user?.image}
+                alt="test"
+                className="rounded-xl"
+              />
             )}
           </div>
           <span className="ml-2">{user?.name}</span>
@@ -48,7 +55,9 @@ const ProfilePage = async ({ params }) => {
             <span key={friend.id} className="flex flex-row p-1">
               <div className="h-8 w-8 rounded-xl mr-2">
                 {friend?.image && (
-                  <img
+                  <Image
+                    width={44}
+                    height={44}
                     className="rounded-xl mr-2"
                     src={friend?.image}
                     alt="image"

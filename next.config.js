@@ -40,6 +40,12 @@ module.exports = {
         port: "",
         pathname: "/v/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.discordapp.com",
+        port: "",
+        pathname: "/embed/**",
+      },
     ],
   },
 };

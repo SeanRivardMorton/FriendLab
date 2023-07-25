@@ -39,7 +39,9 @@ export const Header = () => {
               <EnvelopeClosedIcon className="mr-4 h-4 w-4" />
             </Link>
             <Link href="/profile">
-              <img
+              <Image
+                width={44}
+                height={44}
                 alt="logo"
                 src={data?.user?.image || ""}
                 className="rounded-md h-8 w-8"
