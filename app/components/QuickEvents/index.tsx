@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Vial from "../../assets/vial.svg";
+// import Vial from "../../assets/vial.svg";
 import theme from "daisyui/src/theming/themes";
 import Link from "next/link";
 
@@ -20,7 +20,7 @@ const QuickEvents = ({ event }) => {
             className="btn mx-auto w-fill border-white border-dashed border-2 rounded-full h-32 w-32 my-6 shadow-primary"
           >
             <Image
-              src={Vial}
+              src={"vial.svg"}
               height={44}
               width={44}
               alt="logo"

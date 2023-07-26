@@ -59,11 +59,7 @@ const CreateEventForm = () => {
             </div>
           )}
         </div>
-<<<<<<< Updated upstream
-        <button className="btn btn-primary">Create Event</button>
-=======
         <button className="btn btn-primary">Create Groups</button>
->>>>>>> Stashed changes
       </div>
     </form>
   );

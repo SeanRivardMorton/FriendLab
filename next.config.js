@@ -46,6 +46,12 @@ module.exports = {
         port: "",
         pathname: "/embed/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.googleusercontent.com",
+        port: "",
+        pathname: "/a/**",
+      },
     ],
   },
 };

@@ -1,11 +1,8 @@
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  Cross1Icon,
-  Pencil1Icon,
   PlusIcon,
   RocketIcon,
-  TrashIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";

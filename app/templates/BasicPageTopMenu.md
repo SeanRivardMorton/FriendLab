@@ -1,5 +1,5 @@
 ```
-import { PlusCircledIcon, PlusIcon } from "@radix-ui/react-icons";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 const Page = async () => {
   return (

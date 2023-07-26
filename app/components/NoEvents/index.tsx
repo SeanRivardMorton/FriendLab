@@ -1,4 +1,4 @@
-import Vial from "../../assets/vial.svg";
+// import Vial from "../../../../../public/vial.svg";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +13,7 @@ const NoEvents = () => {
             className="btn mx-auto w-fill border-white border-dashed border-2 rounded-full h-32 w-32 my-6"
           >
             <Image
-              src={Vial}
+              src={"vial.svg"}
               height={44}
               width={44}
               alt="logo"
