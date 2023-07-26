@@ -5,6 +5,9 @@ const getGroupsByGroupId = async (groupId: string) => {
     where: {
       id: groupId,
     },
+    include: {
+      members: true,
+    },
   });
 
   return group;

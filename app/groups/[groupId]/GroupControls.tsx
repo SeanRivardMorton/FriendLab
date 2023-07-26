@@ -1,4 +1,4 @@
-import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
+import { Pencil1Icon, PersonIcon, TrashIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 const GroupControls = ({ groupId }) => {
@@ -12,6 +12,12 @@ const GroupControls = ({ groupId }) => {
               className="btn btn-circle bg-base-100"
             >
               <Pencil1Icon className="h-8 w-8" />
+            </Link>
+            <Link
+              href={`/groups/${groupId}/members`}
+              className="btn btn-circle bg-base-100"
+            >
+              <PersonIcon className="h-8 w-8" />
             </Link>
           </div>
         </div>

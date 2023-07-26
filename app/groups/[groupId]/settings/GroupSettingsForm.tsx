@@ -48,6 +48,11 @@ const GroupSettingsForm = ({ group }) => {
           className="input input-bordered"
         />
       </div>
+      {mutate.isLoading && (
+        <div className="flex flex-row justify-center mt-8">
+          <span className="loading loading-bars loading-md"></span>
+        </div>
+      )}
     </form>
   );
 };

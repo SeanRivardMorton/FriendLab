@@ -25,7 +25,7 @@ const Page = async ({ params }) => {
                 <h1 className="my-auto">{group?.name}</h1>
               </div>
               <button className="btn btn-circle bg-base-100">
-                <GearIcon className="h-8 w-8" />
+                <GearIcon className={"h-8 w-8"} />
               </button>
             </div>
           </div>
