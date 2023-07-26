@@ -1,4 +1,9 @@
-import { ChevronRightIcon, PlusIcon, RocketIcon } from "@radix-ui/react-icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  PlusIcon,
+  RocketIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";
 import getGroupsByGroupId from "../../api/groups/getGroupsByGroupId";
@@ -15,7 +20,12 @@ const GroupPage = async ({ params }) => {
       <div className="card card-compact bg-base-200 rounded-e-full w-3/4 mb-8">
         <div className="card-body">
           <div className="card-title flex flex-row justify-between">
-            <h1>{group?.name}</h1>
+            <div className="flex flex-row">
+              <Link href="/groups" className="btn btn-circle bg-base-100 mr-4">
+                <ChevronLeftIcon className="h-8 w-8" />
+              </Link>
+              <h1 className="my-auto">{group?.name}</h1>
+            </div>
             <Link href="/" className="btn btn-circle bg-base-100">
               <PlusIcon className="h-8 w-8" />
             </Link>
