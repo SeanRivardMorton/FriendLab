@@ -1,4 +1,9 @@
-import { CalendarIcon, Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";
+import {
+  CalendarIcon,
+  Cross1Icon,
+  Pencil1Icon,
+  PersonIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Event } from "../../api/events/getEventById";
 
@@ -11,7 +16,7 @@ const FriendLabHeader: React.FC<FriendLabHeaderProps> = ({ event }) => {
     <div className="card bg-base-200 card-compact w-fit rounded-e-full">
       <div className="m-2 flex flex-row justify-start">
         <div className="card-title ml-4 text-3xl">
-          Glass House
+          {event?.group?.name}
           <Link
             href={`/events/${event?.id}/edit`}
             className="btn btn-circle bg-base-100"
@@ -21,9 +26,12 @@ const FriendLabHeader: React.FC<FriendLabHeaderProps> = ({ event }) => {
           <button className="btn btn-circle bg-base-100">
             <PersonIcon className="h-8 w-6" />
           </button>
-          <button className="btn btn-circle bg-base-100">
-            <CalendarIcon className="h-8 w-6" />
-          </button>
+          <Link
+            href={`/events/${event.id}/delete`}
+            className="btn btn-circle bg-base-100"
+          >
+            <Cross1Icon className="h-8 w-6" />
+          </Link>
         </div>
       </div>
     </div>
