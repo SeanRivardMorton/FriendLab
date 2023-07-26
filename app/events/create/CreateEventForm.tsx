@@ -1,6 +1,6 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import type { Event } from "../../api/events/getEventById";
 
@@ -12,6 +12,8 @@ const createEvent = async (data) => {
 };
 
 const CreateEventForm = () => {
+  const params = useSearchParams();
+  const groupId = params?.get("gId");
   const router = useRouter();
   const form = useForm<Event>({
     defaultValues: {
@@ -26,7 +28,7 @@ const CreateEventForm = () => {
   });
 
   const handleSubmit = form.handleSubmit((data) => {
-    mutate.mutate(data);
+    mutate.mutate({ ...data, groupId: groupId });
   });
 
   return (
@@ -69,6 +71,7 @@ const CreateEventForm = () => {
             placeholder="Event Name"
             className="input input-bordered"
           />
+
           {mutate.isLoading && (
             <div className="m-auto mt-8">
               <span className="loading loading-bars loading-md"></span>

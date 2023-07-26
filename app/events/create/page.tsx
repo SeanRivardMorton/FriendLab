@@ -1,7 +1,10 @@
 import { PlusIcon } from "@radix-ui/react-icons";
+import { getSession } from "../../api/getSession";
 import CreateEventForm from "./CreateEventForm";
 
 const CreatePage = async () => {
+  // const session = await getSession();
+  // const groups = await getGroupsByUserId(session?.user?.id);
   return (
     <>
       <div className="card card-compact bg-base-200 w-2/3 rounded-e-full">

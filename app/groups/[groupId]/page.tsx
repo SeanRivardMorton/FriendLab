@@ -26,7 +26,10 @@ const GroupPage = async ({ params }) => {
               </Link>
               <h1 className="my-auto">{group?.name}</h1>
             </div>
-            <Link href="/" className="btn btn-circle bg-base-100">
+            <Link
+              href={`/events/create?gId=${groupId}`}
+              className="btn btn-circle bg-base-100"
+            >
               <PlusIcon className="h-8 w-8" />
             </Link>
           </div>
