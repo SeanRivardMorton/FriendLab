@@ -12,7 +12,10 @@ const updateGroups = async (data) => {
 };
 
 const GroupSettingsForm = ({ group }) => {
+<<<<<<< Updated upstream
   const router = useRouter();
+=======
+>>>>>>> Stashed changes
   const form = useForm({
     defaultValues: group,
   });
@@ -27,6 +30,11 @@ const GroupSettingsForm = ({ group }) => {
     mutate.mutate(data);
   });
 
+<<<<<<< Updated upstream
+=======
+  console.log(form.formState);
+
+>>>>>>> Stashed changes
   return (
     <form onBlur={onChange}>
       <div className="form-control mx-1">
