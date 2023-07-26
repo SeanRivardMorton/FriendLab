@@ -27,7 +27,7 @@ const FriendLabGroupSelect: React.FC<FriendLabGroupSelectProps> = ({
           {...form.register("groupName")}
           className="select w-full max-w-xs"
         >
-          <option value="All">All</option>
+          <option value="All">All Groups</option>
           {groups?.map((group) => (
             <option key={group.id} value={group.id}>
               {group.name}
