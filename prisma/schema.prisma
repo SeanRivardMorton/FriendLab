@@ -10,15 +10,17 @@ datasource db {
 }
 
 model Event {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  location    String?
-  date        DateTime
-  creator     User     @relation("EventCreator", fields: [creatorId], references: [id])
-  creatorId   String
-  attendees   User[]   @relation("EventAttendees")
-  Post        Post[]
+  id            String     @id @default(cuid())
+  name          String
+  description   String?
+  location      String?
+  date          DateTime
+  creator       User       @relation("EventCreator", fields: [creatorId], references: [id])
+  creatorId     String
+  attendees     User[]     @relation("EventAttendees")
+  Post          Post[]
+  group         Group?     @relation(fields: [groupId], references: [id])
+  groupId       String?
 }
 
 model Post {
@@ -59,6 +61,7 @@ model Group {
   creator   User     @relation("GroupOwner", fields: [creatorId], references: [id])
   creatorId String
   members   User[]   @relation("GroupMembers")
+  Event     Event[]
 }
 
 model Friendship {
