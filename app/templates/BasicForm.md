@@ -1,3 +1,4 @@
+```
 "use client";
 import { useMutation } from "@tanstack/react-query";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -85,3 +86,4 @@ const CreateEventForm = () => {
 };
 
 export default CreateEventForm;
+```

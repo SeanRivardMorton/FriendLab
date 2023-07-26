@@ -4,44 +4,43 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import type { Event } from "../../api/events/getEventById";
 
-const createEvent = async (data) => {
-  return fetch("/api/events", {
+const createGroup = async (data) => {
+  return fetch("/api/groups", {
     method: "POST",
     body: JSON.stringify(data),
   });
 };
 
 const CreateEventForm = () => {
-  const params = useSearchParams();
-  const groupId = params?.get("gId");
   const router = useRouter();
   const form = useForm<Event>({
     defaultValues: {
       name: "",
+      description: "",
     },
   });
   const mutate = useMutation({
-    mutationFn: createEvent,
+    mutationFn: createGroup,
     onSuccess: () => {
-      router.push("/");
+      router.push("/groups");
     },
   });
 
   const handleSubmit = form.handleSubmit((data) => {
-    mutate.mutate({ ...data, groupId: groupId });
+    mutate.mutate({ ...data });
   });
 
   return (
     <form onSubmit={handleSubmit} className="mx-2">
-      <div className="flex flex-col justify-between h-[80vh]">
+      <div className="flex flex-col justify-between h-[66vh]">
         <div className="form-control ">
           <label className="label">
-            <span className="label-text">Event Name</span>
+            <span className="label-text">Group Name</span>
           </label>
           <input
             {...form.register("name")}
             type="text"
-            placeholder="Event Name"
+            placeholder="Knights of the round table"
             className="input input-bordered"
           />
           <label className="label">
@@ -50,25 +49,7 @@ const CreateEventForm = () => {
           <input
             {...form.register("description")}
             type="text"
-            placeholder="Event Name"
-            className="input input-bordered"
-          />
-          <label className="label">
-            <span className="label-text">Date Time</span>
-          </label>
-          <input
-            {...form.register("date")}
-            type="datetime-local"
-            placeholder="Event Name"
-            className="input input-bordered"
-          />
-          <label className="label">
-            <span className="label-text">Location</span>
-          </label>
-          <input
-            {...form.register("location")}
-            type="text"
-            placeholder="Event Name"
+            placeholder="We kinda suck"
             className="input input-bordered"
           />
 

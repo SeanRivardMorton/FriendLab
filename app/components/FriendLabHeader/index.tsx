@@ -3,6 +3,7 @@ import {
   Cross1Icon,
   Pencil1Icon,
   PersonIcon,
+  TrashIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Event } from "../../api/events/getEventById";
@@ -30,7 +31,7 @@ const FriendLabHeader: React.FC<FriendLabHeaderProps> = ({ event }) => {
             href={`/events/${event.id}/delete`}
             className="btn btn-circle bg-base-100"
           >
-            <Cross1Icon className="h-8 w-6" />
+            <TrashIcon className="h-8 w-6" />
           </Link>
         </div>
       </div>

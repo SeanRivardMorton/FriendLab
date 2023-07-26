@@ -25,7 +25,7 @@ const GroupPage = async () => {
               </Link>
               <h1 className="my-auto">Your Groups</h1>
             </div>
-            <Link href="/" className="btn btn-circle bg-base-100">
+            <Link href="/groups/create" className="btn btn-circle bg-base-100">
               <PlusIcon className="h-8 w-8" />
             </Link>
           </div>
