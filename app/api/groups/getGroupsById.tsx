@@ -3,12 +3,13 @@ import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 
 export const getGroupsByUserId = async (id: string) => {
-  const res = await prisma.group.findMany({
+  const creatorRes = prisma.group.findMany({
     where: {
       creatorId: id,
     },
   });
-  return res;
+
+  return creatorRes;
 };
 
 export type Groups = Prisma.GroupGetPayload<{}>;
