@@ -1,12 +1,16 @@
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
+  Cross1Icon,
+  Pencil1Icon,
   PlusIcon,
   RocketIcon,
+  TrashIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";
 import getGroupsByGroupId from "../../api/groups/getGroupsByGroupId";
+import GroupControls from "./GroupControls";
 
 const GroupPage = async ({ params }) => {
   const { groupId } = params;
@@ -16,7 +20,7 @@ const GroupPage = async ({ params }) => {
   const [group, groupEvents] = await Promise.all([groupData, groupEventsData]);
 
   return (
-    <>
+    <div className="flex flex-col justify-between h-[87vh]">
       <div className="card card-compact bg-base-200 rounded-e-full w-3/4 mb-8">
         <div className="card-body">
           <div className="card-title flex flex-row justify-between">
@@ -35,7 +39,7 @@ const GroupPage = async ({ params }) => {
           </div>
         </div>
       </div>
-      <ul>
+      <ul className="h-full">
         {groupEvents.map((event) => (
           <li key={event.id}>
             <Link
@@ -52,7 +56,8 @@ const GroupPage = async ({ params }) => {
           </li>
         ))}
       </ul>
-    </>
+      <GroupControls groupId={groupId} />
+    </div>
   );
 };
 
