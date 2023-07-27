@@ -7,6 +7,7 @@ import {
 import Link from "next/link";
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";
 import getGroupsByGroupId from "../../api/groups/getGroupsByGroupId";
+import GroupUserAvatarsRow from "../GroupUserAvatarRow";
 import GroupControls from "./GroupControls";
 
 const GroupPage = async ({ params }) => {
@@ -25,7 +26,10 @@ const GroupPage = async ({ params }) => {
               <Link href="/groups" className="btn btn-circle bg-base-100 mr-4">
                 <ChevronLeftIcon className="h-8 w-8" />
               </Link>
-              <h1 className="my-auto">{group?.name}</h1>
+              {/* <h1 className="my-auto">{group?.name}</h1> */}
+              <div className="my-auto">
+                <GroupUserAvatarsRow group={group} />
+              </div>
             </div>
             <Link
               href={`/events/create?gId=${groupId}`}
