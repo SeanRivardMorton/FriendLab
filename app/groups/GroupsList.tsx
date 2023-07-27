@@ -23,10 +23,12 @@ const GroupList = ({ groups }) => {
                   className="rounded-full h-12 w-12"
                 />
               </div>
-              <div className="my-auto ml-4">
+              <div className="my-auto ml-1">
                 <GroupUserAvatarsRow group={group} />
               </div>
-              {/* <h2 className="text-2xl my-auto ml-4">{name}</h2> */}
+              <h2 className="text-2xl my-auto w-fit line-clamp-1">
+                {group.name}
+              </h2>
             </div>
             <button className="btn btn-circle mr-4">
               <ChevronRightIcon className="h-8 w-8" />
