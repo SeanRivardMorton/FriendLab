@@ -8,6 +8,8 @@ import NoEvents from "./components/NoEvents";
 import BottomTray from "./components/BottomTray";
 import getEventsByUserId from "./api/events/getEventsByUserId";
 import QuickEvents from "./components/QuickEvents";
+import getCurrentUserFriends from "./api/friends/getCurrentUsetFriends";
+import NoFriends from "./components/NoFriends";
 
 export default async function Home() {
   const session = await getSession();
@@ -17,11 +19,25 @@ export default async function Home() {
   if (!session?.user?.id) redirect(LOGIN_ROUTE);
   const groupsData = getGroupsByUserId(session?.user?.id);
   const eventsData = getEventsByUserId(session?.user?.id);
+  const friendsData = getCurrentUserFriends(session?.user?.id);
 
-  const [groups, { created, attendee }] = await Promise.all([
+  const [groups, { created, attendee }, friends] = await Promise.all([
     groupsData,
     eventsData,
+    friendsData,
   ]);
+
+  if (friends.length === 0) {
+    return (
+      <main>
+        <div className="flex flex-col justify-between h-[89vh]">
+          <FriendLabGroupSelect groups={groups} />
+          <NoFriends />
+          <BottomTray />
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main>

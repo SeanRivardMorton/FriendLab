@@ -1,28 +1,22 @@
-"use client";
-
-import { ExitIcon, GearIcon } from "@radix-ui/react-icons";
+import { GearIcon, PersonIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import Image from "next/image";
 
 interface TopNavProps {
   avatar?: string;
 }
 
-const TopNav: React.FC<TopNavProps> = ({ avatar }) => {
-  const router = useRouter();
+const TopNav: React.FC<TopNavProps> = () => {
   return (
     <div className="text-4xl m-2 w-screen text-primary bg-base-black flex flex-row justify-between">
       <Link href="/">FriendLab</Link>
-
-      <div className="bg-base-200 rounded-full mr-4">
-        <button className="btn btn-circle">
-          <GearIcon
-            onClick={() => router.push("/settings")}
-            className="h-6 w-6"
-          />
-        </button>
+      <div>
+        <Link href="/friends" className="btn btn-circle bg-base-200 mr-4">
+          <PersonIcon className="h-6 w-6" />
+        </Link>
+        <Link href="/settings" className="btn btn-circle bg-base-200 mr-4">
+          <GearIcon className="h-6 w-6" />
+        </Link>
       </div>
     </div>
   );
