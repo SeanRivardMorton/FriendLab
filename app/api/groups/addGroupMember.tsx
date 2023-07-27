@@ -12,6 +12,9 @@ const addGroupMember = async (groupId: string, userId: string) => {
         },
       },
     },
+    include: {
+      members: true,
+    },
   });
   return response;
 };
