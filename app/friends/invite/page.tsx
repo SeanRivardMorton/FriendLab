@@ -19,7 +19,7 @@ const InviteFriendPage = async ({ searchParams }) => {
   const basePath =
     process.env.NEXTAUTH_URL?.split("/api")[0] || "https://friendlab.co.uk";
   const shortenedId = last6Digits(session?.user?.id);
-  const link = `${basePath}/invite?friend=${shortenedId}`;
+  const link = `${basePath}/friends/invite?friend=${shortenedId}`;
   return (
     <>
       <ClientFriendInvitePage inviteLink={link} />
