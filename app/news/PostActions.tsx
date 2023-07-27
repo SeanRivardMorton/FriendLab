@@ -1,5 +1,10 @@
 "use client";
-import { MinusIcon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
+import {
+  MinusIcon,
+  PlusIcon,
+  Share1Icon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { CircleButtonInset } from "../components/Form/button";
@@ -20,15 +25,27 @@ const PostActions = ({ post }) => {
   });
   return (
     <div>
-      <CircleButtonInset onClick={deleteQuery.mutate} small>
-        {deleteQuery.isLoading ? (
-          <span className="loading loading-spinner loading-md text-error"></span>
-        ) : (
-          <TrashIcon className="h-6 w-6 text-error" />
-        )}
-      </CircleButtonInset>
+      <div className="flex flex-row justify-end">
+        <CircleButtonInset small>
+          {deleteQuery.isLoading ? (
+            <span className="loading loading-spinner loading-md text-primary"></span>
+          ) : (
+            <Share1Icon className="h-6 w-6 text-primary" />
+          )}
+        </CircleButtonInset>
+      </div>
     </div>
   );
 };
 
 export default PostActions;
+
+{
+  /* <CircleButtonInset onClick={deleteQuery.mutate} small>
+{deleteQuery.isLoading ? (
+  <span className="loading loading-spinner loading-md text-error"></span>
+) : (
+  <TrashIcon className="h-6 w-6 text-error" />
+)}
+</CircleButtonInset> */
+}

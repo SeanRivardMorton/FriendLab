@@ -31,8 +31,7 @@ const WritingNewsCard = ({ userId }) => {
   const form = useForm<Post>();
 
   const savePost = form.handleSubmit((data) => {
-    mutate.mutate({ ...data, authorId: userId });
-    // console.log(data);
+    mutate.mutate({ ...data, authorId: userId, postedAt: new Date() });
   });
   return (
     <form onSubmit={savePost}>
@@ -48,6 +47,14 @@ const WritingNewsCard = ({ userId }) => {
                 type="text"
                 placeholder="Title"
                 className="input input-bordered text-3xl w-full max-w-xs"
+              />
+            </div>
+            <div className="flex flex-row justify-start w-full">
+              <input
+                {...form.register("subtitle")}
+                type="text"
+                placeholder="subtitle"
+                className="input input-bordered text-md w-2/4 max-w-xs"
               />
             </div>
             <div className="divider"></div>
