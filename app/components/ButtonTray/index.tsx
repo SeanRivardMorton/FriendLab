@@ -7,6 +7,17 @@ interface ButtonTrayProps {
   href?: string;
 }
 
+/**
+ * Usage:
+ * 
+ * - Default
+ * 
+  <ButtonTray>
+    <h1>Name</h1>
+  </ButtonTray>
+ * 
+ */
+
 const ButtonTray: React.FC<ButtonTrayProps> = ({
   children,
   actionSlot,

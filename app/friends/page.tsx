@@ -10,7 +10,7 @@ const FriendPage = async () => {
   return (
     <>
       <ButtonTray>
-        <h1>Your Friends</h1>
+        <h1>Your friends</h1>
       </ButtonTray>
       <FriendList friends={friends} />
     </>

@@ -7,6 +7,9 @@ export const getGroupsByUserId = async (id: string) => {
     where: {
       creatorId: id,
     },
+    include: {
+      members: true,
+    },
   });
 
   return creatorRes;
