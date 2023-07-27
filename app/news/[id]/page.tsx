@@ -12,7 +12,7 @@ const PostPage = async ({ params }) => {
 
   return (
     <>
-      <ButtonTray>
+      <ButtonTray href="/news">
         <h1>Post</h1>
       </ButtonTray>
       <NewsCard post={post} />

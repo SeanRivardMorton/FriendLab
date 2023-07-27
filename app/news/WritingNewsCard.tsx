@@ -62,16 +62,20 @@ const WritingNewsCard = ({ userId }) => {
       <BottomTray>
         <div className="flex flex-row justify-between w-full">
           <div>
-            <button type="submit" className="btn btn-circle bg-base-100">
+            {/* <button type="submit" className="btn btn-circle bg-base-100">
               <FileIcon className="h-8 w-8" />
-            </button>
+            </button> */}
           </div>
           <div className="">
-            <button className="btn btn-circle bg-base-100">
+            {/* <button className="btn btn-circle bg-base-100">
               <PlusIcon className="h-8 w-8" />
-            </button>
-            <button className="btn btn-circle bg-base-100">
-              <PaperPlaneIcon className="h-8 w-8" />
+            </button> */}
+            <button className="btn btn-circle bg-base-100 text-success">
+              {mutate.isLoading ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+                <PaperPlaneIcon className="h-8 w-8" />
+              )}
             </button>
           </div>
         </div>

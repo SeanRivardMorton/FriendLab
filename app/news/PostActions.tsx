@@ -20,11 +20,12 @@ const PostActions = ({ post }) => {
   });
   return (
     <div>
-      {deleteQuery.isLoading && (
-        <span className="loading mr-2 text-primary loading-bars loading-md"></span>
-      )}
       <CircleButtonInset onClick={deleteQuery.mutate} small>
-        <TrashIcon className="h-6 w-6 text-error" />
+        {deleteQuery.isLoading ? (
+          <span className="loading loading-spinner loading-md text-error"></span>
+        ) : (
+          <TrashIcon className="h-6 w-6 text-error" />
+        )}
       </CircleButtonInset>
       <CircleButtonInset small>
         <MinusIcon className="h-6 w-6 text-warning" />
