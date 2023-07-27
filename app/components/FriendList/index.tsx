@@ -9,7 +9,10 @@ const FriendList = ({ friends }) => {
       {friends?.map((friend) => (
         <>
           <li key={friend.id}>
-            <div className="flex flex-row my-2 ml-2 justify-between">
+            <Link
+              href={`/friends/${friend.id}`}
+              className="flex flex-row my-2 ml-2 justify-between"
+            >
               <div className="flex flex-row">
                 <div className="btn btn-circle bg-base-200">
                   <Image
@@ -22,13 +25,10 @@ const FriendList = ({ friends }) => {
                 </div>
                 <h2 className="text-2xl my-auto ml-4">{friend.name}</h2>
               </div>
-              <Link
-                href={`/friends/${friend.id}`}
-                className="btn btn-circle mr-4"
-              >
+              <div className="btn btn-circle mr-4">
                 <ChevronRightIcon className="h-8 w-8" />
-              </Link>
-            </div>
+              </div>
+            </Link>
           </li>
           <div className="divider"></div>
         </>

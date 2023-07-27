@@ -5,7 +5,7 @@ import Link from "next/link";
 import { formatDistance } from "date-fns";
 
 // surely there is a better way than this?
-const { primary } = theme["[data-theme=night]"];
+const { primary } = theme["[data-theme=aqua]"];
 
 const QuickEvents = ({ event }) => {
   const date = formatDistance(new Date(event.date), new Date(), {

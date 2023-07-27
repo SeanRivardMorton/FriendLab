@@ -21,7 +21,7 @@ const NewsCard = ({ post = defaultNews }) => {
             <div>{new Date().toDateString()}</div>
           </div>
           <div className="divider"></div>
-          <div className="prose">{post.content}</div>
+          <div className="prose whitespace-break-spaces">{post.content}</div>
         </div>
       </div>
     </>

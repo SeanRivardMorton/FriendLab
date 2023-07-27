@@ -9,7 +9,10 @@ const GroupList = ({ groups }) => {
       <div className="divider"></div>
       {groups?.map((group) => (
         <li key={group.id}>
-          <div className="flex flex-row my-2 ml-2 justify-between">
+          <Link
+            href={`/groups/${group.id}`}
+            className="flex flex-row my-2 ml-2 justify-between"
+          >
             <div className="flex flex-row">
               <div className="btn btn-circle bg-base-200">
                 <Image
@@ -25,10 +28,10 @@ const GroupList = ({ groups }) => {
               </div>
               {/* <h2 className="text-2xl my-auto ml-4">{name}</h2> */}
             </div>
-            <Link href={`/groups/${group.id}`} className="btn btn-circle mr-4">
+            <button className="btn btn-circle mr-4">
               <ChevronRightIcon className="h-8 w-8" />
-            </Link>
-          </div>
+            </button>
+          </Link>
           <div className="divider"></div>
         </li>
       ))}

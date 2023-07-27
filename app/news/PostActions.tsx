@@ -27,12 +27,6 @@ const PostActions = ({ post }) => {
           <TrashIcon className="h-6 w-6 text-error" />
         )}
       </CircleButtonInset>
-      <CircleButtonInset small>
-        <MinusIcon className="h-6 w-6 text-warning" />
-      </CircleButtonInset>
-      <CircleButtonInset small>
-        <PlusIcon className="h-6 w-6 text-success" />
-      </CircleButtonInset>
     </div>
   );
 };
