@@ -14,16 +14,7 @@ const GroupList = ({ groups }) => {
             className="flex flex-row my-2 ml-2 justify-between"
           >
             <div className="flex flex-row">
-              <div className="btn btn-circle bg-base-200">
-                <Image
-                  src={"/vial.svg"}
-                  alt={group.name}
-                  height={44}
-                  width={44}
-                  className="rounded-full h-12 w-12"
-                />
-              </div>
-              <div className="my-auto ml-1">
+              <div className="my-auto ml-2">
                 <GroupUserAvatarsRow group={group} />
               </div>
               <h2 className="text-2xl my-auto w-fit line-clamp-1">
