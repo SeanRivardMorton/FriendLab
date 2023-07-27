@@ -16,7 +16,8 @@ const InviteFriendPage = async ({ searchParams }) => {
   if (session?.user?.id === friend?.id) return redirect(LOGIN_ROUTE);
 
   if (!session?.user?.id) return redirect(LOGIN_ROUTE);
-  const basePath = process.env.NEXTAUTH_URL?.split("/api")[0];
+  const basePath =
+    process.env.NEXTAUTH_URL?.split("/api")[0] || "https://friendlab.co.uk";
   const shortenedId = last6Digits(session?.user?.id);
   const link = `${basePath}/invite?friend=${shortenedId}`;
   return (
