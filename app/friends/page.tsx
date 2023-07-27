@@ -1,4 +1,6 @@
 import { PlusIcon } from "@radix-ui/react-icons";
+import { getSession } from "../api/getSession";
+import { redirect } from "next/navigation";
 import getCurrentUserFriends from "../api/friends/getCurrentUsetFriends";
 import getFriendsOfUser from "../api/friends/getFriendsOfUser";
 import ButtonTray from "../components/ButtonTray";
@@ -7,8 +9,11 @@ import {
   CircleButtonLinkInset,
 } from "../components/Form/button";
 import FriendList from "../components/FriendList";
+import { LOGIN_ROUTE } from "../constants";
 
 const FriendPage = async () => {
+  const session = await getSession();
+  if (!session?.user?.id) redirect(LOGIN_ROUTE);
   const friends = await getFriendsOfUser();
   return (
     <>

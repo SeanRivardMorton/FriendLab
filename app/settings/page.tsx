@@ -1,11 +1,15 @@
-"use client";
 import { GearIcon } from "@radix-ui/react-icons";
+import { getSession } from "../api/getSession";
+import { redirect } from "next/navigation";
+import { LOGIN_ROUTE } from "../constants";
 import SettingsForm from "./settingsform";
 import SignOutButton from "./SignOutButton";
 
-const SettingsPage = () => {
+const SettingsPage = async () => {
+  const session = await getSession();
+  if (!session?.user?.id) redirect(LOGIN_ROUTE);
   return (
-    <div className="flex flex-col justify-between h-[80vh] w-screen">
+    <div className="flex flex-col justify-between h-[80vh]">
       <div className="card card-compact">
         <div className="card-body justify-between">
           <div>

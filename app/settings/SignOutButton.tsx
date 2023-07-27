@@ -1,4 +1,4 @@
-"ues client";
+"use client";
 import { ExitIcon } from "@radix-ui/react-icons";
 import { signOut } from "next-auth/react";
 
@@ -23,8 +23,3 @@ const SignOutButton = () => {
 };
 
 export default SignOutButton;
-
-// <button onClick={() => signOut()} className="btn btn-error">
-//   Logout
-//   <ExitIcon className="h-6 w-6" />
-// </button>

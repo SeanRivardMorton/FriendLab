@@ -1,11 +1,16 @@
 import getUser from "../../api/user/getUser";
 import ButtonTray from "../../components/ButtonTray";
 import Image from "next/image";
-import getFriendsOfUser from "../../api/friends/getFriendsOfUser";
 import getCurrentUserFriends from "../../api/friends/getCurrentUsetFriends";
 import FriendList from "../../components/FriendList";
 
+import { redirect } from "next/navigation";
+import { LOGIN_ROUTE } from "../../constants";
+import { getSession } from "../../api/getSession";
+
 const FriendPage = async ({ params }) => {
+  const session = await getSession();
+  if (!session?.user?.id) redirect(LOGIN_ROUTE);
   const { friendId } = params;
   const friend = await getUser(friendId);
   if (!friend) return <>This user does not exist</>;
