@@ -20,7 +20,7 @@ const GroupSettingsActionsBar = ({ groupId }) => {
   return (
     <div className="card card-compact bg-base-200 rounded-l-full w-2/3">
       <div className="card-body">
-        <div className="card-title">
+        <div className="card-title flex flex-row justify-end w-full">
           <button
             onClick={() => mutate.mutate(groupId)}
             className={`btn btn-circle text-error bg-base-100`}
