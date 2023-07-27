@@ -1,13 +1,14 @@
 import {
+  ArrowRightIcon,
   CheckIcon,
   PaperPlaneIcon,
   PlusIcon,
   RocketIcon,
   StarFilledIcon,
 } from "@radix-ui/react-icons";
+import Link from "next/link";
 
-const HandleInvite = async ({ friendId }) => {
-  console.log(friendId);
+const HandleInvite = async ({ friendId }: { friendId: string }) => {
   return (
     <div className="">
       <div className="card card-compact bg-base-200 w-11/12 rounded-e-full">
@@ -27,7 +28,7 @@ const HandleInvite = async ({ friendId }) => {
               <button className="btn btn-circle text-success bg-base-100 animate-pulse">
                 <CheckIcon className="h-8 w-8" />
               </button>
-              <h2>You've just followed a link from a friend</h2>
+              <h2>You&apos;ve just followed a link from a friend</h2>
             </div>
           </div>
         </div>
@@ -36,9 +37,13 @@ const HandleInvite = async ({ friendId }) => {
         <div className="card-body">
           <div className="card-title flex flex-row justify-between">
             <h1>Sign up to get started!</h1>
-            <button className="btn btn-circle bg-base-100 text-primary animate-pulse">
+            <ArrowRightIcon className="h-8 w-8" />
+            <Link
+              href="/api/auth/signin"
+              className="btn btn-circle bg-base-100 text-primary animate-pulse shadow-md shadow-primary"
+            >
               <RocketIcon className="h-8 w-8" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
