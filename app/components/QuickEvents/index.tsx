@@ -2,12 +2,15 @@ import Image from "next/image";
 // import Vial from "../../assets/vial.svg";
 import theme from "daisyui/src/theming/themes";
 import Link from "next/link";
+import { formatDistance } from "date-fns";
 
 // surely there is a better way than this?
 const { primary } = theme["[data-theme=night]"];
 
 const QuickEvents = ({ event }) => {
-  const date = new Date(event.date).toLocaleString();
+  const date = formatDistance(new Date(event.date), new Date(), {
+    addSuffix: true,
+  });
   return (
     <div className="hero">
       <div className="hero-content text-center">

@@ -1,5 +1,6 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import { redirect } from "next/navigation";
+import getEventsByGroupId from "../api/events/getEventsByGroupId";
 import { getSession } from "../api/getSession";
 import { getGroupsByUserId } from "../api/groups/getGroupsById";
 import ButtonTray from "../components/ButtonTray";
