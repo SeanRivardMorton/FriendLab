@@ -1,7 +1,6 @@
 "ues client";
-import { ArrowRightIcon, ExitIcon, RocketIcon } from "@radix-ui/react-icons";
+import { ExitIcon } from "@radix-ui/react-icons";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 
 const SignOutButton = () => {
   return (
@@ -10,12 +9,12 @@ const SignOutButton = () => {
         <div className="card-body">
           <div className="card-title flex flex-row justify-end">
             <h1>Sign out</h1>
-            <Link
-              href="/api/auth/signin"
+            <button
+              onClick={() => signOut()}
               className="btn btn-circle bg-base-100 text-error animate-pulse shadow-md shadow-error"
             >
               <ExitIcon className="h-8 w-8" />
-            </Link>
+            </button>
           </div>
         </div>
       </div>
