@@ -1,42 +1,27 @@
-import { Cross1Icon, MinusIcon, PlusIcon } from "@radix-ui/react-icons";
-import ButtonTray from "../components/ButtonTray";
-import { CircleButtonInset } from "../components/Form/button";
+import { Post } from "./createPost";
+import PostActions from "./PostActions";
 
-const defaultNews = {
+const defaultNews: Partial<Post> = {
   title: "Title",
-  subtitle: "Subtitle",
-  date: new Date().toLocaleDateString(),
-  text: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl quis tincidunt aliquam, nisl nisl lacinia nisl, nec lacinia nisl",
+  content:
+    "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl quis tincidunt aliquam, nisl nisl lacinia nisl, nec lacinia nisl",
 };
 
-const NewsCard = ({ news = defaultNews }) => {
+const NewsCard = ({ post = defaultNews }) => {
   return (
     <>
-      <ButtonTray>
-        <button>News</button>
-      </ButtonTray>
       <div className="card">
         <div className="card-body">
           <div className="card-title flex flex-row justify-between">
-            <h2>{news.title}</h2>
-            <div>
-              <CircleButtonInset small>
-                <Cross1Icon className="h-6 w-6 text-error" />
-              </CircleButtonInset>
-              <CircleButtonInset small>
-                <MinusIcon className="h-6 w-6 text-warning" />
-              </CircleButtonInset>
-              <CircleButtonInset small>
-                <PlusIcon className="h-6 w-6 text-success" />
-              </CircleButtonInset>
-            </div>
+            <h2>{post.title}</h2>
+            <PostActions post={post} />
           </div>
           <div className="flex flex-row justify-between">
-            <p className="text-bold">{news.subtitle}</p>
-            <div>{news.date}</div>
+            <p className="text-bold"></p>
+            <div>{new Date().toDateString()}</div>
           </div>
           <div className="divider"></div>
-          <div className="prose">{news.text}</div>
+          <div className="prose">{post.content}</div>
         </div>
       </div>
     </>

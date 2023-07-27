@@ -1,12 +1,9 @@
 "use client";
 import { FileIcon, PaperPlaneIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
 import React from "react";
 import { useForm } from "react-hook-form";
-import { authOptions } from "../api/auth/[...nextauth]";
 import BottomTray from "../components/BottomTray";
 import ButtonTray from "../components/ButtonTray";
 import { Post } from "./createPost";
@@ -19,20 +16,26 @@ const postPost = async (post): Promise<Post> => {
   return data.json();
 };
 
-const WritingNewsCard = ({ userId }) => {
+interface UpdatingNewsCard {
+  post: Post;
+}
+
+const UpdatingNewsCard: React.FC<UpdatingNewsCard> = (props) => {
   const router = useRouter();
+  const [post, setPost] = React.useState(props.post);
   const mutate = useMutation({
     mutationFn: (post: Post) => postPost(post),
     onSuccess: (newPost: Post) => {
-      router.push(`/news/${newPost.id}`);
+      console.log(newPost);
+      setPost(newPost);
     },
   });
 
-  const form = useForm<Post>();
-
+  const form = useForm({
+    defaultValues: props.post,
+  });
   const savePost = form.handleSubmit((data) => {
-    mutate.mutate({ ...data, authorId: userId });
-    // console.log(data);
+    mutate.mutate(data);
   });
   return (
     <form onSubmit={savePost}>
@@ -80,4 +83,4 @@ const WritingNewsCard = ({ userId }) => {
   );
 };
 
-export default WritingNewsCard;
+export default UpdatingNewsCard;

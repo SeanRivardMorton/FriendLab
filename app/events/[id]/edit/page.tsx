@@ -1,5 +1,4 @@
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import getEventById from "../../../api/events/getEventById";
