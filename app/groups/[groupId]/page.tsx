@@ -4,13 +4,20 @@ import {
   PlusIcon,
   RocketIcon,
 } from "@radix-ui/react-icons";
+
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";
+import { getSession } from "../../api/getSession";
 import getGroupsByGroupId from "../../api/groups/getGroupsByGroupId";
+import { LOGIN_ROUTE } from "../../constants";
 import GroupUserAvatarsRow from "../GroupUserAvatarRow";
 import GroupControls from "./GroupControls";
 
 const GroupPage = async ({ params }) => {
+  const session = await getSession();
+  if (!session?.user?.id) redirect(LOGIN_ROUTE);
+
   const { groupId } = params;
   const groupData = getGroupsByGroupId(groupId);
   const groupEventsData = getEventsByGroupId(groupId);
