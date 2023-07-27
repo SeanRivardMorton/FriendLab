@@ -4,7 +4,7 @@ import theme from "daisyui/src/theming/themes";
 import Link from "next/link";
 
 // surely there is a better way than this?
-const { primary } = theme["[data-theme=luxury]"];
+const { primary } = theme["[data-theme=black]"];
 
 const QuickEvents = ({ event }) => {
   const date = new Date(event.date).toLocaleString();

@@ -8,7 +8,7 @@ interface TopNavProps {
 
 const TopNav: React.FC<TopNavProps> = () => {
   return (
-    <div className="text-4xl m-2 w-screen text-primary bg-base-black flex flex-row justify-between">
+    <div className="text-4xl m-2 w-screen text-primary flex flex-row justify-between">
       <Link href="/">FriendLab</Link>
       <div>
         <Link href="/friends" className="btn btn-circle bg-base-200 mr-4">

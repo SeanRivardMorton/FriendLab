@@ -53,7 +53,7 @@ const MembersList = ({ members, groupId, friends }) => {
         </div>
       </div>
       <ul className="h-full">
-        {members.map((member) => (
+        {members?.map((member) => (
           <li key={member.id}>
             <div className="flex flex-row my-2 ml-2 justify-between">
               <div className="flex flex-row">
