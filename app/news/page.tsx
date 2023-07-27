@@ -33,14 +33,17 @@ const NewsPage = async () => {
         {yourPosts?.map((post) => (
           <>
             <li key={post.id}>
-              <div className="flex flex-row my-2 ml-2 justify-between">
+              <Link
+                href={`/news/${post.id}`}
+                className="flex flex-row my-2 ml-2 justify-between"
+              >
                 <div className="flex flex-row">
                   <h2 className="text-2xl my-auto ml-4">{post.title}</h2>
                 </div>
-                <Link href={`/news/${post.id}`} className="btn btn-circle mr-4">
+                <div className="btn btn-circle mr-4">
                   <ChevronRightIcon className="h-8 w-8" />
-                </Link>
-              </div>
+                </div>
+              </Link>
             </li>
             <div className="divider"></div>
           </>

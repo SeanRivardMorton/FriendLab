@@ -8,6 +8,7 @@ const defaultNews: Partial<Post> = {
 };
 
 const NewsCard = ({ post = defaultNews }) => {
+  const dateFormat = new Date().toDateString();
   return (
     <>
       <div className="card">
@@ -17,11 +18,11 @@ const NewsCard = ({ post = defaultNews }) => {
             <PostActions post={post} />
           </div>
           <div className="flex flex-row justify-between">
-            <p className="text-bold"></p>
-            <div>{new Date().toDateString()}</div>
+            <p className="text-bold">{post.subtitle}</p>
+            <div>{dateFormat}</div>
           </div>
           <div className="divider"></div>
-          <div className="prose">{post.content}</div>
+          <div className="prose whitespace-break-spaces">{post.content}</div>
         </div>
       </div>
     </>
