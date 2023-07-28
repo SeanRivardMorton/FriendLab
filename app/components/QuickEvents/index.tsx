@@ -16,7 +16,7 @@ const QuickEvents = ({ event }) => {
       <div className="hero-content text-center">
         <div className="max-w-md flex flex-col">
           <h1 className="text-5xl font-bold">Next Event</h1>
-          <h2 className="text-primary">{event.name}</h2>
+          <h2 className="">{event.name}</h2>
           <Link
             href={`/events/${event.id}`}
             style={{ boxShadow: `${primary} 0px 0px 10px` }}
@@ -31,7 +31,7 @@ const QuickEvents = ({ event }) => {
             />
           </Link>
           <span className="mb-2">{date}</span>
-          <Link href={`/events/${event.id}`} className="btn btn-primary">
+          <Link href={`/events/${event.id}`} className="btn">
             View
           </Link>
         </div>
