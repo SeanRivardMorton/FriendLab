@@ -10,10 +10,11 @@ import getEventsByUserId from "./api/events/getEventsByUserId";
 import QuickEvents from "./components/QuickEvents";
 import getCurrentUserFriends from "./api/friends/getCurrentUsetFriends";
 import NoFriends from "./components/NoFriends";
+import LandingPage from "./LandingPage/LandingPage";
 
 export default async function Home() {
   const session = await getSession();
-  if (!session?.user?.id) redirect(LOGIN_ROUTE);
+  if (!session?.user?.id) return <LandingPage />;
   const groupsData = getGroupsByUserId(session?.user?.id);
   const eventsData = getEventsByUserId(session?.user?.id);
   const friendsData = getCurrentUserFriends(session?.user?.id);

@@ -8,10 +8,9 @@ const SignOutButton = () => {
       <div className="card card-compact mt-4 bg-base-200 w-fit rounded-l-full">
         <div className="card-body">
           <div className="card-title flex flex-row justify-end">
-            <h1>Sign out</h1>
             <button
               onClick={() => signOut()}
-              className="btn btn-circle bg-base-100 text-error animate-pulse shadow-md shadow-error"
+              className="btn btn-circle bg-base-100 text-error"
             >
               <ExitIcon className="h-8 w-8" />
             </button>
