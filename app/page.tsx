@@ -10,6 +10,8 @@ import getCurrentUserFriends from "./api/friends/getCurrentUsetFriends";
 import NoFriends from "./components/NoFriends";
 import LandingPage from "./LandingPage/LandingPage";
 import { BaseEvent } from "./api/events/getEventById";
+import { CircleButtonLinkInset } from "./components/Form/button";
+import { CalendarIcon } from "@radix-ui/react-icons";
 
 const sortEventsByDate = (events: BaseEvent[]) =>
   events.sort(
@@ -50,7 +52,11 @@ export default async function Home() {
         {events.length > 0 && (
           <QuickEvents events={sortedEvents} initialIndex={0} />
         )}
-        <BottomTray />
+        <BottomTray>
+          <CircleButtonLinkInset href="/calendar">
+            <CalendarIcon className="h-8 w-8" />
+          </CircleButtonLinkInset>
+        </BottomTray>
       </div>
     </main>
   );
