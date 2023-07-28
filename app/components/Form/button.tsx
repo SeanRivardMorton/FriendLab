@@ -21,6 +21,7 @@ export const CircleButtonLinkInset = ({ children, href = "/", ...props }) => (
 export const CircleButtonInset = ({
   children,
   isLoading = false,
+  small,
   ...props
 }) => {
   if (isLoading) {
@@ -38,7 +39,7 @@ export const CircleButtonInset = ({
 
   return (
     <button
-      className={`btn btn-circle bg-base-200 ${props?.small ? "btn-sm" : ""}`}
+      className={`btn btn-circle bg-base-200 ${small ? "btn-sm" : ""}`}
       {...props}
     >
       {children}
