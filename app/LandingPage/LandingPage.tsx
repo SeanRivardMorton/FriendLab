@@ -33,14 +33,15 @@ const LandingPage = () => {
               </h2>
             </div>
             <h1 className="text-3xl mt-24">Friend Lab.</h1>
-            <div className="flex flex-row justify-around mt-8">
+            <div className="flex flex-row">
               <Link
                 href="/login"
-                className="btn btn-circle h-28 w-28 bg-base-200 "
+                className="btn btn-circle mx-auto h-28 w-28 bg-base-200 "
               >
                 <ArrowRightIcon className="h-16 w-16" />
               </Link>
             </div>
+            <h3 className="mt-2 text-xl">Get Started</h3>
           </div>
         </div>
       </div>
