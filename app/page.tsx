@@ -16,13 +16,6 @@ const sortEventsByDate = (events: BaseEvent[]) =>
     (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
   );
 
-const filterEventsByDate = (events: BaseEvent[]) => {
-  const today = new Date();
-  return events.filter(
-    (event) => new Date(event.date).valueOf() >= today.valueOf()
-  );
-};
-
 export default async function Home() {
   const session = await getSession();
   if (!session?.user?.id) return <LandingPage />;
@@ -48,14 +41,15 @@ export default async function Home() {
   }
 
   const sortedEvents = sortEventsByDate(events);
-  const filteredSortedEvents = filterEventsByDate(sortedEvents);
-  console.log("fitlered", filteredSortedEvents);
+
   return (
     <main>
       <div className="flex flex-col justify-between h-[89vh]">
         <FriendLabGroupSelect groups={groups} />
         {events.length === 0 && <NoEvents />}
-        {events.length > 0 && <QuickEvents event={filteredSortedEvents[0]} />}
+        {events.length > 0 && (
+          <QuickEvents events={sortedEvents} initialIndex={0} />
+        )}
         <BottomTray />
       </div>
     </main>
