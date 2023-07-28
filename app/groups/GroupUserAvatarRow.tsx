@@ -5,7 +5,7 @@ const GroupUserAvatarsRow = ({ group }) => {
     <div className="flex flex-row mx-2">
       {group?.members?.map((member) => (
         <div key={member.id} className="avatar">
-          <div className="btn btn-circle btn-sm ring-1 ring-primary -ml-4">
+          <div className="btn btn-circle btn-sm ring-1 ring-white -ml-4">
             <Image
               src={member.image}
               width={22}
