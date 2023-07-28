@@ -8,6 +8,7 @@ import {
   CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  Cross1Icon,
 } from "@radix-ui/react-icons";
 import React from "react";
 
@@ -70,7 +71,7 @@ const QuickEvents = ({ events, initialIndex }) => {
               />
             </Link>
             <button className="btn btn-circle text-error my-auto">
-              <ChevronRightIcon className="w-8 h-8" />
+              <Cross1Icon className="w-8 h-8" />
             </button>
             <button
               onClick={nextEvent}
