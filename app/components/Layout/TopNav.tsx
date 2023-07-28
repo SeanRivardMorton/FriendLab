@@ -3,14 +3,13 @@ import {
   GearIcon,
   PersonIcon,
 } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface TopNavProps {
   avatar?: string;
 }
 
-const TopNav: React.FC<TopNavProps> = () => {
+const TopNav = () => {
   return (
     <div className="text-4xl m-2 w-screen text-primary flex flex-row justify-between">
       <Link href="/">FriendLab</Link>

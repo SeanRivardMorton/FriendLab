@@ -30,6 +30,7 @@ const font = Ubuntu({
 
 export default async function RootLayout({ children }) {
   const session = await getSession();
+
   return (
     <html lang="en-UK" className={`${font?.className}`}>
       <Suspense fallback={<>When do I happen?</>}>
@@ -40,7 +41,7 @@ export default async function RootLayout({ children }) {
           <Provider>
             <Suspense fallback={<Loading />}>
               <body className="text-current bg-base-100">
-                <TopNav avatar={session?.user?.image || undefined} />
+                {session?.user && <TopNav />}
                 <div className="bg-base-100 overflow-auto">
                   <div className="lg:w-2/4 lg:mx-auto">
                     {children}
