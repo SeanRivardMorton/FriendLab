@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
+import SloganRotater from "../login/SloganRotater";
 
 const slogans = [
   "Friend Hangout Scheduler",
@@ -24,14 +25,7 @@ const LandingPage = () => {
       <div className="hero min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <div className="text-center">
-              <h2
-                style={{ wordSpacing: "100vw" }}
-                className="text-4xl mx-auto underline"
-              >
-                {slogans[Math.floor(Math.random() * slogans.length)]}
-              </h2>
-            </div>
+            <SloganRotater slogans={slogans} />
             <h1 className="text-3xl mt-24">Friend Lab.</h1>
             <div className="flex flex-row">
               <Link
