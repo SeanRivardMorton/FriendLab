@@ -54,8 +54,9 @@ const QuickEvents = ({ events, initialIndex }) => {
             >
               <ChevronLeftIcon className="w-8 h-8" />
             </button>
-            <button className="btn btn-circle my-auto text-success">
-              <CheckIcon className="w-8 h-8" />
+
+            <button className="btn btn-circle text-error my-auto">
+              <Cross1Icon className="w-8 h-8" />
             </button>
             <Link
               href={`/events/${event.id}`}
@@ -70,8 +71,8 @@ const QuickEvents = ({ events, initialIndex }) => {
                 className="rotate-12 mx-auto"
               />
             </Link>
-            <button className="btn btn-circle text-error my-auto">
-              <Cross1Icon className="w-8 h-8" />
+            <button className="btn btn-circle my-auto text-success">
+              <CheckIcon className="w-8 h-8" />
             </button>
             <button
               onClick={nextEvent}
