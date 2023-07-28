@@ -5,6 +5,9 @@ const getPost = (postId) => {
     where: {
       id: postId,
     },
+    include: {
+      author: true,
+    },
   });
   return res;
 };

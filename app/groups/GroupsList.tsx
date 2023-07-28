@@ -21,9 +21,9 @@ const GroupList = ({ groups }) => {
                 {group.name}
               </h2>
             </div>
-            <button className="btn btn-circle mr-4">
+            <div className=" mr-4">
               <ChevronRightIcon className="h-8 w-8" />
-            </button>
+            </div>
           </Link>
           <div className="divider"></div>
         </li>

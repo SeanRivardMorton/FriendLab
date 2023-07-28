@@ -11,4 +11,6 @@ const createPost = async (post) => {
 
 export default createPost;
 
-export type Post = Prisma.PostGetPayload<{}>;
+export type Post = Prisma.PostGetPayload<{
+  include: { author: true };
+}>;

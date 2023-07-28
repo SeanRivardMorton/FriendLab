@@ -15,8 +15,8 @@ const PostPage = async ({ params }) => {
 
   return (
     <>
-      <ButtonTray href="/news">
-        <h1>Post</h1>
+      <ButtonTray href="/news" actionSlot={<span></span>}>
+        <h1>{post.title}</h1>
       </ButtonTray>
       <NewsCard post={post} />
       <BottomTray>
