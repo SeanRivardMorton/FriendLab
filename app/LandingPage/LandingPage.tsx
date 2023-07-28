@@ -28,7 +28,7 @@ const LandingPage = () => {
         <div className="hero-content text-center">
           <div className="max-w-md">
             <SloganRotater slogans={slogans} />
-            <h1 className="text-3xl mt-24">Friend Lab.</h1>
+            <h1 className="text-3xl mt-24 mb-8">Friend Lab.</h1>
             <div className="flex flex-row">
               <Link
                 href="/login"
