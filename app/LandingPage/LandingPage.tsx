@@ -3,18 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 const slogans = [
-  "Friend Hangout Planner",
+  "Friend Hangout Scheduler",
   "Dinner Party Coordinator",
   "Fantasy Tabletop Planner",
   "Frugal Hangout Advisor",
   "Techy Meetup Planner",
   "Cat Sitting Tracker",
   "Work Drinks Decider",
-  "Movie Night Agent",
+  "Movie Night Planner",
   "Game Day Coordinator",
   "BBQ Day Planner",
-  "Stag Do Planner",
-  "Hen Do Planner",
+  "Stag-Do Planner",
+  "Hen-Do Planner",
   "Poker Night Scheduler",
 ];
 
