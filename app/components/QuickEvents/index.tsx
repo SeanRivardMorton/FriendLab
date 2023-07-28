@@ -8,7 +8,8 @@ import { formatDistance } from "date-fns";
 const { primary } = theme["[data-theme=night]"];
 
 const QuickEvents = ({ event }) => {
-  const date = formatDistance(new Date(event.date), new Date(), {
+  if (!event) return <div>No events!</div>;
+  const date = formatDistance(new Date(event?.date ?? null), new Date(), {
     addSuffix: true,
   });
   return (

@@ -49,7 +49,7 @@ export default async function Home() {
 
   const sortedEvents = sortEventsByDate(events);
   const filteredSortedEvents = filterEventsByDate(sortedEvents);
-
+  console.log("fitlered", filteredSortedEvents);
   return (
     <main>
       <div className="flex flex-col justify-between h-[89vh]">
