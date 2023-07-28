@@ -18,21 +18,9 @@ export const CircleButtonLinkInset = ({ children, href = "/", ...props }) => (
   </Link>
 );
 
-export const CircleButtonInset = ({
-  children,
-  isLoading = false,
-  ...props
-}) => {
-  if (isLoading) {
-    return (
-      <button className={`btn btn-circle bg-base-200 animate-pulse`} {...props}>
-        <span className="loading loading-spinner loading-md"></span>
-      </button>
-    );
-  }
-
+export const CircleButtonInset = ({ children, ...props }) => {
   return (
-    <button className={`btn btn-circle bg-base-200`} {...props}>
+    <button className={`btn btn-circle bg-base-100`} {...props}>
       {children}
     </button>
   );
