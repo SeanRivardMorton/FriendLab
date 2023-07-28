@@ -1,6 +1,4 @@
 import React from "react";
-import { redirect } from "next/navigation";
-import { LOGIN_ROUTE } from "./constants";
 import { getSession } from "./api/getSession";
 import FriendLabGroupSelect from "./components/FriendLabGroupSelect";
 import { getGroupsByUserId } from "./api/groups/getGroupsById";
@@ -11,6 +9,19 @@ import QuickEvents from "./components/QuickEvents";
 import getCurrentUserFriends from "./api/friends/getCurrentUsetFriends";
 import NoFriends from "./components/NoFriends";
 import LandingPage from "./LandingPage/LandingPage";
+import { BaseEvent } from "./api/events/getEventById";
+
+const sortEventsByDate = (events: BaseEvent[]) =>
+  events.sort(
+    (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
+  );
+
+const filterEventsByDate = (events: BaseEvent[]) => {
+  const today = new Date();
+  return events.filter(
+    (event) => new Date(event.date).valueOf() >= today.valueOf()
+  );
+};
 
 export default async function Home() {
   const session = await getSession();
@@ -36,12 +47,15 @@ export default async function Home() {
     );
   }
 
+  const sortedEvents = sortEventsByDate(events);
+  const filteredSortedEvents = filterEventsByDate(sortedEvents);
+
   return (
     <main>
       <div className="flex flex-col justify-between h-[89vh]">
         <FriendLabGroupSelect groups={groups} />
         {events.length === 0 && <NoEvents />}
-        {events.length > 0 && <QuickEvents event={events[0]} />}
+        {events.length > 0 && <QuickEvents event={filteredSortedEvents[0]} />}
         <BottomTray />
       </div>
     </main>
