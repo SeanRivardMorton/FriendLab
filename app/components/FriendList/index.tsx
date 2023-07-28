@@ -25,7 +25,7 @@ const FriendList = ({ friends }) => {
                 </div>
                 <h2 className="text-2xl my-auto ml-4">{friend.name}</h2>
               </div>
-              <div className="btn btn-circle mr-4">
+              <div className="my-auto mr-2">
                 <ChevronRightIcon className="h-8 w-8" />
               </div>
             </Link>
