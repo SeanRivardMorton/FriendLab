@@ -17,6 +17,8 @@ const slogans = [
   "Stag-Do Planner",
   "Hen-Do Planner",
   "Poker Night Scheduler",
+  "Work drink instigator",
+  "Gym Day Scheduler",
 ];
 
 const LandingPage = () => {
