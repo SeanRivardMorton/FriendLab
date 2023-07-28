@@ -31,7 +31,12 @@ const WritingNewsCard = ({ userId }) => {
   const form = useForm<Post>();
 
   const savePost = form.handleSubmit((data) => {
-    mutate.mutate({ ...data, authorId: userId, postedAt: new Date() });
+    mutate.mutate({
+      ...data,
+      authorId: userId,
+      postedAt: new Date(),
+      published: true,
+    });
   });
   return (
     <form onSubmit={savePost}>
