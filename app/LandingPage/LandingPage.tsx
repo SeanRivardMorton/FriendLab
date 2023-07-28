@@ -34,20 +34,11 @@ const LandingPage = () => {
             </div>
             <h1 className="text-3xl mt-24">Friend Lab.</h1>
             <div className="flex flex-row justify-around mt-8">
-              <span className="my-auto text-xl">
-                Start <ArrowRightIcon className="w-10 h-10" />
-              </span>
               <Link
                 href="/login"
                 className="btn btn-circle h-28 w-28 bg-base-200 "
               >
-                <Image
-                  className=""
-                  src="/vial.svg"
-                  height={44}
-                  width={44}
-                  alt="go to login"
-                />
+                <ArrowRightIcon className="h-16 w-16" />
               </Link>
             </div>
           </div>
