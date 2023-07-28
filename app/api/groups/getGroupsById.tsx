@@ -3,9 +3,20 @@ import { NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 
 export const getGroupsByUserId = async (id: string) => {
-  const creatorRes = prisma.group.findMany({
+  const creatorRes = await prisma.group.findMany({
     where: {
-      creatorId: id,
+      OR: [
+        {
+          creatorId: id,
+        },
+        {
+          members: {
+            some: {
+              id,
+            },
+          },
+        },
+      ],
     },
     include: {
       members: true,
