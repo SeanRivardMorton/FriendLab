@@ -32,7 +32,7 @@ const LandingPage = () => {
             <div className="flex flex-row">
               <Link
                 href="/login"
-                className="btn btn-circle mx-auto h-28 w-28 bg-base-200 "
+                className="btn btn-circle btn-primary mx-auto h-28 w-28 "
               >
                 <ArrowRightIcon className="h-16 w-16" />
               </Link>

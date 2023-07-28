@@ -38,7 +38,7 @@ const FriendLabGroupSelect: React.FC<FriendLabGroupSelectProps> = ({
           href={groupName === "All" ? "/groups" : `/groups/${groupName}`}
           className="btn btn-circle bg-base-100 mx-1"
         >
-          <ArrowRightIcon className="h-8 w-8" />
+          <ArrowRightIcon aria-label="link to see groups" className="h-8 w-8" />
         </Link>
       </form>
     </div>

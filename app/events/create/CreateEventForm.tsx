@@ -11,9 +11,7 @@ const createEvent = async (data) => {
   });
 };
 
-const CreateEventForm = () => {
-  const params = useSearchParams();
-  const groupId = params?.get("gId");
+const CreateEventForm = ({ groupId }) => {
   const router = useRouter();
   const form = useForm<Event>({
     defaultValues: {

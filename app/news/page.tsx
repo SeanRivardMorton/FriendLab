@@ -16,6 +16,7 @@ const NewsPage = async () => {
     getPublishedPosts(),
   ]);
   const yourPosts = await getAllPostsFromUser(session?.user?.id);
+  console.log(posts);
 
   return (
     <>
@@ -30,7 +31,7 @@ const NewsPage = async () => {
       </ButtonTray>
       <ul>
         <div className="divider"></div>
-        {yourPosts?.map((post) => (
+        {posts?.map((post) => (
           <>
             <li key={post.id}>
               <Link

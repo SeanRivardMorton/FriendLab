@@ -25,12 +25,7 @@ export const CircleButtonInset = ({
 }) => {
   if (isLoading) {
     return (
-      <button
-        className={`btn btn-circle bg-base-200 animate-pulse ${{
-          ...props?.className,
-        }}`}
-        {...props}
-      >
+      <button className={`btn btn-circle bg-base-200 animate-pulse`} {...props}>
         <span className="loading loading-spinner loading-md"></span>
       </button>
     );

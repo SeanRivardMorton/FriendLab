@@ -22,3 +22,5 @@ export type Event = Prisma.EventGetPayload<{
     group: true;
   };
 }>;
+
+export type BaseEvent = Prisma.EventGetPayload<{}>;

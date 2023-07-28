@@ -1,6 +1,4 @@
 import React from "react";
-import { redirect } from "next/navigation";
-import { LOGIN_ROUTE } from "./constants";
 import { getSession } from "./api/getSession";
 import FriendLabGroupSelect from "./components/FriendLabGroupSelect";
 import { getGroupsByUserId } from "./api/groups/getGroupsById";
@@ -11,19 +9,24 @@ import QuickEvents from "./components/QuickEvents";
 import getCurrentUserFriends from "./api/friends/getCurrentUsetFriends";
 import NoFriends from "./components/NoFriends";
 import LandingPage from "./LandingPage/LandingPage";
+import { BaseEvent } from "./api/events/getEventById";
+
+const sortEventsByDate = (events: BaseEvent[]) =>
+  events.sort(
+    (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
+  );
 
 export default async function Home() {
   const session = await getSession();
   if (!session?.user?.id) return <LandingPage />;
   const groupsData = getGroupsByUserId(session?.user?.id);
-  const eventsData = getEventsByUserId(session?.user?.id);
   const friendsData = getCurrentUserFriends(session?.user?.id);
 
-  const [groups, { created, attendee }, friends] = await Promise.all([
-    groupsData,
-    eventsData,
-    friendsData,
-  ]);
+  const [groups, friends] = await Promise.all([groupsData, friendsData]);
+  const events = await getEventsByUserId(
+    session?.user?.id,
+    groups.map((group) => group.id)
+  );
 
   if (friends.length === 0) {
     return (
@@ -37,13 +40,15 @@ export default async function Home() {
     );
   }
 
+  const sortedEvents = sortEventsByDate(events);
+
   return (
     <main>
       <div className="flex flex-col justify-between h-[89vh]">
         <FriendLabGroupSelect groups={groups} />
-        {created.length === 0 && attendee.length === 0 && <NoEvents />}
-        {(created.length > 0 || attendee.length > 0) && (
-          <QuickEvents event={created[0]} />
+        {events.length === 0 && <NoEvents />}
+        {events.length > 0 && (
+          <QuickEvents events={sortedEvents} initialIndex={0} />
         )}
         <BottomTray />
       </div>
