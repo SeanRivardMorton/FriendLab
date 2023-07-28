@@ -10,6 +10,7 @@ export async function GET(req, params) {
 
 export async function DELETE(req, { params }) {
   const { id } = await params;
+  console.log(id);
   const response = await deletePost(id);
   return NextResponse.json({ response });
 }
