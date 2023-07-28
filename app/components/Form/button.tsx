@@ -32,10 +32,7 @@ export const CircleButtonInset = ({
   }
 
   return (
-    <button
-      className={`btn btn-circle bg-base-200 ${props?.small ? "btn-sm" : ""}`}
-      {...props}
-    >
+    <button className={`btn btn-circle bg-base-200`} {...props}>
       {children}
     </button>
   );

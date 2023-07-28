@@ -26,7 +26,7 @@ const PostActions = ({ post }) => {
   return (
     <div>
       <div className="flex flex-row justify-end">
-        <CircleButtonInset small={true}>
+        <CircleButtonInset>
           {deleteQuery.isLoading ? (
             <span className="loading loading-spinner loading-md text-primary"></span>
           ) : (
