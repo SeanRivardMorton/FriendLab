@@ -1,28 +1,29 @@
 import prisma from "../../../lib/prisma";
 
-const getEventsByUserId = async (userId: string) => {
+const getEventsByUserId = async (userId: string, groupId: string[]) => {
   const createdEvents = prisma.event.findMany({
     where: {
-      creatorId: userId,
-    },
-  });
-
-  const attendeeEvents = prisma.event.findMany({
-    where: {
-      attendees: {
-        some: {
-          id: userId,
+      OR: [
+        {
+          groupId: {
+            in: groupId,
+          },
         },
-      },
+        {
+          creatorId: userId,
+        },
+        {
+          attendees: {
+            some: {
+              id: userId,
+            },
+          },
+        },
+      ],
     },
   });
 
-  const [created, attendee] = await Promise.all([
-    createdEvents,
-    attendeeEvents,
-  ]);
-
-  return { created, attendee };
+  return createdEvents;
 };
 
 export default getEventsByUserId;

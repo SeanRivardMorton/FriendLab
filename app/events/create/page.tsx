@@ -1,10 +1,14 @@
 import { PlusIcon } from "@radix-ui/react-icons";
+import { redirect } from "next/navigation";
 import { getSession } from "../../api/getSession";
+import { LOGIN_ROUTE } from "../../constants";
 import CreateEventForm from "./CreateEventForm";
 
-const CreatePage = async () => {
-  // const session = await getSession();
-  // const groups = await getGroupsByUserId(session?.user?.id);
+const CreatePage = async ({ searchParams }) => {
+  const { gId } = searchParams;
+  const session = await getSession();
+  if (!session?.user?.id) redirect(LOGIN_ROUTE);
+
   return (
     <>
       <div className="card card-compact bg-base-200 w-2/3 rounded-e-full">
@@ -17,7 +21,7 @@ const CreatePage = async () => {
           </div>
         </div>
       </div>
-      <CreateEventForm />
+      <CreateEventForm groupId={gId} />
     </>
   );
 };

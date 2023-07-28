@@ -16,14 +16,13 @@ export default async function Home() {
   const session = await getSession();
   if (!session?.user?.id) return <LandingPage />;
   const groupsData = getGroupsByUserId(session?.user?.id);
-  const eventsData = getEventsByUserId(session?.user?.id);
   const friendsData = getCurrentUserFriends(session?.user?.id);
 
-  const [groups, { created, attendee }, friends] = await Promise.all([
-    groupsData,
-    eventsData,
-    friendsData,
-  ]);
+  const [groups, friends] = await Promise.all([groupsData, friendsData]);
+  const events = await getEventsByUserId(
+    session?.user?.id,
+    groups.map((group) => group.id)
+  );
 
   if (friends.length === 0) {
     return (
@@ -41,10 +40,8 @@ export default async function Home() {
     <main>
       <div className="flex flex-col justify-between h-[89vh]">
         <FriendLabGroupSelect groups={groups} />
-        {created.length === 0 && attendee.length === 0 && <NoEvents />}
-        {(created.length > 0 || attendee.length > 0) && (
-          <QuickEvents event={created[0]} />
-        )}
+        {events.length === 0 && <NoEvents />}
+        {events.length > 0 && <QuickEvents event={events[0]} />}
         <BottomTray />
       </div>
     </main>
