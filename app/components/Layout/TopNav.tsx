@@ -21,21 +21,21 @@ const TopNav = () => {
         <Link
           href="/news"
           aria-label="Link to news page"
-          className="btn btn-circle bg-base-200 mr-4"
+          className="btn btn-circle bg-base-100 mr-4"
         >
           <DrawingPinFilledIcon className="h-6 w-6" />
         </Link>
         <Link
           href="/friends"
           aria-label="Link to friends page"
-          className="btn btn-circle bg-base-200 mr-4"
+          className="btn btn-circle bg-base-100 mr-4"
         >
           <PersonIcon className="h-6 w-6" />
         </Link>
         <Link
           href="/settings"
           aria-label="link to settings"
-          className="btn btn-circle bg-base-200 mr-4"
+          className="btn btn-circle bg-base-100 mr-4"
         >
           <GearIcon className="h-6 w-6" />
         </Link>
