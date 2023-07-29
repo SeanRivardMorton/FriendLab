@@ -1,6 +1,7 @@
 import { PlusIcon } from "@radix-ui/react-icons";
 import { redirect } from "next/navigation";
 import { getSession } from "../../api/getSession";
+import ButtonTray from "../../components/ButtonTray";
 import { LOGIN_ROUTE } from "../../constants";
 import CreateEventForm from "./CreateEventForm";
 
@@ -11,16 +12,9 @@ const CreatePage = async ({ searchParams }) => {
 
   return (
     <>
-      <div className="card card-compact bg-base-200 w-2/3 rounded-e-full">
-        <div className="card-body">
-          <div className="card-title flex flex-row justify-between">
-            <h1>Create An Event</h1>
-            <button className="btn btn-circle bg-base-100">
-              <PlusIcon className="h-8 w-8" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <ButtonTray>
+        <h2>Create an event</h2>
+      </ButtonTray>
       <CreateEventForm groupId={gId} />
     </>
   );

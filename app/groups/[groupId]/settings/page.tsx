@@ -1,40 +1,47 @@
-import { ChevronLeftIcon, GearIcon, PlusIcon } from "@radix-ui/react-icons";
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  GearIcon,
+  Pencil1Icon,
+  PlusIcon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getSession } from "../../../api/getSession";
 import getGroupById from "../../../api/groups/getGroupById";
+import BottomTray from "../../../components/BottomTray";
+import ButtonTray from "../../../components/ButtonTray";
+import { CircleButtonInset } from "../../../components/Form/button";
+import { LOGIN_ROUTE } from "../../../constants";
 import GroupSettingsActionsBar from "./GroupSettingsActionBar";
 import GroupSettingsForm from "./GroupSettingsForm";
 
 const Page = async ({ params }) => {
+  const session = await getSession();
+  if (!session?.user?.id) redirect(LOGIN_ROUTE);
   const { groupId } = params;
 
   const group = await getGroupById(groupId);
 
   return (
     <div className="flex flex-col justify-between">
-      <div className="h-[75vh]">
-        <div className="card card-compact bg-base-200 w-3/4 rounded-e-full">
-          <div className="card-body">
-            <div className="card-title flex flex-row justify-between">
-              <div className="flex flex-row">
-                <Link
-                  href={`/groups/${groupId}`}
-                  className="btn btn-circle bg-base-100 mr-4"
-                >
-                  <ChevronLeftIcon className="h-8 w-8" />
-                </Link>
-                <h1 className="my-auto">{group?.name}</h1>
-              </div>
-              <button className="btn btn-circle bg-base-100">
-                <GearIcon className={"h-8 w-8"} />
-              </button>
-            </div>
-          </div>
-        </div>
-        <GroupSettingsForm group={group} />
-      </div>
-      <div className="w-full flex flex-row justify-end">
-        <GroupSettingsActionsBar groupId={groupId} />
-      </div>
+      <ButtonTray
+        href={`/groups/${group?.id}`}
+        actionSlot={
+          <CircleButtonInset>
+            <CheckIcon className="w-8 h-7 text-success" />
+          </CircleButtonInset>
+        }
+      >
+        <h1>Edit {group?.name} Group</h1>
+      </ButtonTray>
+      <GroupSettingsForm group={group} />
+      <BottomTray>
+        <CircleButtonInset>
+          <TrashIcon className="w-8 h-8 text-error" />
+        </CircleButtonInset>
+      </BottomTray>
     </div>
   );
 };
