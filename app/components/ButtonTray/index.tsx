@@ -36,7 +36,7 @@ const ButtonTray: React.FC<ButtonTrayProps> = ({
           {actionSlot ? (
             actionSlot
           ) : (
-            <button className="btn btn-circle bg-base-100">
+            <button className="btn btn-circle bg-base-100 ml-6">
               <PlusIcon className="h-8 w-8" />
             </button>
           )}

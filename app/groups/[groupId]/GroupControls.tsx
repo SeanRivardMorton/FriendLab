@@ -1,4 +1,4 @@
-import { Pencil1Icon, PersonIcon, TrashIcon } from "@radix-ui/react-icons";
+import { Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 const GroupControls = ({ groupId }) => {

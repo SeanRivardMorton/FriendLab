@@ -9,6 +9,7 @@ const getEventById = async (eventId: string) => {
     include: {
       attendees: true,
       group: true,
+      creator: true,
     },
   });
   return event;

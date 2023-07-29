@@ -1,14 +1,20 @@
-import { ChevronRightIcon, PlusIcon, RocketIcon } from "@radix-ui/react-icons";
+import {
+  ChevronRightIcon,
+  PlusIcon,
+  RocketIcon,
+  Pencil1Icon,
+  PersonIcon,
+} from "@radix-ui/react-icons";
 
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";
 import { getSession } from "../../api/getSession";
 import getGroupsByGroupId from "../../api/groups/getGroupsByGroupId";
+import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
 import { LOGIN_ROUTE } from "../../constants";
 import GroupUserAvatarsRow from "../GroupUserAvatarRow";
-import GroupControls from "./GroupControls";
 
 const GroupPage = async ({ params }) => {
   const session = await getSession();
@@ -55,7 +61,20 @@ const GroupPage = async ({ params }) => {
           </li>
         ))}
       </ul>
-      <GroupControls groupId={groupId} />
+      <BottomTray>
+        <Link
+          href={`/groups/${groupId}/settings`}
+          className="btn btn-circle bg-base-100"
+        >
+          <Pencil1Icon className="h-8 w-8" />
+        </Link>
+        <Link
+          href={`/groups/${groupId}/members`}
+          className="btn btn-circle bg-base-100"
+        >
+          <PersonIcon className="h-8 w-8" />
+        </Link>
+      </BottomTray>
     </div>
   );
 };
