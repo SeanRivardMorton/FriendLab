@@ -13,7 +13,7 @@ import {
 import React from "react";
 
 // surely there is a better way than this?
-const { primary } = theme["[data-theme=night]"];
+const { primary } = theme["[data-theme=luxury]"];
 
 const QuickEvents = ({ events, initialIndex }) => {
   const [event, setEvent] = React.useState(events?.[initialIndex]);

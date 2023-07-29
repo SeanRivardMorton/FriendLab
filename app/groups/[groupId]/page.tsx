@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";
 import { getSession } from "../../api/getSession";
 import getGroupsByGroupId from "../../api/groups/getGroupsByGroupId";
+import ButtonTray from "../../components/ButtonTray";
 import { LOGIN_ROUTE } from "../../constants";
 import GroupUserAvatarsRow from "../GroupUserAvatarRow";
 import GroupControls from "./GroupControls";
@@ -26,27 +27,22 @@ const GroupPage = async ({ params }) => {
 
   return (
     <div className="flex flex-col justify-between h-[87vh]">
-      <div className="card card-compact bg-base-200 rounded-e-full w-3/4 mb-8">
-        <div className="card-body">
-          <div className="card-title flex flex-row justify-between">
-            <div className="flex flex-row">
-              <Link href="/groups" className="btn btn-circle bg-base-100 mr-4">
-                <ChevronLeftIcon className="h-8 w-8" />
-              </Link>
-              {/* <h1 className="my-auto">{group?.name}</h1> */}
-              <div className="my-auto">
-                <GroupUserAvatarsRow group={group} />
-              </div>
-            </div>
-            <Link
-              href={`/events/create?gId=${groupId}`}
-              className="btn btn-circle bg-base-100"
-            >
-              <PlusIcon className="h-8 w-8" />
-            </Link>
-          </div>
+      <ButtonTray
+        href="/groups"
+        actionSlot={
+          <Link
+            href={`/events/create?gId=${groupId}`}
+            className="btn btn-circle bg-base-100"
+          >
+            <PlusIcon className="h-8 w-8" />
+          </Link>
+        }
+      >
+        <div className="my-auto">
+          <GroupUserAvatarsRow group={group} />
         </div>
-      </div>
+      </ButtonTray>
+      <div className="divider"></div>
       <ul className="h-full">
         {groupEvents.map((event) => (
           <li key={event.id}>

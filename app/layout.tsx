@@ -8,7 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import Loading from "./loading";
 import TopNav from "./components/Layout/TopNav";
-import { Ubuntu, Roboto } from "next/font/google";
+import { Ubuntu } from "next/font/google";
 import { getSession } from "./api/getSession";
 
 export const metadata = {
@@ -16,11 +16,6 @@ export const metadata = {
   description:
     "Introducing Friend Lab, the innovative social media platform designed to transform the way adults plan hangouts with their friends. Say goodbye to the hassle of coordinating schedules, setting budgets, and finding the perfect locations, because Friend Lab does the work for you.",
 };
-
-// const inter = Inter({
-//   subsets: ["latin", "latin-ext"],
-//   display: "swap",
-// });
 
 const font = Ubuntu({
   weight: "400",
@@ -32,7 +27,7 @@ export default async function RootLayout({ children }) {
   const session = await getSession();
 
   return (
-    <html lang="en-UK" className={`${font?.className}`}>
+    <html lang="en-UK" className={`${font?.className} bg-base-200`}>
       <Suspense fallback={<>When do I happen?</>}>
         <PostHogPageview />
       </Suspense>
@@ -40,10 +35,10 @@ export default async function RootLayout({ children }) {
         <ReactQueryProvider>
           <Provider>
             <Suspense fallback={<Loading />}>
-              <body className="text-current bg-base-100">
+              <body className="text-current">
                 {session?.user && <TopNav />}
-                <div className="bg-base-100 overflow-auto">
-                  <div className="lg:w-2/4 lg:mx-auto">
+                <div className="overflow-auto flex flex-row justify-center">
+                  <div className="lg:w-2/4 w-full lg:mx-auto bg-base-100 min-h-[93vh] lg:min-h-[60vh] rounded-xl shadow-xl shadow-base-100">
                     {children}
                     <Analytics />
                   </div>

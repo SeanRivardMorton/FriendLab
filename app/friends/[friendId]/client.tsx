@@ -27,7 +27,7 @@ const ClientFriendPage = ({ friend, friendsOfFriend, isFriend }) => {
       <ButtonTray
         href="/friends"
         actionSlot={
-          <button className="btn btn-circle bg-base-100">
+          <div className="p-3 rounded-full bg-base-100">
             {friend?.image && (
               <Image
                 src={friend?.image}
@@ -37,7 +37,7 @@ const ClientFriendPage = ({ friend, friendsOfFriend, isFriend }) => {
                 height={24}
               />
             )}
-          </button>
+          </div>
         }
       >
         <h1>{friend.name}</h1>

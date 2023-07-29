@@ -42,6 +42,7 @@ const ClientGroupCreatePage = (props) => {
   return (
     <div>
       <ButtonTray
+        href="/groups"
         actionSlot={
           <CircleButtonInset
             isLoading={mutation.isLoading}

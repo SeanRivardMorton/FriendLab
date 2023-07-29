@@ -22,6 +22,7 @@ const DeleteButton = ({ deleteUrl, returnUrl }) => {
     <>
       {isDeleting ? (
         <>
+          <span className="my-auto text-sm font-bold">Delete Group?</span>
           <button
             onClick={() => deleteQuery.mutate()}
             className="btn btn-circle bg-base-100 text-success"

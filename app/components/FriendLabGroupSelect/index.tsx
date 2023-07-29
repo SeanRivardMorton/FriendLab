@@ -1,9 +1,10 @@
 "use client";
-import { ArrowRightIcon, PlusIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Groups } from "../../api/groups/getGroupsById";
+import ButtonTray from "../ButtonTray";
 
 interface FriendLabGroupSelectProps {
   groups: Groups[];
@@ -21,8 +22,20 @@ const FriendLabGroupSelect: React.FC<FriendLabGroupSelectProps> = ({
   const groupName = form.watch("groupName");
 
   return (
-    <div className="card card-compact bg-base-200 rounded-e-full w-4/5">
-      <form className="card-body mr-4 flex flex-row">
+    <form>
+      <ButtonTray
+        actionSlot={
+          <Link
+            href={groupName === "All" ? "/groups" : `/groups/${groupName}`}
+            className="btn btn-circle bg-base-100 mx-1"
+          >
+            <ArrowRightIcon
+              aria-label="link to see groups"
+              className="h-8 w-8"
+            />
+          </Link>
+        }
+      >
         <select
           {...form.register("groupName")}
           className="select w-full max-w-xs"
@@ -34,14 +47,8 @@ const FriendLabGroupSelect: React.FC<FriendLabGroupSelectProps> = ({
             </option>
           ))}
         </select>
-        <Link
-          href={groupName === "All" ? "/groups" : `/groups/${groupName}`}
-          className="btn btn-circle bg-base-100 mx-1"
-        >
-          <ArrowRightIcon aria-label="link to see groups" className="h-8 w-8" />
-        </Link>
-      </form>
-    </div>
+      </ButtonTray>
+    </form>
   );
 };
 
