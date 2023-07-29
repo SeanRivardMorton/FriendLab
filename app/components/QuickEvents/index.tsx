@@ -45,8 +45,8 @@ const QuickEvents = ({ events, initialIndex }) => {
     <div className="hero">
       <div className="hero-content text-center">
         <div className="max-w-md flex flex-col">
-          <h1 className="text-5xl font-bold">Next Event</h1>
-          <h2 className="">{event.name}</h2>
+          <h2 className="text-5xl font-bold">Next Event</h2>
+          <h3 className="">{event.name}</h3>
           <div className="flex flex-row justify-end">
             <button
               onClick={previousEvent}

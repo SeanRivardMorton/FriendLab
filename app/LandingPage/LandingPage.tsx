@@ -31,13 +31,14 @@ const LandingPage = () => {
             <h1 className="text-3xl mt-24 mb-8">Friend Lab.</h1>
             <div className="flex flex-row">
               <Link
+                aria-labelledby = "linkLabel"
                 href="/login"
                 className="btn btn-circle btn-primary mx-auto h-28 w-28 "
               >
                 <ArrowRightIcon className="h-16 w-16" />
               </Link>
             </div>
-            <h3 className="mt-2 text-xl">Get Started</h3>
+            <span className="mt-2 text-xl" id="linkLabel">Get Started</span>
           </div>
         </div>
       </div>
