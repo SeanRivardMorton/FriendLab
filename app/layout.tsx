@@ -12,7 +12,7 @@ import { Ubuntu } from "next/font/google";
 import { getSession } from "./api/getSession";
 
 export const metadata = {
-  title: "Friend Lab",
+  title: "Friend Lab - Homepage",
   description:
     "Introducing Friend Lab, the innovative social media platform designed to transform the way adults plan hangouts with their friends. Say goodbye to the hassle of coordinating schedules, setting budgets, and finding the perfect locations, because Friend Lab does the work for you.",
 };

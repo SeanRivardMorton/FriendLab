@@ -12,6 +12,7 @@ const GroupUserAvatarsRow = ({ group }) => {
               height={22}
               alt={member.name}
             />
+            {/* Will this be replaced with CircleButtonLinkInset from form/button.tsx so when they become clickable keyboard works too?*/}
           </div>
         </div>
       ))}
