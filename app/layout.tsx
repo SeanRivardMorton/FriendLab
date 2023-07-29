@@ -38,8 +38,7 @@ export default async function RootLayout({ children }) {
               <body className="text-current">
                 {session?.user && <TopNav />}
                 <div className="overflow-auto flex flex-row justify-center">
-                  <div className="lg:w-2/4 w-full lg:mx-auto bg-base-100 shadow-2xl mb-2 shadow-base-100">
-                    {/* <div className="lg:w-2/4 lg:mx-auto"> */}
+                  <div className="lg:w-2/4 w-full lg:mx-auto bg-base-100 min-h-[93vh] lg:min-h-[60vh] rounded-xl shadow-xl shadow-base-100">
                     {children}
                     <Analytics />
                   </div>
