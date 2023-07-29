@@ -24,7 +24,7 @@ const ButtonTray: React.FC<ButtonTrayProps> = ({
   href,
 }) => {
   return (
-    <div className="translate-y-3 -translate-x-2 shadow-xl shadow-base-100 card card-compact bg-base-200 w-fit rounded-e-full">
+    <div className="translate-y-3 mb-4 -translate-x-2 shadow-xl shadow-base-100 card card-compact bg-base-200 w-fit rounded-e-full">
       <div className="card-body">
         <div className="card-title flex flex-row justify-between">
           {href && (
