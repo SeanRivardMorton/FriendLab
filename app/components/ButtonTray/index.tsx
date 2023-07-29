@@ -21,15 +21,17 @@ interface ButtonTrayProps {
 const ButtonTray: React.FC<ButtonTrayProps> = ({
   children,
   actionSlot,
-  href = "/",
+  href,
 }) => {
   return (
     <div className="mt-4 card card-compact bg-base-200 w-11/12 rounded-e-full">
       <div className="card-body">
         <div className="card-title flex flex-row justify-between">
-          <Link href={href} className="btn btn-circle bg-base-100">
-            <ChevronLeftIcon className="h-8 w-8" />
-          </Link>
+          {href && (
+            <Link href={href} className="btn btn-circle bg-base-100">
+              <ChevronLeftIcon className="h-8 w-8" />
+            </Link>
+          )}
           {children}
           {actionSlot ? (
             actionSlot
