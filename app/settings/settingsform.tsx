@@ -3,7 +3,7 @@
 const SettingsForm = () => {
   return (
     <form>
-      <div className="form-control">
+      <div className="form-control mt-6">
         <label className="label">
           <span className="label-text">Display Name</span>
         </label>
