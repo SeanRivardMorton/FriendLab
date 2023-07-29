@@ -9,7 +9,9 @@ const defaultNews: Partial<Post> = {
 };
 
 const NewsCard = ({ post = defaultNews }) => {
-  const dateFormat = new Date().toDateString();
+  const dateFormat = post.postedAt
+    ? new Date(post.postedAt).toDateString()
+    : "";
   if (!post) {
     return <div>Post not found</div>;
   }
