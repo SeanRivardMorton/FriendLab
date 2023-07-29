@@ -1,9 +1,4 @@
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  PlusIcon,
-  RocketIcon,
-} from "@radix-ui/react-icons";
+import { ChevronRightIcon, PlusIcon, RocketIcon } from "@radix-ui/react-icons";
 
 import Link from "next/link";
 import { redirect } from "next/navigation";

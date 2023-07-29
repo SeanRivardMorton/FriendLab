@@ -11,13 +11,13 @@ interface TopNavProps {
 
 const TopNav = () => {
   return (
-    <div className="lg:w-2/4 h-[5vh] lg:mx-auto text-4xl m-2 text-primary flex flex-row justify-between">
+    <div className="lg:w-2/4 h-[7vh] lg:mx-auto text-4xl m-2 text-primary flex flex-row justify-between">
       <div className="card">
         <h1 className="card-title my-auto text-neutral-content">
           <Link href="/">FriendLab</Link>
         </h1>
       </div>
-      <div>
+      <div className="my-auto">
         <Link
           href="/news"
           aria-label="Link to news page"
