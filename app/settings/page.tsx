@@ -6,6 +6,7 @@ import SettingsForm from "./settingsform";
 import SignOutButton from "./SignOutButton";
 import ButtonTray from "../components/ButtonTray";
 import BottomTray from "../components/BottomTray";
+import { CircleButtonInset } from "../components/Form/button";
 
 const SettingsPage = async () => {
   const session = await getSession();
@@ -24,7 +25,10 @@ const SettingsPage = async () => {
       </ButtonTray>
       <SettingsForm />
       <BottomTray>
-        <ChatBubbleIcon className="w-8 h-8" />
+        <CircleButtonInset>
+          <ChatBubbleIcon className="w-8 h-8" />
+        </CircleButtonInset>
+        <SignOutButton />
       </BottomTray>
     </>
   );

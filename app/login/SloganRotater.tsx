@@ -19,7 +19,7 @@ const SloganRotater: React.FC<SloganRotaterProps> = ({
         return;
       }
       setIndex((i) => i + 1);
-    }, 5000);
+    }, 1000);
     return () => {
       clearInterval(interval);
     };
