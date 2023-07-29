@@ -28,20 +28,21 @@ const LoginPage = async () => {
                   src={"/vial.svg"}
                   height={20}
                   width={20}
-                  alt="go to login"
+                  alt=""
                 />
               </div>
               <div className="card-title mb-4">You&apos;re not logged in!</div>
-              <Link href="/api/auth/signin" className="btn btn-primary">
+              <Link href="/api/auth/signin" className="btn btn-primary">   {/* Please can you make this non-uppercase? Inheriting from btn class */}
                 Register
               </Link>
               <div className="divider"></div>
               <Link
                 href="/api/auth/signin"
-                className="btn btn-primary btn-link"
-              >
+                className="btn btn-primary btn-link" 
+              >  {/* Please can you make this non-uppercase? Inheriting from btn class */}
                 Login
-              </Link>
+              </Link> 
+              
             </div>
           </div>
         </div>
