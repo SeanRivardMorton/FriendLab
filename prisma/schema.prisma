@@ -23,6 +23,8 @@ model Event {
   groupId       String?
 }
 
+
+
 model Post {
   id        String  @id @default(cuid())
   title     String
@@ -128,4 +130,23 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+
+model EventResponse {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   String
+  response  ResponseStatus
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, eventId])
+}
+
+enum ResponseStatus {
+  ACCEPTED
+  DECLINED
 }

@@ -10,6 +10,7 @@ import ButtonTray from "../../components/ButtonTray";
 import { CircleButtonLinkInset } from "../../components/Form/button";
 
 import { LOGIN_ROUTE } from "../../constants";
+import ClientEventPage from "./client";
 
 const Home = async ({ params }) => {
   const session = await getSession();
@@ -21,8 +22,6 @@ const Home = async ({ params }) => {
   const event = await getEventById(params.id);
 
   if (!event) return <>not sure how you got here..</>;
-
-  console.log(event);
 
   const date = formatDistance(new Date(event?.date ?? null), new Date(), {
     addSuffix: true,
@@ -51,6 +50,7 @@ const Home = async ({ params }) => {
           </div>
         </div>
       </ButtonTray>
+      <ClientEventPage event={event} />
       <BottomTray>
         <CircleButtonLinkInset>
           <ChatBubbleIcon className="h-8 w-8" />
