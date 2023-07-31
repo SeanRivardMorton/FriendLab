@@ -10,63 +10,63 @@ datasource db {
 }
 
 model Event {
-  id            String     @id @default(cuid())
+  id            String          @id @default(cuid())
   name          String
   description   String?
   location      String?
   date          DateTime
-  creator       User       @relation("EventCreator", fields: [creatorId], references: [id])
+  creator       User            @relation("EventCreator", fields: [creatorId], references: [id])
   creatorId     String
-  attendees     User[]     @relation("EventAttendees")
+  attendees     User[]          @relation("EventAttendees")
   Post          Post[]
-  group         Group?     @relation(fields: [groupId], references: [id])
+  group         Group?          @relation(fields: [groupId], references: [id])
   groupId       String?
+  EventResponse EventResponse[]
 }
 
-
-
 model Post {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   title     String
   subtitle  String?
   content   String?
-  published Boolean @default(false)
-  postedAt DateTime @default(now()) @map("posted_at")
+  published Boolean  @default(false)
+  postedAt  DateTime @default(now()) @map("posted_at")
   authorId  String?
-  author    User?   @relation(fields: [authorId], references: [id])
-  event     Event?  @relation(fields: [eventId], references: [id])
+  author    User?    @relation(fields: [authorId], references: [id])
+  event     Event?   @relation(fields: [eventId], references: [id])
   eventId   String?
 }
 
 model User {
-  id              String       @id @default(cuid())
+  id              String          @id @default(cuid())
   name            String?
-  email           String?      @unique
+  email           String?         @unique
   emailVerified   DateTime?
   image           String?
-  createdAt       DateTime     @default(now()) @map("created_at")
-  updatedAt       DateTime     @updatedAt @map("updated_at")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
   accounts        Account[]
   posts           Post[]
   sessions        Session[]
-  friendships     Friendship[] @relation("UserFriendships")
-  friendOf        Friendship[] @relation("UserFriendOf")
-  groupsOwned     Group[]      @relation("GroupOwner")
-  groups          Group[]      @relation("GroupMembers")
-  eventsCreated   Event[]      @relation("EventCreator")
-  eventsAttending Event[]      @relation("EventAttendees")
+  friendships     Friendship[]    @relation("UserFriendships")
+  friendOf        Friendship[]    @relation("UserFriendOf")
+  groupsOwned     Group[]         @relation("GroupOwner")
+  groups          Group[]         @relation("GroupMembers")
+  eventsCreated   Event[]         @relation("EventCreator")
+  eventsAttending Event[]         @relation("EventAttendees")
+  EventResponse   EventResponse[]
 }
 
 model Group {
-  id        String   @id @default(cuid())
-  name      String
+  id          String   @id @default(cuid())
+  name        String
   description String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  creator   User     @relation("GroupOwner", fields: [creatorId], references: [id])
-  creatorId String
-  members   User[]   @relation("GroupMembers")
-  Event     Event[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  creator     User     @relation("GroupOwner", fields: [creatorId], references: [id])
+  creatorId   String
+  members     User[]   @relation("GroupMembers")
+  Event       Event[]
 }
 
 model Friendship {
@@ -132,16 +132,15 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-
 model EventResponse {
-  id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
+  id        String         @id @default(cuid())
+  user      User           @relation(fields: [userId], references: [id])
   userId    String
-  event     Event    @relation(fields: [eventId], references: [id])
+  event     Event          @relation(fields: [eventId], references: [id])
   eventId   String
   response  ResponseStatus
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
 
   @@unique([userId, eventId])
 }
