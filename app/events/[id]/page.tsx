@@ -38,7 +38,7 @@ const Home = async ({ params }) => {
         <div className="flex flex-row">
           {event?.creator.image ? (
             <Image
-              className="rounded-full mr-2"
+              className="rounded-full h-12 w-12 mr-2 my-auto"
               src={event.creator.image}
               height={44}
               width={44}

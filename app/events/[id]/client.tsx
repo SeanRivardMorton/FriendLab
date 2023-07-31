@@ -12,6 +12,11 @@ interface ClientEventPageProps {
   response: EventResponse;
 }
 
+const responseMap = {
+  [ResponseStatus.ACCEPTED]: <CheckIcon className="h-8 w-8 text-success" />,
+  [ResponseStatus.DECLINED]: <Cross1Icon className="h-8 w-8 text-error" />,
+};
+
 const updateUserResponse = async (userId, eventId, response) => {
   console.log(userId, eventId, response);
   const res = await fetch(`/api/events/${eventId}/users/${userId}`, {
@@ -30,7 +35,6 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({
   event,
   response,
 }) => {
-  console.log(response);
   const date = event?.date && new Date(event.date).toDateString();
   const userResponseQuery = useMutation({
     mutationFn: (response: ResponseStatus) =>
@@ -44,7 +48,11 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({
             <div className="card-title">{event.description}</div>
             <p>Date: {date}</p>
             <div className="divider"></div>
-            <div className="card-title">Can you make it?</div>
+            {response ? (
+              <div>{responseMap[response.response]}</div>
+            ) : (
+              <div className="card-title">Can you make it?</div>
+            )}
             <div className="">
               <button
                 onClick={() =>
