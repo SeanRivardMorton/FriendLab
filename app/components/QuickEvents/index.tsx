@@ -11,11 +11,15 @@ import {
   Cross1Icon,
 } from "@radix-ui/react-icons";
 import React from "react";
+import {
+  AcceptInviteButton,
+  DeclineInviteButton,
+} from "../FunctionalButtons/UserEventResponseButtons";
 
 // surely there is a better way than this?
-const { primary } = theme["[data-theme=luxury]"];
+const { primary } = theme["[data-theme=aqua]"];
 
-const QuickEvents = ({ events, initialIndex }) => {
+const QuickEvents = ({ events, initialIndex, userId }) => {
   const [event, setEvent] = React.useState(events?.[initialIndex]);
 
   const previousEvent = () => {
@@ -55,9 +59,7 @@ const QuickEvents = ({ events, initialIndex }) => {
               <ChevronLeftIcon className="w-8 h-8" />
             </button>
 
-            <button className="btn btn-circle text-error my-auto">
-              <Cross1Icon className="w-8 h-8" />
-            </button>
+            <DeclineInviteButton userId={userId} eventId={event.id} />
             <Link
               href={`/events/${event.id}`}
               style={{ boxShadow: `${primary} 0px 0px 10px` }}
@@ -71,9 +73,7 @@ const QuickEvents = ({ events, initialIndex }) => {
                 className="rotate-12 mx-auto"
               />
             </Link>
-            <button className="btn btn-circle my-auto text-success">
-              <CheckIcon className="w-8 h-8" />
-            </button>
+            <AcceptInviteButton userId={userId} eventId={event.id} />
             <button
               onClick={nextEvent}
               className="btn btn-circle btn-ghost my-auto"

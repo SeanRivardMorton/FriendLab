@@ -50,7 +50,11 @@ export default async function Home() {
         <FriendLabGroupSelect groups={groups} />
         {events.length === 0 && <NoEvents />}
         {events.length > 0 && (
-          <QuickEvents events={sortedEvents} initialIndex={0} />
+          <QuickEvents
+            userId={session?.user?.id}
+            events={sortedEvents}
+            initialIndex={0}
+          />
         )}
         <BottomTray>
           <CircleButtonLinkInset href="/calendar">
