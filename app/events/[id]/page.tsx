@@ -49,7 +49,7 @@ const Home = async ({ params }) => {
   return (
     <main>
       <ButtonTray
-        href="/"
+        href="/events"
         actionSlot={
           <CircleButtonInset className="h-8 w-8">
             {eventResponse && responseMap[eventResponse.response]}

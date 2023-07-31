@@ -40,7 +40,7 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["aqua"],
+    themes: ["synthwave"],
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };
