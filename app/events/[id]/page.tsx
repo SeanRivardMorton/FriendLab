@@ -1,4 +1,9 @@
-import { AvatarIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
+import {
+  AvatarIcon,
+  ChatBubbleIcon,
+  CheckIcon,
+  Cross1Icon,
+} from "@radix-ui/react-icons";
 import { formatDistance } from "date-fns";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -7,11 +12,20 @@ import getEventById from "../../api/events/getEventById";
 import { getSession } from "../../api/getSession";
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
-import { CircleButtonLinkInset } from "../../components/Form/button";
+import {
+  CircleButtonInset,
+  CircleButtonLinkInset,
+} from "../../components/Form/button";
 
 import { LOGIN_ROUTE } from "../../constants";
 import ClientEventPage from "./client";
 import getUserEventResponse from "../../api/events/[id]/users/[userId]/getUserEventResponse";
+import { ResponseStatus } from "@prisma/client";
+
+const responseMap = {
+  [ResponseStatus.ACCEPTED]: <CheckIcon className="h-8 w-8 text-success" />,
+  [ResponseStatus.DECLINED]: <Cross1Icon className="h-8 w-8 text-error" />,
+};
 
 const Home = async ({ params }) => {
   const session = await getSession();
@@ -32,9 +46,20 @@ const Home = async ({ params }) => {
     addSuffix: true,
   });
 
+  // if (!eventResponse) return <div>Something went wrong</div>;
+
+  console.log(eventResponse);
+
   return (
     <main>
-      <ButtonTray href="/">
+      <ButtonTray
+        href="/"
+        actionSlot={
+          <CircleButtonInset className="h-8 w-8">
+            {eventResponse && responseMap[eventResponse.response]}
+          </CircleButtonInset>
+        }
+      >
         <div className="flex flex-row">
           {event?.creator.image ? (
             <Image
@@ -55,11 +80,13 @@ const Home = async ({ params }) => {
           </div>
         </div>
       </ButtonTray>
-      <ClientEventPage
-        userId={session?.user.id}
-        event={event}
-        response={eventResponse}
-      />
+      {
+        <ClientEventPage
+          userId={session?.user.id}
+          event={event}
+          response={eventResponse}
+        />
+      }
       <BottomTray>
         <CircleButtonLinkInset>
           <ChatBubbleIcon className="h-8 w-8" />

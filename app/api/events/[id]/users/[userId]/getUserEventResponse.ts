@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../../../../../../lib/prisma";
 
 const getUserEventResponse = async (userId, eventId) => {
@@ -14,3 +15,5 @@ const getUserEventResponse = async (userId, eventId) => {
 };
 
 export default getUserEventResponse;
+
+export type UserEventResponse = Prisma.EventResponseGetPayload<{}>;
