@@ -24,4 +24,8 @@ export type Event = Prisma.EventGetPayload<{
   };
 }>;
 
-export type BaseEvent = Prisma.EventGetPayload<{}>;
+export type BaseEvent = Prisma.EventGetPayload<{
+  include: {
+    eventResponse: true;
+  };
+}>;

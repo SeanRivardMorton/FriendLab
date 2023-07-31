@@ -46,10 +46,6 @@ const Home = async ({ params }) => {
     addSuffix: true,
   });
 
-  // if (!eventResponse) return <div>Something went wrong</div>;
-
-  console.log(eventResponse);
-
   return (
     <main>
       <ButtonTray

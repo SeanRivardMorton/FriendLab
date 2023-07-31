@@ -21,6 +21,13 @@ const getEventsByUserId = async (userId: string, groupId: string[]) => {
         },
       ],
     },
+    include: {
+      eventResponse: {
+        where: {
+          userId,
+        },
+      },
+    },
   });
 
   return createdEvents;

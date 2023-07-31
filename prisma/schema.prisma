@@ -21,7 +21,7 @@ model Event {
   Post          Post[]
   group         Group?          @relation(fields: [groupId], references: [id])
   groupId       String?
-  EventResponse EventResponse[]
+  eventResponse EventResponse[]
 }
 
 model Post {
@@ -54,7 +54,7 @@ model User {
   groups          Group[]         @relation("GroupMembers")
   eventsCreated   Event[]         @relation("EventCreator")
   eventsAttending Event[]         @relation("EventAttendees")
-  EventResponse   EventResponse[]
+  eventResponse   EventResponse[]
 }
 
 model Group {
@@ -66,7 +66,7 @@ model Group {
   creator     User     @relation("GroupOwner", fields: [creatorId], references: [id])
   creatorId   String
   members     User[]   @relation("GroupMembers")
-  Event       Event[]
+  event       Event[]
 }
 
 model Friendship {

@@ -18,6 +18,9 @@ const sortEventsByDate = (events: BaseEvent[]) =>
     (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
   );
 
+const unansweredEventRequest = (events: BaseEvent[]) =>
+  events.filter((event) => event.eventResponse.length === 0);
+
 export default async function Home() {
   const session = await getSession();
   if (!session?.user?.id) return <LandingPage />;
@@ -43,6 +46,8 @@ export default async function Home() {
   }
 
   const sortedEvents = sortEventsByDate(events);
+  const unanswerEvents = unansweredEventRequest(sortedEvents);
+  // console.log(unansweredEventRequest(sortedEvents));
 
   return (
     <main>
@@ -52,7 +57,7 @@ export default async function Home() {
         {events.length > 0 && (
           <QuickEvents
             userId={session?.user?.id}
-            events={sortedEvents}
+            events={unanswerEvents}
             initialIndex={0}
           />
         )}
