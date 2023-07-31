@@ -11,6 +11,7 @@ import { CircleButtonLinkInset } from "../../components/Form/button";
 
 import { LOGIN_ROUTE } from "../../constants";
 import ClientEventPage from "./client";
+import getUserEventResponse from "../../api/events/[id]/users/[userId]/getUserEventResponse";
 
 const Home = async ({ params }) => {
   const session = await getSession();
@@ -18,6 +19,10 @@ const Home = async ({ params }) => {
   if (!session?.user?.id) {
     return redirect(LOGIN_ROUTE);
   }
+  const eventResponse = await getUserEventResponse(
+    session?.user?.id,
+    params.id
+  );
 
   const event = await getEventById(params.id);
 
@@ -50,7 +55,11 @@ const Home = async ({ params }) => {
           </div>
         </div>
       </ButtonTray>
-      <ClientEventPage event={event} />
+      <ClientEventPage
+        userId={session?.user.id}
+        event={event}
+        response={eventResponse}
+      />
       <BottomTray>
         <CircleButtonLinkInset>
           <ChatBubbleIcon className="h-8 w-8" />
