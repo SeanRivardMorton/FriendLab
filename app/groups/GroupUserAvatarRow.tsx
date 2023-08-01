@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { CircleButtonLink } from "../components/Form/button";
 
 const GroupUserAvatarsRow = ({ group }) => {
   return (
@@ -24,17 +26,16 @@ export const EventUserAvatarsRow = ({ attendees }) => {
   return (
     <div className="flex flex-row mx-2">
       {attendees?.map((member) => (
-        <div key={member.id} className="avatar">
-          <div className="rounded-full h-8 w-8 ring-1 ring-white mr-1">
-            <Image
-              src={member.image}
-              width={44}
-              height={44}
-              alt={member.name}
-            />
-            {/* Will this be replaced with CircleButtonLinkInset from form/button.tsx so when they become clickable keyboard works too?*/}
-          </div>
-        </div>
+        <CircleButtonLink key={member.id} href={`/friends/${member.id}`}>
+          <Image
+            className="rounded-full"
+            src={member.image}
+            width={44}
+            height={44}
+            alt={member.name}
+          />
+          {/* Will this be replaced with CircleButtonLinkInset from form/button.tsx so when they become clickable keyboard works too?*/}
+        </CircleButtonLink>
       ))}
     </div>
   );
