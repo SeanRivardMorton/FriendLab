@@ -22,12 +22,18 @@ export async function PUT(request: Request) {
   return NextResponse.json({ res });
 }
 
-export async function DELETE(request: NextRequest) {
-  const pathname = request.url;
-  const id = pathname.split("events/")[1];
+export async function DELETE(request: NextRequest, { params }) {
+  const { id } = params;
+
+  await prisma.eventResponse.deleteMany({
+    where: {
+      eventId: id,
+    },
+  });
+
   const res = await prisma.event.delete({
     where: {
-      id: id,
+      id,
     },
   });
   return NextResponse.json({ res });
