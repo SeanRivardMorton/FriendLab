@@ -19,6 +19,9 @@ const userWithEvents = async (userId) => {
         include: {
           creator: true,
           eventResponse: {
+            where: {
+              userId,
+            },
             include: {
               user: true,
             },
@@ -29,6 +32,9 @@ const userWithEvents = async (userId) => {
         include: {
           creator: true,
           eventResponse: {
+            where: {
+              userId,
+            },
             include: {
               user: true,
             },
@@ -49,6 +55,8 @@ export default async function Home() {
 
   const { eventsCreated, eventsAttending } = user;
   const events = [...eventsAttending, ...eventsCreated];
+
+  console.log(events);
 
   const unansweredEvents = events.filter(
     (event) =>
