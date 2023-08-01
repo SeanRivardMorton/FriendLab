@@ -59,7 +59,7 @@ export default async function Home() {
   if (!user) return <></>;
 
   const { eventsCreated, eventsAttending } = user;
-  const events = [...eventsAttending, ...eventsCreated];
+  const events = eventsAttending;
 
   console.log(events);
 

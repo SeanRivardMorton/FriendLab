@@ -16,7 +16,9 @@ const createGroup = async (data) => {
     data: {
       name: `${userFirstName}, ${memberFirstNames}`,
       members: {
-        connect: data.members.map((member) => ({ id: member.id })),
+        connect: data.members
+          .map((member) => ({ id: member.id }))
+          .concat({ id: session?.user?.id }),
       },
       creatorId: session?.user?.id,
     },
