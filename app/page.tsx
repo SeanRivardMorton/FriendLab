@@ -58,8 +58,6 @@ export default async function Home() {
       ).length === 0
   );
 
-  console.log(unansweredEvents);
-
   return (
     <main>
       <ButtonTray
