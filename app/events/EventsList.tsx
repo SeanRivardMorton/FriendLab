@@ -25,12 +25,12 @@ const EventsList = ({ events }) => {
                 <Image
                   className="rounded-full w-8 h-8 ring-primary"
                   src={event.creator?.image}
-                  alt={`event creater: ${event.creator.name}`}
+                  alt={`event creater: ${event?.creator?.name}`}
                   height={44}
                   width={44}
                 />
                 <div className="flex flex-col ml-2">
-                  <div className="my-auto">{event.name}</div>
+                  <div className="my-auto">{event?.name}</div>
                   <p className="text-xs my-auto">{date}</p>
                 </div>
               </div>

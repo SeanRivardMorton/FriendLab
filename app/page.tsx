@@ -1,88 +1,90 @@
 import React from "react";
 import { getSession } from "./api/getSession";
-import FriendLabGroupSelect from "./components/FriendLabGroupSelect";
-import { getGroupsByUserId } from "./api/groups/getGroupsById";
-import NoEvents from "./components/NoEvents";
-import BottomTray from "./components/BottomTray";
-import getEventsByUserId, { Event } from "./api/events/getEventsByUserId";
 import QuickEvents from "./components/QuickEvents";
-import getCurrentUserFriends from "./api/friends/getCurrentUsetFriends";
-import NoFriends from "./components/NoFriends";
 import LandingPage from "./LandingPage/LandingPage";
-import {
-  CircleButtonLink,
-  CircleButtonLinkInset,
-} from "./components/Form/button";
-import { CalendarIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { CircleButtonLinkInset } from "./components/Form/button";
+import { CalendarIcon, PersonIcon } from "@radix-ui/react-icons";
+import prisma from "../lib/prisma";
+import ButtonTray from "./components/ButtonTray";
+import BottomTray from "./components/BottomTray";
+import EventsList from "./events/EventsList";
 
-const sortEventsByDate = (events: Event[]) =>
-  events.sort(
-    (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
-  );
-
-const unansweredEventRequest = (events: Event[]) =>
-  events.filter((event) => event.eventResponse.length === 0);
+const userWithEvents = async (userId) => {
+  return await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    include: {
+      eventsCreated: {
+        include: {
+          creator: true,
+          eventResponse: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
+      eventsAttending: {
+        include: {
+          creator: true,
+          eventResponse: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
+    },
+  });
+};
 
 export default async function Home() {
   const session = await getSession();
-  if (!session?.user?.id) return <LandingPage />;
-  const groupsData = getGroupsByUserId(session?.user?.id);
-  const friendsData = getCurrentUserFriends(session?.user?.id);
+  if (!session) return <LandingPage />;
 
-  const [groups, friends] = await Promise.all([groupsData, friendsData]);
-  const events = await getEventsByUserId(session?.user?.id, {
-    groupIds: groups.map((group) => group.id),
-  });
+  const user = await userWithEvents(session?.user?.id);
 
-  if (friends.length === 0) {
-    return (
-      <main>
-        <div className="flex flex-col justify-between h-[89vh]">
-          <FriendLabGroupSelect groups={groups} />
-          <NoFriends />
-          <BottomTray />
-        </div>
-      </main>
-    );
-  }
+  if (!user) return <></>;
 
-  const sortedEvents = sortEventsByDate(events);
-  const unanswerEvents = unansweredEventRequest(sortedEvents);
+  const { eventsCreated, eventsAttending } = user;
+  const events = [...eventsAttending, ...eventsCreated];
 
-  if (unanswerEvents.length === 0)
-    return (
-      <>
-        <div className="flex flex-col justify-between h-[89vh]">
-          <FriendLabGroupSelect groups={groups} />
-          <div className="flex flex-row justify-center">
-            <CircleButtonLink href="/events">
-              <ChevronRightIcon className="h-8 w-8" />
-            </CircleButtonLink>
-          </div>
-          <BottomTray />
-        </div>
-      </>
-    );
+  const unansweredEvents = events.filter(
+    (event) =>
+      event.eventResponse.length === 0 ||
+      event.eventResponse.filter(
+        (response) => response.user.id === session?.user?.id
+      ).length === 0
+  );
+
+  console.log(unansweredEvents);
 
   return (
     <main>
-      <div className="flex flex-col justify-between h-[89vh]">
-        <FriendLabGroupSelect groups={groups} />
-        {events.length === 0 && <NoEvents />}
-        {events.length > 0 && (
-          <QuickEvents
-            userId={session?.user?.id}
-            events={unanswerEvents}
-            initialIndex={0}
-          />
-        )}
-
-        <BottomTray>
-          <CircleButtonLinkInset href="/calendar">
-            <CalendarIcon className="h-8 w-8" />
-          </CircleButtonLinkInset>
-        </BottomTray>
-      </div>
+      <ButtonTray
+        actionSlot={
+          <>
+            <CircleButtonLinkInset href="/events">
+              <CalendarIcon className="h-8 w-8" />
+            </CircleButtonLinkInset>
+            <CircleButtonLinkInset href="/groups">
+              <PersonIcon className="h-8 w-8" />
+            </CircleButtonLinkInset>
+          </>
+        }
+      >
+        <h2>Home</h2>
+      </ButtonTray>
+      {unansweredEvents.length > 0 ? (
+        <QuickEvents
+          userId={session?.user?.id}
+          events={unansweredEvents}
+          initialIndex={0}
+        />
+      ) : (
+        <EventsList events={events} />
+      )}
     </main>
   );
 }
