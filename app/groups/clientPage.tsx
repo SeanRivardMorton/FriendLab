@@ -11,6 +11,7 @@ const ClientGroupPage = (props) => {
   return (
     <>
       <ButtonTray
+        href="/"
         actionSlot={
           <CircleButtonLinkInset href="/groups/create">
             <PlusIcon className="h-8 w-8" />

@@ -48,8 +48,6 @@ const getEventsByUserId = async (
     },
   });
 
-  console.log(createdEvents);
-
   return createdEvents;
 };
 

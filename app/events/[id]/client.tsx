@@ -4,7 +4,7 @@ import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { Event } from "../../api/events/getEventById";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
-import { ResponseStatus } from "@prisma/client";
+import { EventResponse, ResponseStatus } from "@prisma/client";
 
 interface ClientEventPageProps {
   userId: string;

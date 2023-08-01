@@ -3,6 +3,7 @@ import {
   ChatBubbleIcon,
   CheckIcon,
   Cross1Icon,
+  TrashIcon,
 } from "@radix-ui/react-icons";
 import { formatDistance } from "date-fns";
 import Image from "next/image";
@@ -21,6 +22,7 @@ import { LOGIN_ROUTE } from "../../constants";
 import ClientEventPage from "./client";
 import getUserEventResponse from "../../api/events/[id]/users/[userId]/getUserEventResponse";
 import { ResponseStatus } from "@prisma/client";
+import DeleteButton from "../../components/DeleteButton.tsx";
 
 const responseMap = {
   [ResponseStatus.ACCEPTED]: <CheckIcon className="h-8 w-8 text-success" />,
@@ -45,6 +47,8 @@ const Home = async ({ params }) => {
   const date = formatDistance(new Date(event?.date ?? null), new Date(), {
     addSuffix: true,
   });
+
+  console.log(event);
 
   return (
     <main>
@@ -76,14 +80,13 @@ const Home = async ({ params }) => {
           </div>
         </div>
       </ButtonTray>
-      {
-        <ClientEventPage
-          userId={session?.user.id}
-          event={event}
-          response={eventResponse}
-        />
-      }
+      <ClientEventPage userId={session?.user.id} event={event} />
+
       <BottomTray>
+        <DeleteButton
+          deleteUrl={`/api/events/${event.id}`}
+          returnUrl="/events"
+        />
         <CircleButtonLinkInset>
           <ChatBubbleIcon className="h-8 w-8" />
         </CircleButtonLinkInset>

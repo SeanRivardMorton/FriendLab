@@ -12,7 +12,7 @@ const EventsPage = async () => {
   const events = await getEventsByUserId(session?.user?.id);
   return (
     <div>
-      <ButtonTray>
+      <ButtonTray href="/">
         <h2>Events</h2>
       </ButtonTray>
       <EventsList events={events} />
