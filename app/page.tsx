@@ -3,7 +3,12 @@ import { getSession } from "./api/getSession";
 import QuickEvents from "./components/QuickEvents";
 import LandingPage from "./LandingPage/LandingPage";
 import { CircleButtonLinkInset } from "./components/Form/button";
-import { CalendarIcon, PersonIcon } from "@radix-ui/react-icons";
+import {
+  CalendarIcon,
+  PersonIcon,
+  PlusCircledIcon,
+  PlusIcon,
+} from "@radix-ui/react-icons";
 import prisma from "../lib/prisma";
 import ButtonTray from "./components/ButtonTray";
 import BottomTray from "./components/BottomTray";
@@ -82,6 +87,7 @@ export default async function Home() {
       >
         <h2>Home</h2>
       </ButtonTray>
+      {/* {events.length === 0 && <></>} */}
       {unansweredEvents.length > 0 ? (
         <QuickEvents
           userId={session?.user?.id}
@@ -91,6 +97,12 @@ export default async function Home() {
       ) : (
         <EventsList events={events} />
       )}
+      <BottomTray>
+        <p className="my-auto text-lg">New Event</p>
+        <CircleButtonLinkInset href="/events/create">
+          <PlusIcon className="h-8 w-8" />
+        </CircleButtonLinkInset>
+      </BottomTray>
     </main>
   );
 }

@@ -5,6 +5,9 @@ import { Event } from "../../api/events/getEventById";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { EventResponse, ResponseStatus } from "@prisma/client";
+import GroupUserAvatarsRow, {
+  EventUserAvatarsRow,
+} from "../../groups/GroupUserAvatarRow";
 
 interface ClientEventPageProps {
   userId: string;
@@ -37,7 +40,11 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
             <p>Date: {date}</p>
             <div className="card-title">{event.description}</div>
             <div className="divider"></div>
+            <p className="text-lg">Invited</p>
+            <EventUserAvatarsRow attendees={event.attendees} />
+            <div className="divider"></div>
             <div className="">
+              <p className="text-lg mb-2">Change your mind?</p>
               <button
                 onClick={() =>
                   userResponseQuery.mutate(ResponseStatus.DECLINED)

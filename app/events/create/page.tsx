@@ -1,4 +1,3 @@
-import { PlusIcon } from "@radix-ui/react-icons";
 import { redirect } from "next/navigation";
 import { getSession } from "../../api/getSession";
 import ButtonTray from "../../components/ButtonTray";
