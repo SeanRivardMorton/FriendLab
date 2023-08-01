@@ -9,6 +9,9 @@ const createNewEvent = async (event) => {
       ...event,
       date: new Date(event.date).toJSON(),
       creatorId: session.user.id,
+      attendees: {
+        connect: event.attendees,
+      },
     },
   });
   return res;

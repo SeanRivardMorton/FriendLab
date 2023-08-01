@@ -1,6 +1,6 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import type { Event } from "../../api/events/getEventById";
 
@@ -11,7 +11,7 @@ const createEvent = async (data) => {
   });
 };
 
-const CreateEventForm = ({ groupId }) => {
+const CreateEventForm = ({ group }) => {
   const router = useRouter();
   const form = useForm<Event>({
     defaultValues: {
@@ -26,7 +26,7 @@ const CreateEventForm = ({ groupId }) => {
   });
 
   const handleSubmit = form.handleSubmit((data) => {
-    mutate.mutate({ ...data, groupId: groupId });
+    mutate.mutate({ ...data, groupId: group.id, attendees: group.members });
   });
 
   return (
