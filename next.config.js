@@ -24,7 +24,7 @@ module.exports = {
       },
       {
         protocol: "https",
-        hostname: "scontent.fmaa10-1.fna.fbcdn.net",
+        hostname: "scontent.**",
         port: "",
         pathname: "/v/**",
       },

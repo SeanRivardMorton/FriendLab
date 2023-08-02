@@ -2,7 +2,6 @@ import { CheckIcon, ChevronRightIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import { format } from "path";
 
 const sortEventsByDate = (events) =>
   events.sort(

@@ -2,7 +2,11 @@ import {
   AvatarIcon,
   ChatBubbleIcon,
   CheckIcon,
+  CircleIcon,
   Cross1Icon,
+  Pencil1Icon,
+  SewingPinIcon,
+  TrashIcon,
 } from "@radix-ui/react-icons";
 import { formatDistance } from "date-fns";
 import Image from "next/image";
@@ -19,13 +23,53 @@ import {
 
 import { LOGIN_ROUTE } from "../../constants";
 import ClientEventPage from "./client";
-import getUserEventResponse from "../../api/events/[id]/users/[userId]/getUserEventResponse";
+// import getUserEventResponse from "../../api/events/[id]/users/[userId]/getUserEventResponse";
 import { ResponseStatus } from "@prisma/client";
 import DeleteButton from "../../components/DeleteButton.tsx";
+import prisma from "../../../lib/prisma";
+import {
+  AcceptInviteButton,
+  DeclineInviteButton,
+} from "../../components/FunctionalButtons/UserEventResponseButtons";
 
 const responseMap = {
   [ResponseStatus.ACCEPTED]: <CheckIcon className="h-8 w-8 text-success" />,
   [ResponseStatus.DECLINED]: <Cross1Icon className="h-8 w-8 text-error" />,
+  [ResponseStatus.MAYBE]: <ChatBubbleIcon className="h-8 w-8 text-warning" />,
+  [ResponseStatus.PENDING]: <CircleIcon className="h-8 w-8" />,
+};
+
+const getEvent = async (id) => {
+  const event = await prisma.event.findUnique({
+    where: {
+      id: id,
+    },
+    include: {
+      attendees: {
+        include: {
+          eventResponse: true,
+        },
+      },
+      creator: true,
+      group: true,
+      eventResponse: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  });
+  const filterAttendeesEventResponse = event?.attendees.map((attendee) => {
+    const eventResponse = attendee.eventResponse.filter(
+      (response) => response.eventId === event?.id
+    );
+    return {
+      ...attendee,
+      eventResponse: eventResponse,
+    };
+  });
+
+  return { ...event, attendees: filterAttendeesEventResponse };
 };
 
 const Home = async ({ params }) => {
@@ -34,65 +78,85 @@ const Home = async ({ params }) => {
   if (!session?.user?.id) {
     return redirect(LOGIN_ROUTE);
   }
-  const eventResponse = await getUserEventResponse(
-    session?.user?.id,
-    params.id
-  );
 
-  // console.log(eventResponse);
-
-  const event = await getEventById(params.id);
-
-  if (!event) return <>not sure how you got here..</>;
-
-  const date = formatDistance(new Date(event?.date ?? null), new Date(), {
-    addSuffix: true,
-  });
-
+  const event = await getEvent(params.id);
+  if (!event) return <>Could not find</>;
   return (
     <main>
-      <ButtonTray
-        href="/events"
-        actionSlot={
-          <CircleButtonInset className="h-8 w-8">
-            {eventResponse && responseMap[eventResponse.response]}
-          </CircleButtonInset>
-        }
-      >
-        <div className="flex flex-row">
-          {event?.creator.image ? (
-            <Image
-              className="rounded-full h-12 w-12 mr-2 my-auto"
-              src={event.creator.image}
-              height={44}
-              width={44}
-              alt={event?.creator?.name ?? "user image"}
-            />
-          ) : (
-            <div className="h-12 w-12 rounded-full bg-primary">
-              <AvatarIcon />
+      <ButtonTray href="/events">
+        <h2>Hangout</h2>
+      </ButtonTray>
+      <div className="card card-compact bg-base-200 mt-8">
+        <div className="card-body">
+          <div className="flex flex-row">
+            {event?.creator?.image ? (
+              <Image
+                alt="Profile Picture"
+                className="rounded-full h-14 w-14 mr-2"
+                src={event?.creator?.image}
+                width={56}
+                height={56}
+              />
+            ) : (
+              <AvatarIcon className="w-14 h-14 mr-2" />
+            )}
+            <div className="flex flex-col">
+              <div className="card-title">{event?.name}</div>
+              <span>{event.date ? event.date.toDateString() : ""}</span>
             </div>
-          )}
+            <Pencil1Icon className="w-8 h-8 ml-auto" />
+          </div>
+          <div className="divider my-1">What&apos;s going on</div>
+          <div className="prose">
+            <p>{event.description}</p>
+            <div className="flex flex-row">
+              <SewingPinIcon className="my-auto h-6 w-6" />
+              <h3 className="my-auto">Location: {event.location}</h3>
+            </div>
+          </div>
+          <div className="divider">
+            <div className="divider-text">Who&apos;s going</div>
+          </div>
           <div className="flex flex-col">
-            <h2>{event.name}</h2>
-            <p className="text-sm text-primary">{date}</p>
+            {event.attendees?.map((attendee) => (
+              <div key={attendee.id} className="flex flex-row my-1">
+                {attendee?.image ? (
+                  <Image
+                    alt="Profile Picture"
+                    className="rounded-full h-10 w-10 mr-2"
+                    src={attendee?.image}
+                    width={56}
+                    height={56}
+                  />
+                ) : (
+                  <AvatarIcon className="w-10 h-10 mr-2" />
+                )}
+                <div className="flex flex-col my-auto">
+                  <div className="card-title">{attendee.name}</div>
+                </div>
+                <div className="ml-auto">
+                  {responseMap[attendee.eventResponse[0]?.response]}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </ButtonTray>
-      <ClientEventPage userId={session?.user.id} event={event} />
-
+      </div>
       <BottomTray>
-        <DeleteButton
-          deleteUrl={`/api/events/${event.id}`}
-          returnUrl="/events"
-        />
-        <CircleButtonLinkInset>
-          <ChatBubbleIcon className="h-8 w-8" />
-        </CircleButtonLinkInset>
+        <div className="my-auto">Make Suggestion</div>
+        <CircleButtonInset>
+          <ChatBubbleIcon className="h-8 w-8 text-warning" />
+        </CircleButtonInset>
       </BottomTray>
-      {/* <FriendLabHeader event={event} />
-      <FriendLabPoll />
-      <FriendLabThreads /> */}
+      <BottomTray>
+        <div className="my-auto">Still Going?</div>
+        <CircleButtonInset>
+          <DeclineInviteButton userId={session.user.id} eventId={event.id} />
+        </CircleButtonInset>
+        <CircleButtonInset>
+          <AcceptInviteButton userId={session.user.id} eventId={event.id} />
+        </CircleButtonInset>
+      </BottomTray>
     </main>
   );
 };
