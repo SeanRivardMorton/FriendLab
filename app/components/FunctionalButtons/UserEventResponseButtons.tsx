@@ -3,7 +3,7 @@ import { ResponseStatus } from "@prisma/client";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 
-import { CircleButton, CircleButtonInset } from "../Form/button";
+import { CircleButton } from "../Form/button";
 
 const updateUserResponse = async (userId, eventId, response) => {
   const res = await fetch(`/api/events/${eventId}/users/${userId}`, {
@@ -17,10 +17,11 @@ const updateUserResponse = async (userId, eventId, response) => {
   return data;
 };
 
-export const AcceptInviteButton = ({ userId, eventId }) => {
+export const AcceptInviteButton = ({ userId, eventId, onSuccess }) => {
   const acceptInviteQuery = useMutation({
     mutationFn: () =>
       updateUserResponse(userId, eventId, ResponseStatus.ACCEPTED),
+    onSuccess: (e) => onSuccess?.(e),
   });
   return (
     <CircleButton
@@ -36,10 +37,11 @@ export const AcceptInviteButton = ({ userId, eventId }) => {
   );
 };
 
-export const DeclineInviteButton = ({ userId, eventId }) => {
+export const DeclineInviteButton = ({ userId, eventId, onSuccess }) => {
   const declineInviteQuery = useMutation({
     mutationFn: () =>
       updateUserResponse(userId, eventId, ResponseStatus.DECLINED),
+    onSuccess: (e) => onSuccess?.(e),
   });
   return (
     <CircleButton
