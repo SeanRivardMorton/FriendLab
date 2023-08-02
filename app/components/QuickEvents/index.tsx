@@ -49,37 +49,45 @@ const QuickEvents = ({ events, initialIndex, userId }) => {
   return (
     <div className="hero">
       <div className="hero-content text-center">
-        <div className="max-w-md flex flex-col">
+        <div className="flex max-w-md flex-col">
           <h2 className="text-5xl font-bold">Next Event</h2>
           <h3 className="">{event.name}</h3>
           <div className="flex flex-row justify-end">
             <button
               onClick={previousEvent}
-              className="btn btn-circle btn-ghost my-auto"
+              className="btn-ghost btn-circle btn my-auto"
             >
-              <ChevronLeftIcon className="w-8 h-8" />
+              <ChevronLeftIcon className="h-8 w-8" />
             </button>
 
-            <DeclineInviteButton userId={userId} eventId={event.id} />
+            <DeclineInviteButton
+              onSuccess={() => {}}
+              userId={userId}
+              eventId={event.id}
+            />
             <Link
               href={`/events/${event.id}`}
               style={{ boxShadow: `${primary} 0px 0px 10px` }}
-              className="btn mx-auto w-fill border-white border-dashed border-2 rounded-full h-32 w-32 my-6 shadow-primary"
+              className="w-fill btn mx-auto my-6 h-32 w-32 rounded-full border-2 border-dashed border-white shadow-primary"
             >
               <Image
                 src={"vial.svg"}
                 height={44}
                 width={44}
                 alt="logo"
-                className="rotate-12 mx-auto"
+                className="mx-auto rotate-12"
               />
             </Link>
-            <AcceptInviteButton userId={userId} eventId={event.id} />
+            <AcceptInviteButton
+              onSuccess={() => {}}
+              userId={userId}
+              eventId={event.id}
+            />
             <button
               onClick={nextEvent}
-              className="btn btn-circle btn-ghost my-auto"
+              className="btn-ghost btn-circle btn my-auto"
             >
-              <ChevronRightIcon className="w-8 h-8" />
+              <ChevronRightIcon className="h-8 w-8" />
             </button>
           </div>
           <span className="mb-2">{date}</span>
