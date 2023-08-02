@@ -3,7 +3,6 @@ import {
   ChatBubbleIcon,
   CheckIcon,
   Cross1Icon,
-  TrashIcon,
 } from "@radix-ui/react-icons";
 import { formatDistance } from "date-fns";
 import Image from "next/image";
@@ -40,6 +39,8 @@ const Home = async ({ params }) => {
     params.id
   );
 
+  // console.log(eventResponse);
+
   const event = await getEventById(params.id);
 
   if (!event) return <>not sure how you got here..</>;
@@ -47,8 +48,6 @@ const Home = async ({ params }) => {
   const date = formatDistance(new Date(event?.date ?? null), new Date(), {
     addSuffix: true,
   });
-
-  console.log(event);
 
   return (
     <main>
