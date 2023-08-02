@@ -4,10 +4,8 @@ import prisma from "../../../../lib/prisma";
 import { Event } from "../getEventById";
 
 export async function PUT(request: Request, { params }) {
-  // console.log(params);
-
   const data: Event = await request.json();
-  console.log(data);
+
   const res = await prisma.event.update({
     where: {
       id: params.id,
@@ -17,11 +15,6 @@ export async function PUT(request: Request, { params }) {
       description: data.description,
       location: data.location,
       date: data.date,
-      // group: {
-      //   connect: {
-      //     id: data?.group?.id,
-      //   },
-      // },
     },
   });
   return NextResponse.json({ res });
