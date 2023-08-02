@@ -21,6 +21,7 @@ import { CircleButtonInset } from "../../components/Form/button";
 import {
   AcceptInviteButton,
   DeclineInviteButton,
+  InviteButton,
 } from "../../components/FunctionalButtons/UserEventResponseButtons";
 import { EventType } from "./page";
 interface ClientEventPageProps {
@@ -28,7 +29,7 @@ interface ClientEventPageProps {
   event: EventType;
 }
 
-const responseIconMap = {
+export const responseIconMap = {
   [ResponseStatus.ACCEPTED]: <CheckIcon className="h-8 w-8 text-success" />,
   [ResponseStatus.DECLINED]: <Cross1Icon className="h-8 w-8 text-error" />,
   [ResponseStatus.MAYBE]: <ChatBubbleIcon className="h-8 w-8 text-warning" />,
@@ -37,6 +38,8 @@ const responseIconMap = {
 
 const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
   const [iEvent, setIEvent] = useImmer(event);
+
+  if (!event?.id) return <div>Event not found</div>;
 
   return (
     <>
@@ -108,11 +111,9 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
       <BottomTray>
         <div className="my-auto">Still Going?</div>
 
-        <DeclineInviteButton
-          userId={userId}
-          eventId={event.id}
+        <InviteButton
+          response={ResponseStatus.DECLINED}
           onSuccess={(e) =>
-            // This makes me sad
             setIEvent((draft) => {
               if (!draft?.attendees) return;
               const attendee = draft?.attendees.find(
@@ -124,8 +125,11 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
               attendee.eventResponse[0].response = ResponseStatus.DECLINED;
             })
           }
+          userId={userId}
+          eventId={event.id}
         />
-        <AcceptInviteButton
+        <InviteButton
+          response={ResponseStatus.ACCEPTED}
           onSuccess={(e) =>
             setIEvent((draft) => {
               if (!draft?.attendees) return;
