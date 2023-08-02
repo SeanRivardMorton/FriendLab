@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+
 import { getSession } from "../api/getSession";
 import { getGroupsByUserId } from "../api/groups/getGroupsById";
 import { LOGIN_ROUTE } from "../constants";

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import React from "react";
+
 import { getSession } from "../../api/getSession";
 import { LOGIN_ROUTE } from "../../constants";
 import WritingNewsCard from "../WritingNewsCard";

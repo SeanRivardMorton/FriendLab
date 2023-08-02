@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
+
 import SloganRotater from "../login/SloganRotater";
 
 const slogans = [

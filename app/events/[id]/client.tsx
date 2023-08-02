@@ -1,10 +1,11 @@
 "use client";
 
-import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { Event } from "../../api/events/getEventById";
-import React from "react";
-import { useMutation } from "@tanstack/react-query";
 import { EventResponse, ResponseStatus } from "@prisma/client";
+import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
+import { useMutation } from "@tanstack/react-query";
+import React from "react";
+
+import { Event } from "../../api/events/getEventById";
 import GroupUserAvatarsRow, {
   EventUserAvatarsRow,
 } from "../../groups/GroupUserAvatarRow";

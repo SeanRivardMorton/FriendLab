@@ -1,18 +1,14 @@
+import { CalendarIcon, PersonIcon, PlusIcon } from "@radix-ui/react-icons";
 import React from "react";
-import { getSession } from "./api/getSession";
-import QuickEvents from "./components/QuickEvents";
-import LandingPage from "./LandingPage/LandingPage";
-import { CircleButtonLinkInset } from "./components/Form/button";
-import {
-  CalendarIcon,
-  PersonIcon,
-  PlusCircledIcon,
-  PlusIcon,
-} from "@radix-ui/react-icons";
+
 import prisma from "../lib/prisma";
-import ButtonTray from "./components/ButtonTray";
+import { getSession } from "./api/getSession";
 import BottomTray from "./components/BottomTray";
+import ButtonTray from "./components/ButtonTray";
+import { CircleButtonLinkInset } from "./components/Form/button";
+import QuickEvents from "./components/QuickEvents";
 import EventsList from "./events/EventsList";
+import LandingPage from "./LandingPage/LandingPage";
 
 const userWithEvents = async (userId) => {
   return await prisma.user.findUnique({
@@ -58,17 +54,15 @@ export default async function Home() {
 
   if (!user) return <></>;
 
-  const { eventsCreated, eventsAttending } = user;
+  const { eventsAttending } = user;
   const events = eventsAttending;
-
-  console.log(events);
 
   const unansweredEvents = events.filter(
     (event) =>
       event.eventResponse.length === 0 ||
       event.eventResponse.filter(
-        (response) => response.user.id === session?.user?.id
-      ).length === 0
+        (response) => response.user.id === session?.user?.id,
+      ).length === 0,
   );
 
   return (

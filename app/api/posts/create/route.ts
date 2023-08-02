@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import createPost from "../../../news/createPost";
 
 export async function POST(req: NextRequest, params) {

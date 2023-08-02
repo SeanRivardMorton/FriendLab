@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import createGroup from "./createGroup";
 
 export async function POST(req, res) {

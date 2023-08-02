@@ -1,10 +1,10 @@
 // app/providers.js
 "use client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { usePathname, useSearchParams } from "next/navigation";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
-import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 
 if (typeof window !== "undefined") {

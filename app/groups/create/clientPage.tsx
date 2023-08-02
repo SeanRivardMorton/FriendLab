@@ -1,11 +1,12 @@
 "use client";
-import ButtonTray from "../../components/ButtonTray";
-import Image from "next/image";
 import { CheckIcon, MinusIcon, PlusIcon } from "@radix-ui/react-icons";
-import React from "react";
-import { CircleButton, CircleButtonInset } from "../../components/Form/button";
-import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
+
+import ButtonTray from "../../components/ButtonTray";
+import { CircleButton, CircleButtonInset } from "../../components/Form/button";
 
 const postGroup = async (group) => {
   const response = await fetch("/api/groups", {

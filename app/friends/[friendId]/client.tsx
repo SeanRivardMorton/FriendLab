@@ -1,12 +1,13 @@
 "use client";
 
-import ButtonTray from "../../components/ButtonTray";
-import Image from "next/image";
-import FriendList from "../../components/FriendList";
-import BottomTray from "../../components/BottomTray";
-import { CircleButtonInset } from "../../components/Form/button";
 import { ChatBubbleIcon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
+import Image from "next/image";
+
+import BottomTray from "../../components/BottomTray";
+import ButtonTray from "../../components/ButtonTray";
+import { CircleButtonInset } from "../../components/Form/button";
+import FriendList from "../../components/FriendList";
 
 const addFriend = async (friendId) => {
   const res = await fetch(`/api/friends/add/${friendId}`, {
@@ -18,9 +19,7 @@ const addFriend = async (friendId) => {
 const ClientFriendPage = ({ friend, friendsOfFriend, isFriend }) => {
   const addFriendQuery = useMutation({
     mutationFn: (id) => addFriend(id),
-    onSuccess: (data) => {
-      console.log("yay", data);
-    },
+    onSuccess: (data) => {},
   });
   return (
     <>

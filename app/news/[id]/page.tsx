@@ -1,4 +1,5 @@
 import { TrashIcon } from "@radix-ui/react-icons";
+
 import { getSession } from "../../api/getSession";
 import getPost from "../../api/posts/[id]/getPost";
 import BottomTray from "../../components/BottomTray";

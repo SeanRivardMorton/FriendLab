@@ -1,9 +1,9 @@
 "use client";
 import { FileIcon, PaperPlaneIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+
 import BottomTray from "../components/BottomTray";
 import ButtonTray from "../components/ButtonTray";
 import { Post } from "./createPost";
@@ -21,12 +21,10 @@ interface UpdatingNewsCard {
 }
 
 const UpdatingNewsCard: React.FC<UpdatingNewsCard> = (props) => {
-  const router = useRouter();
   const [post, setPost] = React.useState(props.post);
   const mutate = useMutation({
     mutationFn: (post: Post) => postPost(post),
     onSuccess: (newPost: Post) => {
-      console.log(newPost);
       setPost(newPost);
     },
   });

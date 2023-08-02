@@ -1,9 +1,9 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
-import SpotifyProvider from "next-auth/providers/spotify";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
+import NextAuth, { NextAuthOptions } from "next-auth";
+import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
+import SpotifyProvider from "next-auth/providers/spotify";
 
 const prisma = new PrismaClient();
 

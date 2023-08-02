@@ -16,7 +16,6 @@ const EventsList = ({ events }) => {
         const date = formatDistance(new Date(event?.date ?? null), new Date(), {
           addSuffix: true,
         });
-        console.log(event);
         return (
           <Link href={`/events/${event.id}`} key={event.id} className="w-full">
             <div className=" mx-1 flex flex-row justify-between">

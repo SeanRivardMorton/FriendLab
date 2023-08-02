@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import createNewEvent from "./createNewEvent";
 
 export async function PUT(req: NextRequest | Request, res: NextResponse) {

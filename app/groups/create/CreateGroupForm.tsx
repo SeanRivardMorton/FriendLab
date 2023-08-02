@@ -2,6 +2,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
+
 import type { Event } from "../../api/events/getEventById";
 
 const createGroup = async (data) => {

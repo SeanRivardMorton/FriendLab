@@ -17,8 +17,8 @@ import {
   Share2Icon,
 } from "@radix-ui/react-icons";
 import Image from "next/image";
-import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
+import { getSession, useSession } from "next-auth/react";
 
 const FriendLabThreads = () => {
   const { data } = useSession();

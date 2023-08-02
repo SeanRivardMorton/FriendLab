@@ -1,11 +1,11 @@
 "use client";
 import { FileIcon, PaperPlaneIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import { useSession } from "next-auth/react";
 import React from "react";
 import { useForm } from "react-hook-form";
+
 import { authOptions } from "../api/auth/[...nextauth]";
 import BottomTray from "../components/BottomTray";
 import ButtonTray from "../components/ButtonTray";

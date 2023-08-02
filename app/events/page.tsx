@@ -46,7 +46,6 @@ const EventsPage = async () => {
     return <div>Not logged in</div>;
   }
   const a = await userWithEvents(session?.user?.id);
-  console.log("asdfasdf", a);
   const events = a?.eventsAttending;
   return (
     <div>

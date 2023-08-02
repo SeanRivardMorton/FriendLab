@@ -1,3 +1,4 @@
+import { ResponseStatus } from "@prisma/client";
 import {
   AvatarIcon,
   ChatBubbleIcon,
@@ -6,33 +7,23 @@ import {
   Cross1Icon,
   Pencil1Icon,
   SewingPinIcon,
-  TrashIcon,
 } from "@radix-ui/react-icons";
-import { formatDistance } from "date-fns";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
-import getEventById from "../../api/events/getEventById";
+
+import prisma from "../../../lib/prisma";
 import { getSession } from "../../api/getSession";
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
-import {
-  CircleButtonInset,
-  CircleButtonLinkInset,
-} from "../../components/Form/button";
-
-import { LOGIN_ROUTE } from "../../constants";
-import ClientEventPage from "./client";
-// import getUserEventResponse from "../../api/events/[id]/users/[userId]/getUserEventResponse";
-import { ResponseStatus } from "@prisma/client";
-import DeleteButton from "../../components/DeleteButton.tsx";
-import prisma from "../../../lib/prisma";
+import { CircleButtonInset } from "../../components/Form/button";
 import {
   AcceptInviteButton,
   DeclineInviteButton,
 } from "../../components/FunctionalButtons/UserEventResponseButtons";
+import { LOGIN_ROUTE } from "../../constants";
 
-const responseMap = {
+const responseIconMap = {
   [ResponseStatus.ACCEPTED]: <CheckIcon className="h-8 w-8 text-success" />,
   [ResponseStatus.DECLINED]: <Cross1Icon className="h-8 w-8 text-error" />,
   [ResponseStatus.MAYBE]: <ChatBubbleIcon className="h-8 w-8 text-warning" />,
@@ -135,7 +126,7 @@ const Home = async ({ params }) => {
                   <div className="card-title">{attendee.name}</div>
                 </div>
                 <div className="ml-auto">
-                  {responseMap[attendee.eventResponse[0]?.response]}
+                  {responseIconMap[attendee.eventResponse[0]?.response]}
                 </div>
               </div>
             ))}

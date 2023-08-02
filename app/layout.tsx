@@ -1,15 +1,15 @@
 import "./globals.css";
-import { PHProvider, PostHogPageview } from "./providers";
-import ReactQueryProvider from "./providers";
-import { Suspense } from "react";
-import Provider from "./components/Provider";
 
 import { Analytics } from "@vercel/analytics/react";
-
-import Loading from "./loading";
-import TopNav from "./components/Layout/TopNav";
 import { Ubuntu } from "next/font/google";
+import { Suspense } from "react";
+
 import { getSession } from "./api/getSession";
+import TopNav from "./components/Layout/TopNav";
+import Provider from "./components/Provider";
+import Loading from "./loading";
+import { PHProvider, PostHogPageview } from "./providers";
+import ReactQueryProvider from "./providers";
 
 export const metadata = {
   title: "Friend Lab - Homepage",
@@ -37,8 +37,8 @@ export default async function RootLayout({ children }) {
             <Suspense fallback={<Loading />}>
               <body className="text-current">
                 {session?.user && <TopNav />}
-                <div className="overflow-auto flex flex-row justify-center">
-                  <div className="lg:w-2/4 w-full lg:mx-auto bg-base-100 min-h-[93vh] lg:min-h-[60vh] rounded-xl shadow-xl shadow-base-100">
+                <div className="flex flex-row justify-center overflow-auto">
+                  <div className="min-h-[93vh] w-full rounded-xl bg-base-100 shadow-xl shadow-base-100 lg:mx-auto lg:min-h-[60vh] lg:w-2/4">
                     {children}
                     <Analytics />
                   </div>

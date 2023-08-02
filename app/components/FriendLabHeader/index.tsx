@@ -6,6 +6,7 @@ import {
   TrashIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
+
 import { Event } from "../../api/events/getEventById";
 
 interface FriendLabHeaderProps {

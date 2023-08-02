@@ -1,6 +1,7 @@
+import Image from "next/image";
+
 import { Post } from "./createPost";
 import PostActions from "./PostActions";
-import Image from "next/image";
 
 const defaultNews: Partial<Post> = {
   title: "Title",

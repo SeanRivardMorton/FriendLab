@@ -1,8 +1,9 @@
-import getUser from "../../api/user/getUser";
-import getCurrentUserFriends from "../../api/friends/getCurrentUsetFriends";
 import { redirect } from "next/navigation";
-import { LOGIN_ROUTE } from "../../constants";
+
+import getCurrentUserFriends from "../../api/friends/getCurrentUsetFriends";
 import { getSession } from "../../api/getSession";
+import getUser from "../../api/user/getUser";
+import { LOGIN_ROUTE } from "../../constants";
 import ClientFriendPage from "./client";
 
 const FriendPage = async ({ params }) => {

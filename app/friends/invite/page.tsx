@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+
 import { getSession } from "../../api/getSession";
 import { LOGIN_ROUTE } from "../../constants";
 import ClientFriendInvitePage from "./clientPage";

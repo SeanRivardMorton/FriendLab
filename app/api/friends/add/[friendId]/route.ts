@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { getSession } from "../../../getSession";
 import addFriend from "./addFriend";
 

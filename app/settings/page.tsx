@@ -1,12 +1,13 @@
-import { ChatBubbleIcon, CheckIcon, GearIcon } from "@radix-ui/react-icons";
-import { getSession } from "../api/getSession";
+import { ChatBubbleIcon, GearIcon } from "@radix-ui/react-icons";
 import { redirect } from "next/navigation";
+
+import { getSession } from "../api/getSession";
+import BottomTray from "../components/BottomTray";
+import ButtonTray from "../components/ButtonTray";
+import { CircleButtonInset } from "../components/Form/button";
 import { LOGIN_ROUTE } from "../constants";
 import SettingsForm from "./settingsform";
 import SignOutButton from "./SignOutButton";
-import ButtonTray from "../components/ButtonTray";
-import BottomTray from "../components/BottomTray";
-import { CircleButtonInset } from "../components/Form/button";
 
 const SettingsPage = async () => {
   const session = await getSession();
@@ -17,7 +18,7 @@ const SettingsPage = async () => {
         href="/"
         actionSlot={
           <>
-            <GearIcon className="w-8 h-8" />
+            <GearIcon className="h-8 w-8" />
           </>
         }
       >
@@ -26,7 +27,7 @@ const SettingsPage = async () => {
       <SettingsForm />
       <BottomTray>
         <CircleButtonInset>
-          <ChatBubbleIcon className="w-8 h-8" />
+          <ChatBubbleIcon className="h-8 w-8" />
         </CircleButtonInset>
         <SignOutButton />
       </BottomTray>

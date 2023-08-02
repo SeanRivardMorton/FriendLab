@@ -1,8 +1,9 @@
 import { PlusIcon } from "@radix-ui/react-icons";
-import { getSession } from "../api/getSession";
 import { redirect } from "next/navigation";
+
 import getCurrentUserFriends from "../api/friends/getCurrentUsetFriends";
 import getFriendsOfUser from "../api/friends/getFriendsOfUser";
+import { getSession } from "../api/getSession";
 import ButtonTray from "../components/ButtonTray";
 import {
   CircleButtonInset,

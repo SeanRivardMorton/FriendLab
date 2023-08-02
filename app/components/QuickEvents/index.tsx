@@ -1,16 +1,17 @@
 "use client";
-import Image from "next/image";
-// import Vial from "../../assets/vial.svg";
-import theme from "daisyui/src/theming/themes";
-import Link from "next/link";
-import { formatDistance } from "date-fns";
 import {
   CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   Cross1Icon,
 } from "@radix-ui/react-icons";
+// import Vial from "../../assets/vial.svg";
+import theme from "daisyui/src/theming/themes";
+import { formatDistance } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+
 import {
   AcceptInviteButton,
   DeclineInviteButton,

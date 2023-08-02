@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
+
 import { getSession } from "../../api/getSession";
+import getGroupById from "../../api/groups/getGroupById";
 import ButtonTray from "../../components/ButtonTray";
 import { LOGIN_ROUTE } from "../../constants";
 import CreateEventForm from "./CreateEventForm";
-import getGroupById from "../../api/groups/getGroupById";
 
 const CreatePage = async ({ searchParams }) => {
   const { gId } = searchParams;

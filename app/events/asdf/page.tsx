@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import React from "react";
+
 import getEventById from "../../api/events/getEventById";
 import getEventsByUserId from "../../api/events/getEventsByUserId";
 import { getSession } from "../../api/getSession";

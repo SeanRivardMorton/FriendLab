@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { CircleButtonLink } from "../components/Form/button";
 
 const GroupUserAvatarsRow = ({ group }) => {

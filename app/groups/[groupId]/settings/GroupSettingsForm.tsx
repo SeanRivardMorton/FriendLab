@@ -17,9 +17,7 @@ const GroupSettingsForm = ({ group }) => {
   });
   const mutate = useMutation({
     mutationFn: updateGroups,
-    onSuccess: (res) => {
-      console.log(res);
-    },
+    onSuccess: (res) => {},
   });
 
   const onChange = form.handleSubmit((data) => {

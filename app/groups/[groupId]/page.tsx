@@ -1,13 +1,13 @@
 import {
   ChevronRightIcon,
-  PlusIcon,
-  RocketIcon,
   Pencil1Icon,
   PersonIcon,
+  PlusIcon,
+  RocketIcon,
 } from "@radix-ui/react-icons";
-
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
 import getEventsByGroupId from "../../api/events/getEventsByGroupId";
 import { getSession } from "../../api/getSession";
 import getGroupsByGroupId from "../../api/groups/getGroupsByGroupId";

@@ -1,22 +1,20 @@
 import { ChevronRightIcon, PlusIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
+
 import { getSession } from "../api/getSession";
-import getAllPostsFromUser from "../api/posts/create/getAllPostsFromUser";
 import getPublishedPosts from "../api/posts/getPublishedPosts";
 import ButtonTray from "../components/ButtonTray";
-import {
-  CircleButtonLink,
-  CircleButtonLinkInset,
-} from "../components/Form/button";
+import { CircleButtonLinkInset } from "../components/Form/button";
 
 const NewsPage = async () => {
   const [session, posts] = await Promise.all([
     getSession(),
     getPublishedPosts(),
   ]);
-  const yourPosts = await getAllPostsFromUser(session?.user?.id);
-  console.log(posts);
+
+  if (!session) return redirect("/login");
 
   return (
     <>

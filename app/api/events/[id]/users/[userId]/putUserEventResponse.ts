@@ -1,7 +1,6 @@
 import prisma from "../../../../../../lib/prisma";
 
 const putUserEventResponse = async (userId, eventId, response) => {
-  console.log(userId, eventId, response);
   const upsertedResponse = await prisma.eventResponse.upsert({
     where: {
       userId_eventId: {
