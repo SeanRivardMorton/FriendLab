@@ -3,21 +3,18 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
 import { Event } from "../getEventById";
 
-export async function PUT(request: Request) {
+export async function PUT(request: Request, { params }) {
   const data: Event = await request.json();
+
   const res = await prisma.event.update({
     where: {
-      id: data.id,
+      id: params.id,
     },
     data: {
       name: data.name,
       description: data.description,
       location: data.location,
-      group: {
-        connect: {
-          id: data?.group?.id,
-        },
-      },
+      date: data.date,
     },
   });
   return NextResponse.json({ res });

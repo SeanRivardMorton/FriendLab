@@ -20,6 +20,7 @@ specifiers:
   eslint-config-next: 13.4.8
   eslint-config-prettier: ^8.9.0
   eslint-plugin-simple-import-sort: ^10.0.0
+  immer: ^10.0.2
   next: 13.4.8
   next-auth: ^4.22.1
   openai: ^3.3.0
@@ -35,6 +36,7 @@ specifiers:
   react-stately: ^3.24.0
   tailwindcss: ^3.3.2
   typescript: 5.1.6
+  use-immer: ^0.9.0
   uuid: ^9.0.0
 
 dependencies:
@@ -50,6 +52,7 @@ dependencies:
   date-fns: 2.30.0
   eslint: 8.44.0
   eslint-config-next: 13.4.8_iqf7tbmerllfqanu4l3d6aqdn4
+  immer: 10.0.2
   next: 13.4.8_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.22.1_huavqdni4pobvfczobpbvo6vhq
   openai: 3.3.0
@@ -59,6 +62,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.45.1_react@18.2.0
   react-stately: 3.24.0_react@18.2.0
+  use-immer: 0.9.0_immer@10.0.2+react@18.2.0
   uuid: 9.0.0
 
 devDependencies:
@@ -2947,6 +2951,10 @@ packages:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
     dev: false
 
+  /immer/10.0.2:
+    resolution: {integrity: sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -4483,6 +4491,16 @@ packages:
       '@types/react': 18.2.14
       react: 18.2.0
       tslib: 2.6.0
+    dev: false
+
+  /use-immer/0.9.0_immer@10.0.2+react@18.2.0:
+    resolution: {integrity: sha512-/L+enLi0nvuZ6j4WlyK0US9/ECUtV5v9RUbtxnn5+WbtaXYUaOBoKHDNL9I5AETdurQ4rIFIj/s+Z5X80ATyKw==}
+    peerDependencies:
+      immer: '>=2.0.0'
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      immer: 10.0.2
+      react: 18.2.0
     dev: false
 
   /use-sidecar/1.1.2_i73ekzlbntu7jol6ph2fvy4mga:
