@@ -13,6 +13,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useImmer } from "use-immer";
 
 import BottomTray from "../../components/BottomTray";
@@ -38,15 +39,43 @@ export const responseIconMap = {
 
 const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
   const [iEvent, setIEvent] = useImmer(event);
+  const form = useForm({
+    defaultValues: {
+      name: iEvent?.name || "",
+      description: iEvent?.description || "",
+      date: iEvent?.date?.toJSON().split("T")[0] || "",
+      location: iEvent?.location || "",
+    },
+  });
+
+  const { mutate: updateEvent, isLoading } = useMutation({
+    mutationFn: async (d: any) => {
+      console.log(d);
+      const res = await fetch(`/api/events/${event.id}`, {
+        method: "PUT",
+        body: JSON.stringify(d),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Something went wrong!");
+      }
+      return data;
+    },
+  });
 
   if (!event?.id) return <div>Event not found</div>;
+  const isCreator = iEvent?.creator?.id === userId;
+
+  const onChange = form.handleSubmit((e) => {
+    updateEvent({ ...e, date: new Date(e.date) });
+  });
 
   return (
     <>
       <ButtonTray href="/events">
         <h2>Hangout</h2>
       </ButtonTray>
-      <div className="card card-compact mt-8 bg-base-200">
+      <form onBlur={onChange} className="card card-compact mt-8 bg-base-200">
         <div className="card-body">
           <div className="flex flex-row">
             {iEvent?.creator?.image ? (
@@ -61,24 +90,81 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
               <AvatarIcon className="mr-2 h-14 w-14" />
             )}
             <div className="flex flex-col">
-              <div className="card-title">{iEvent?.name}</div>
-              <span>{iEvent.date ? iEvent.date.toDateString() : ""}</span>
+              <div className="card-title">
+                {isCreator ? (
+                  <input
+                    {...form.register("name")}
+                    defaultValue={iEvent?.name || ""}
+                    type="text"
+                    placeholder="Type here"
+                    className="input w-full max-w-xs"
+                  />
+                ) : (
+                  iEvent?.name
+                )}
+              </div>
+              <span>
+                {iEvent?.date ? (
+                  isCreator ? (
+                    <input
+                      {...form.register("date")}
+                      defaultValue={iEvent.date.toJSON().split("T")[0]}
+                      type="date"
+                      placeholder="Type here"
+                      className="input w-full max-w-xs"
+                    />
+                  ) : (
+                    iEvent.date.toDateString()
+                  )
+                ) : (
+                  ""
+                )}
+              </span>
             </div>
-            <Pencil1Icon className="ml-auto h-8 w-8" />
+            {isLoading && (
+              <span className="loading loading-spinner loading-md ml-auto"></span>
+            )}
           </div>
           <div className="divider my-1">What&apos;s going on</div>
           <div className="prose">
-            <p>{iEvent.description}</p>
+            {isCreator ? (
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Description</span>
+                </label>
+                <textarea
+                  {...form.register("description")}
+                  defaultValue={iEvent?.description || ""}
+                  className="textarea-bordered textarea h-24"
+                  placeholder="Description"
+                ></textarea>
+              </div>
+            ) : (
+              <p>{iEvent?.description}</p>
+            )}
             <div className="flex flex-row">
               <SewingPinIcon className="my-auto h-6 w-6" />
-              <h3 className="my-auto">Location: {iEvent.location}</h3>
+              <h3 className="my-auto">
+                Location:{" "}
+                {isCreator ? (
+                  <input
+                    {...form.register("location")}
+                    defaultValue={iEvent.location || ""}
+                    type="text"
+                    placeholder="Type here"
+                    className="input w-full max-w-xs"
+                  />
+                ) : (
+                  iEvent?.location
+                )}
+              </h3>
             </div>
           </div>
           <div className="divider">
             <div className="divider-text">Who&apos;s going</div>
           </div>
           <div className="flex flex-col">
-            {iEvent.attendees?.map((attendee) => (
+            {iEvent?.attendees?.map((attendee) => (
               <div key={attendee.id} className="my-1 flex flex-row">
                 {attendee?.image ? (
                   <Image
@@ -101,7 +187,7 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
             ))}
           </div>
         </div>
-      </div>
+      </form>
       <BottomTray>
         <div className="my-auto">Make Suggestion</div>
         <CircleButtonInset>

@@ -1,27 +1,10 @@
-import { ResponseStatus } from "@prisma/client";
-import {
-  AvatarIcon,
-  ChatBubbleIcon,
-  CheckIcon,
-  CircleIcon,
-  Cross1Icon,
-  Pencil1Icon,
-  SewingPinIcon,
-} from "@radix-ui/react-icons";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
 
 import prisma from "../../../lib/prisma";
 import { getSession } from "../../api/getSession";
-import BottomTray from "../../components/BottomTray";
-import ButtonTray from "../../components/ButtonTray";
-import { CircleButtonInset } from "../../components/Form/button";
-import {
-  AcceptInviteButton,
-  DeclineInviteButton,
-} from "../../components/FunctionalButtons/UserEventResponseButtons";
 import { LOGIN_ROUTE } from "../../constants";
+import { AsyncReturnType } from "../../utils/AsyncReturnType";
 import ClientEventPage from "./client";
 
 const getEvent = async (id) => {
@@ -56,13 +39,6 @@ const getEvent = async (id) => {
 
   return { ...event, attendees: filterAttendeesEventResponse };
 };
-
-// move this somewhere safe
-type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
-  ...args: any
-) => Promise<infer R>
-  ? R
-  : any;
 
 export type EventType = AsyncReturnType<typeof getEvent>;
 
