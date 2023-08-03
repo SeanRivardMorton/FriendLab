@@ -1,6 +1,6 @@
 import "./globals.css";
-import "@uploadthing/react/styles.css";
 
+// import "@uploadthing/react/styles.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Ubuntu } from "next/font/google";
 import { Suspense } from "react";

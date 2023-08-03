@@ -103,7 +103,6 @@ export default async function Home() {
       >
         <div>
           <h2>Home</h2>
-          <p className="text-sm italic text-primary">All good?</p>
         </div>
       </ButtonTray>
       {/* {events.length === 0 && <></>} */}
@@ -117,10 +116,10 @@ export default async function Home() {
         <EventsList events={events} />
       )}
       <BottomTray>
-        <p className="my-auto text-lg">New Event</p>
+        {/* <p className="my-auto text-lg">New Event</p>
         <CircleButtonLinkInset href="/events/create">
           <PlusIcon className="h-8 w-8" />
-        </CircleButtonLinkInset>
+        </CircleButtonLinkInset> */}
       </BottomTray>
     </main>
   );

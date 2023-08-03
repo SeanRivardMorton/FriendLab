@@ -54,15 +54,14 @@ const EventsPage = async () => {
     <div>
       <ButtonTray href="/" actionSlot={<div className="w-14"></div>}>
         <div>
-          <h2>What&apos;s happenin&apos;</h2>
-          <p className="text-sm italic text-primary">View your events</p>
+          <h2>Socials</h2>
         </div>
       </ButtonTray>
       <EventsList events={events} />
       <BottomTray>
-        <p className="my-auto text-lg">Plan:</p>
+        <p className="my-auto text-lg font-bold ">New Plan:</p>
         <CircleButtonLinkInset href="/events/create">
-          <PlusIcon className="h-8 w-8 text-success" />
+          <PlusIcon className="h-8 w-8" />
         </CircleButtonLinkInset>
       </BottomTray>
     </div>

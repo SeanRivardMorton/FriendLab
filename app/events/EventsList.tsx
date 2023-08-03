@@ -35,16 +35,20 @@ const EventsList = (props) => {
         });
         return (
           <Link href={`/events/${event.id}`} key={event.id} className="w-full">
-            <div className=" mx-1 flex flex-row justify-between">
+            <div className="mx-3 flex flex-row justify-between">
               <div className="flex flex-row">
-                <Avatar src={event.creator?.image} />
+                <Avatar
+                  className="border-4 border-base-200"
+                  src={event.creator?.image}
+                />
+
                 <div className="ml-2 flex flex-col">
                   <div className="my-auto">{event?.name}</div>
                   <p className="my-auto text-xs">{date}</p>
                 </div>
               </div>
               {/* <p className="text-xs">{date}</p> */}
-              <div className="flex flex-row justify-end">
+              <div className="my-auto flex flex-row justify-end">
                 {event.eventResponse[0]?.response === "ACCEPTED" && (
                   <CheckIcon className="h-8 w-8 text-success" />
                 )}

@@ -15,8 +15,8 @@ const FriendList = ({ friends }) => {
               href={`/friends/${friend.id}`}
               className="my-2 ml-2 flex flex-row justify-between"
             >
-              <div className="flex flex-row">
-                <div className="btn-circle  btn rounded-full bg-base-200">
+              <div className="ml-2 flex flex-row">
+                <div className="btn-circle btn rounded-full bg-base-200">
                   <Avatar src={friend?.image} />
                 </div>
                 <h2 className="my-auto ml-4 text-2xl">{friend.name}</h2>

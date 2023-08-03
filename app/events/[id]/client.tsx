@@ -12,7 +12,6 @@ import {
   TrashIcon,
 } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
-import Image from "next/image";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useImmer } from "use-immer";
@@ -21,7 +20,7 @@ import Avatar from "../../components/Avatar";
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
 import DeleteButton from "../../components/DeleteButton.tsx";
-import { CircleButton, CircleButtonInset } from "../../components/Form/button";
+import { CircleButtonInset } from "../../components/Form/button";
 import { InviteButton } from "../../components/FunctionalButtons/UserEventResponseButtons";
 import { EventType } from "./page";
 interface ClientEventPageProps {
@@ -72,7 +71,7 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
     <>
       <ButtonTray
         href="/events"
-        actionSlot={<></>}
+        actionSlot={<div className="w-16"></div>}
         secondarySlot={
           <>
             {isCreator && (
@@ -86,15 +85,15 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
       >
         <h2>Hangout</h2>
       </ButtonTray>
-      <form onBlur={onChange} className="card card-compact mt-8 bg-base-200">
+      <form onBlur={onChange} className="card card-compact">
         <div className="card-body">
           <div className="flex flex-row">
             {iEvent?.creator?.image ? (
               <Avatar src={iEvent?.creator?.image} />
             ) : (
-              <AvatarIcon className="mr-2 h-14 w-14" />
+              <AvatarIcon className=" h-14 w-14" />
             )}
-            <div className="flex flex-col">
+            <div className="ml-4 flex flex-col">
               <div className="card-title">
                 {isCreator ? (
                   <input
@@ -130,8 +129,8 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
               <span className="loading loading-spinner loading-md ml-auto"></span>
             )}
           </div>
-          <div className="divider my-1">What&apos;s going on</div>
-          <div className="prose">
+          {/* <div className="divider my-1">What&apos;s going on</div> */}
+          <div className="prose ml-16">
             {isCreator ? (
               <div className="form-control">
                 <label className="label">
@@ -150,7 +149,6 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
             <div className="flex flex-row">
               <SewingPinIcon className="my-auto h-6 w-6" />
               <h3 className="my-auto">
-                Location:{" "}
                 {isCreator ? (
                   <input
                     {...form.register("location")}
@@ -176,10 +174,10 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
                 ) : (
                   <AvatarIcon className="mr-2 h-10 w-10" />
                 )}
-                <div className="my-auto flex flex-col">
+                <div className="my-auto ml-3 flex flex-col">
                   <div className="card-title">{attendee.name}</div>
                 </div>
-                <div className="ml-auto">
+                <div className="my-auto ml-auto">
                   {responseIconMap[attendee.eventResponse[0]?.response]}
                 </div>
               </div>
@@ -223,7 +221,7 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
               );
 
               if (!attendee?.eventResponse) return;
-              console.log("ASDFASDFASDFa", attendee?.eventResponse);
+
               if (attendee.eventResponse[0]?.response) {
                 attendee.eventResponse[0].response = ResponseStatus.ACCEPTED;
               } else {
