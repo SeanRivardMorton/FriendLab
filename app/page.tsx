@@ -1,4 +1,5 @@
 import { CalendarIcon, PersonIcon, PlusIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 import React from "react";
 
 import prisma from "../lib/prisma";
@@ -68,6 +69,17 @@ export default async function Home() {
   return (
     <main>
       <ButtonTray
+        backSlot={
+          <div className="h-10 w-10 rounded-full bg-base-100">
+            <Image
+              className="m-auto rotate-12"
+              src="/vial.svg"
+              height={22}
+              width={22}
+              alt="logo"
+            />
+          </div>
+        }
         actionSlot={
           <>
             <CircleButtonLinkInset href="/events">

@@ -6,6 +6,7 @@ interface ButtonTrayProps {
   secondarySlot?: React.ReactNode;
   children: React.ReactNode;
   href?: string;
+  backSlot?: React.ReactNode;
 }
 
 /**
@@ -23,6 +24,7 @@ const ButtonTray: React.FC<ButtonTrayProps> = ({
   children,
   actionSlot,
   secondarySlot,
+  backSlot,
   href,
 }) => {
   return (
@@ -30,6 +32,7 @@ const ButtonTray: React.FC<ButtonTrayProps> = ({
       <div className="card card-compact mb-4 w-fit -translate-x-2 translate-y-3 rounded-e-full bg-base-200 shadow-xl shadow-base-100">
         <div className="card-body">
           <div className="card-title flex flex-row justify-between">
+            {backSlot}
             {href && (
               <Link href={href} className="btn-circle btn bg-base-100">
                 <ChevronLeftIcon className="h-8 w-8" />
