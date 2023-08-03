@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import prisma from "../../../../lib/prisma";
+import { getSession } from "../../getSession";
 import { Event } from "../getEventById";
 
 export async function PUT(request: Request, { params }) {

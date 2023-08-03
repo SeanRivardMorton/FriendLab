@@ -48,7 +48,6 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
 
   const { mutate: updateEvent, isLoading } = useMutation({
     mutationFn: async (d: any) => {
-      console.log(d);
       const res = await fetch(`/api/events/${event.id}`, {
         method: "PUT",
         body: JSON.stringify(d),
@@ -86,7 +85,7 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
       >
         <h2>Hangout</h2>
       </ButtonTray>
-      <form onBlur={onChange} className="card-compact card mt-8 bg-base-200">
+      <form onBlur={onChange} className="card card-compact mt-8 bg-base-200">
         <div className="card-body">
           <div className="flex flex-row">
             {iEvent?.creator?.image ? (
@@ -235,8 +234,15 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
               );
 
               if (!attendee?.eventResponse) return;
-
-              attendee.eventResponse[0].response = ResponseStatus.ACCEPTED;
+              console.log("ASDFASDFASDFa", attendee?.eventResponse);
+              if (attendee.eventResponse[0]?.response) {
+                attendee.eventResponse[0].response = ResponseStatus.ACCEPTED;
+              } else {
+                attendee.eventResponse[0] = {
+                  ...attendee.eventResponse[0],
+                  response: ResponseStatus.ACCEPTED,
+                };
+              }
             })
           }
           userId={userId}
