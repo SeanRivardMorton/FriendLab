@@ -9,6 +9,7 @@ import {
   Cross1Icon,
   Pencil1Icon,
   SewingPinIcon,
+  TrashIcon,
 } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
@@ -18,12 +19,9 @@ import { useImmer } from "use-immer";
 
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
-import { CircleButtonInset } from "../../components/Form/button";
-import {
-  AcceptInviteButton,
-  DeclineInviteButton,
-  InviteButton,
-} from "../../components/FunctionalButtons/UserEventResponseButtons";
+import DeleteButton from "../../components/DeleteButton.tsx";
+import { CircleButton, CircleButtonInset } from "../../components/Form/button";
+import { InviteButton } from "../../components/FunctionalButtons/UserEventResponseButtons";
 import { EventType } from "./page";
 interface ClientEventPageProps {
   userId: string;
@@ -72,7 +70,16 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
 
   return (
     <>
-      <ButtonTray href="/events">
+      <ButtonTray
+        href="/events"
+        actionSlot={<></>}
+        secondarySlot={
+          <DeleteButton
+            deleteUrl={`/api/events/${event.id}`}
+            returnUrl="/events"
+          />
+        }
+      >
         <h2>Hangout</h2>
       </ButtonTray>
       <form onBlur={onChange} className="card card-compact mt-8 bg-base-200">

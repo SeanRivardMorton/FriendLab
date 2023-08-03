@@ -1,8 +1,9 @@
-import { ChevronLeftIcon, PlusIcon } from "@radix-ui/react-icons";
+import { ChevronLeftIcon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 interface ButtonTrayProps {
   actionSlot?: React.ReactNode;
+  secondarySlot?: React.ReactNode;
   children: React.ReactNode;
   href?: string;
 }
@@ -21,27 +22,33 @@ interface ButtonTrayProps {
 const ButtonTray: React.FC<ButtonTrayProps> = ({
   children,
   actionSlot,
+  secondarySlot,
   href,
 }) => {
   return (
-    <div className="translate-y-3 mb-4 -translate-x-2 shadow-xl shadow-base-100 card card-compact bg-base-200 w-fit rounded-e-full">
-      <div className="card-body">
-        <div className="card-title flex flex-row justify-between">
-          {href && (
-            <Link href={href} className="btn btn-circle bg-base-100">
-              <ChevronLeftIcon className="h-8 w-8" />
-            </Link>
-          )}
-          {children}
-          {actionSlot ? (
-            actionSlot
-          ) : (
-            <button className="btn btn-circle bg-base-100 ml-6">
-              <PlusIcon className="h-8 w-8" />
-            </button>
-          )}
+    <div className="flex flex-row justify-between">
+      <div className="card card-compact mb-4 w-fit -translate-x-2 translate-y-3 rounded-e-full bg-base-200 shadow-xl shadow-base-100">
+        <div className="card-body">
+          <div className="card-title flex flex-row justify-between">
+            {href && (
+              <Link href={href} className="btn-circle btn bg-base-100">
+                <ChevronLeftIcon className="h-8 w-8" />
+              </Link>
+            )}
+            {children}
+            {actionSlot ? (
+              actionSlot
+            ) : (
+              <button className="btn-circle btn ml-6 bg-base-100">
+                <PlusIcon className="h-8 w-8" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
+      {secondarySlot && (
+        <div className="my-auto ml-auto mr-4">{secondarySlot}</div>
+      )}
     </div>
   );
 };
