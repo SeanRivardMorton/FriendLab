@@ -74,15 +74,19 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
         href="/events"
         actionSlot={<></>}
         secondarySlot={
-          <DeleteButton
-            deleteUrl={`/api/events/${event.id}`}
-            returnUrl="/events"
-          />
+          <>
+            {isCreator && (
+              <DeleteButton
+                deleteUrl={`/api/events/${event.id}`}
+                returnUrl="/events"
+              />
+            )}
+          </>
         }
       >
         <h2>Hangout</h2>
       </ButtonTray>
-      <form onBlur={onChange} className="card card-compact mt-8 bg-base-200">
+      <form onBlur={onChange} className="card-compact card mt-8 bg-base-200">
         <div className="card-body">
           <div className="flex flex-row">
             {iEvent?.creator?.image ? (
