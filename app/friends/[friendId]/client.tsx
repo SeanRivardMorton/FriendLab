@@ -4,6 +4,7 @@ import { ChatBubbleIcon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 
+import Avatar from "../../components/Avatar";
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
 import DeleteButton from "../../components/DeleteButton.tsx";
@@ -28,15 +29,7 @@ const ClientFriendPage = ({ friend, friendsOfFriend, isFriend }) => {
         href="/friends"
         actionSlot={
           <div className="rounded-full bg-base-100 p-3">
-            {friend?.image && (
-              <Image
-                src={friend?.image}
-                alt="user image"
-                className="h-10 w-10 rounded-full"
-                width={24}
-                height={24}
-              />
-            )}
+            {friend?.image && <Avatar src={friend?.image} />}
           </div>
         }
       >
@@ -65,7 +58,10 @@ const ClientFriendPage = ({ friend, friendsOfFriend, isFriend }) => {
                 <ChatBubbleIcon className="h-8 w-8" />
               )}
             </CircleButtonInset>
-            <DeleteButton deleteUrl={`/api/friends/${friend.id}`} returnUrl="/friends" />
+            <DeleteButton
+              deleteUrl={`/api/friends/${friend.id}`}
+              returnUrl="/friends"
+            />
           </>
         )}
       </BottomTray>

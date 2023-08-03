@@ -8,7 +8,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
-import { CircleButtonInset } from "../components/Form/button";
+import { CircleButton, CircleButtonInset } from "../components/Form/button";
 
 const deletePost = async (id) => {
   return fetch(`/api/posts/${id}`, {
@@ -27,13 +27,13 @@ const PostActions = ({ post }) => {
   return (
     <div>
       <div className="flex flex-row justify-end">
-        <CircleButtonInset>
+        <CircleButton>
           {deleteQuery.isLoading ? (
             <span className="loading loading-spinner loading-md text-primary"></span>
           ) : (
             <Share1Icon className="h-6 w-6 text-primary" />
           )}
-        </CircleButtonInset>
+        </CircleButton>
       </div>
     </div>
   );

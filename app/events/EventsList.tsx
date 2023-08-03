@@ -5,6 +5,8 @@ import { formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 
+import Avatar from "../components/Avatar";
+
 const sortEventsByDate = (events) => {
   return events.sort(
     (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf(),
@@ -35,13 +37,7 @@ const EventsList = (props) => {
           <Link href={`/events/${event.id}`} key={event.id} className="w-full">
             <div className=" mx-1 flex flex-row justify-between">
               <div className="flex flex-row">
-                <Image
-                  className="h-8 w-8 rounded-full ring-primary"
-                  src={event.creator?.image}
-                  alt={`event creater: ${event?.creator?.name}`}
-                  height={44}
-                  width={44}
-                />
+                <Avatar src={event.creator?.image} />
                 <div className="ml-2 flex flex-col">
                   <div className="my-auto">{event?.name}</div>
                   <p className="my-auto text-xs">{date}</p>

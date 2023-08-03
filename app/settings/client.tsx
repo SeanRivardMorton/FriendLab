@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 
 import { UserSettings } from "../api/settings/route";
+import Avatar from "../components/Avatar";
 import BottomTray from "../components/BottomTray";
 import ButtonTray from "../components/ButtonTray";
 import { CircleButtonInset } from "../components/Form/button";
@@ -43,14 +44,7 @@ const ClientSettings: React.FC<ClientSettingsProps> = ({ userSettings }) => {
           <div className="flex flex-row">
             <div className="avatar">
               <div className="my-auto mr-4 h-12 w-12 rounded-xl">
-                {settings?.image && (
-                  <Image
-                    src={settings?.image}
-                    alt="user"
-                    height={22}
-                    width={22}
-                  />
-                )}
+                {settings?.image && <Avatar src={settings?.image} />}
               </div>
             </div>
             <div className="flex flex-col">

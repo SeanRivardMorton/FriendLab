@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import Avatar from "../components/Avatar";
 import { Post } from "./createPost";
 import PostActions from "./PostActions";
 
@@ -25,20 +26,12 @@ const NewsCard = ({ post = defaultNews }) => {
             <h2>{post.subtitle}</h2>
             <PostActions post={post} />
           </div>
-          <div className="flex flex-row justify-between ml-4">
+          <div className="ml-4 flex flex-row justify-between">
             <div className="flex flex-row">
               {post?.author?.image && (
-                <div className="btn btn-circle btn-xs ring-2 ring-white -ml-4">
-                  <Image
-                    className="rounded-full"
-                    src={post.author.image}
-                    width={44}
-                    height={44}
-                    alt={post.author.name || "Author Image"}
-                  />
-                </div>
+                <Avatar className="-ml-3 h-10 w-10" src={post.author.image} />
               )}
-              <p className="text-bold mt-auto ml-2">{firstName}</p>
+              <p className="text-bold ml-2 mt-0">{firstName}</p>
             </div>
             <div>{dateFormat}</div>
           </div>

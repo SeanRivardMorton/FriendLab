@@ -17,6 +17,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useImmer } from "use-immer";
 
+import Avatar from "../../components/Avatar";
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
 import DeleteButton from "../../components/DeleteButton.tsx";
@@ -89,13 +90,7 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
         <div className="card-body">
           <div className="flex flex-row">
             {iEvent?.creator?.image ? (
-              <Image
-                alt="Profile Picture"
-                className="mr-2 h-14 w-14 rounded-full"
-                src={iEvent?.creator?.image}
-                width={56}
-                height={56}
-              />
+              <Avatar src={iEvent?.creator?.image} />
             ) : (
               <AvatarIcon className="mr-2 h-14 w-14" />
             )}
@@ -177,13 +172,7 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
             {iEvent?.attendees?.map((attendee) => (
               <div key={attendee.id} className="my-1 flex flex-row">
                 {attendee?.image ? (
-                  <Image
-                    alt="Profile Picture"
-                    className="mr-2 h-10 w-10 rounded-full"
-                    src={attendee?.image}
-                    width={56}
-                    height={56}
-                  />
+                  <Avatar src={attendee?.image} />
                 ) : (
                   <AvatarIcon className="mr-2 h-10 w-10" />
                 )}

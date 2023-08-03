@@ -2,6 +2,8 @@ import { ChevronRightIcon, PlusIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 
+import Avatar from "../Avatar";
+
 const FriendList = ({ friends }) => {
   return (
     <ul>
@@ -11,19 +13,13 @@ const FriendList = ({ friends }) => {
           <li key={friend.id}>
             <Link
               href={`/friends/${friend.id}`}
-              className="flex flex-row my-2 ml-2 justify-between"
+              className="my-2 ml-2 flex flex-row justify-between"
             >
               <div className="flex flex-row">
-                <div className="btn btn-circle bg-base-200">
-                  <Image
-                    src={friend?.image}
-                    alt={friend.name}
-                    height={44}
-                    width={44}
-                    className="rounded-full h-12 w-12"
-                  />
+                <div className="btn-circle  btn rounded-full bg-base-200">
+                  <Avatar src={friend?.image} />
                 </div>
-                <h2 className="text-2xl my-auto ml-4">{friend.name}</h2>
+                <h2 className="my-auto ml-4 text-2xl">{friend.name}</h2>
               </div>
               <div className="my-auto mr-2">
                 <ChevronRightIcon className="h-8 w-8" />
