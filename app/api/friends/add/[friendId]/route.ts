@@ -9,6 +9,7 @@ export async function POST(req, { params }) {
   const { friendId } = await params;
 
   const response = await addFriend(session.user.id, friendId);
+  const response3 = await addFriend(friendId, session.user.id);
 
   return NextResponse.json(response);
 }

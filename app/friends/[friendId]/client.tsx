@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
+import DeleteButton from "../../components/DeleteButton.tsx";
 import { CircleButtonInset } from "../../components/Form/button";
 import FriendList from "../../components/FriendList";
 
@@ -26,12 +27,12 @@ const ClientFriendPage = ({ friend, friendsOfFriend, isFriend }) => {
       <ButtonTray
         href="/friends"
         actionSlot={
-          <div className="p-3 rounded-full bg-base-100">
+          <div className="rounded-full bg-base-100 p-3">
             {friend?.image && (
               <Image
                 src={friend?.image}
                 alt="user image"
-                className="rounded-full h-10 w-10"
+                className="h-10 w-10 rounded-full"
                 width={24}
                 height={24}
               />
@@ -64,13 +65,7 @@ const ClientFriendPage = ({ friend, friendsOfFriend, isFriend }) => {
                 <ChatBubbleIcon className="h-8 w-8" />
               )}
             </CircleButtonInset>
-            {/* <CircleButtonInset>
-              {addFriendQuery.isLoading ? (
-                <span className="loading loading-spinner loading-md"></span>
-              ) : (
-                <TrashIcon className="h-8 w-8 text-error" />
-              )}
-            </CircleButtonInset> */}
+            <DeleteButton deleteUrl={`/api/friends/${friend.id}`} returnUrl="/friends" />
           </>
         )}
       </BottomTray>

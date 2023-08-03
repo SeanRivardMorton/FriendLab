@@ -5,6 +5,7 @@ import { Ubuntu } from "next/font/google";
 import { Suspense } from "react";
 
 import { getSession } from "./api/getSession";
+import FriendInviteProvider from "./components/FriendInviteProvider";
 import TopNav from "./components/Layout/TopNav";
 import Provider from "./components/Provider";
 import Loading from "./loading";
@@ -41,6 +42,9 @@ export default async function RootLayout({ children }) {
                   <div className="min-h-[93vh] w-full rounded-xl bg-base-100 shadow-xl shadow-base-100 lg:mx-auto lg:min-h-[60vh] lg:w-2/4">
                     {children}
                     <Analytics />
+                    <Suspense fallback={<div>adsf</div>}>
+                      <FriendInviteProvider />
+                    </Suspense>
                   </div>
                 </div>
               </body>
