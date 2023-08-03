@@ -7,6 +7,7 @@ import { UserSettings } from "../api/settings/route";
 import BottomTray from "../components/BottomTray";
 import ButtonTray from "../components/ButtonTray";
 import { CircleButtonInset } from "../components/Form/button";
+import { UploadButton } from "../utils/uploadthing";
 import SignOutButton from "./SignOutButton";
 import useSettings from "./useSettings";
 
@@ -15,7 +16,7 @@ interface ClientSettingsProps {
 }
 
 const ClientSettings: React.FC<ClientSettingsProps> = ({ userSettings }) => {
-  const { settings, settingsForm, submitForm, isLoading } =
+  const { settings, settingsForm, submitForm, isLoading, updateSettings } =
     useSettings(userSettings);
 
   return (
@@ -71,6 +72,19 @@ const ClientSettings: React.FC<ClientSettingsProps> = ({ userSettings }) => {
               </div>
             </div>
           </div>
+          <UploadButton
+            // style={{ border: "1px solid black", backgroundColor: "white" }}
+            endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              if (!res?.[0]?.fileUrl) return;
+              updateSettings({ image: res?.[0].fileUrl });
+            }}
+            onUploadError={(error: Error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
         </div>
       </form>
       <BottomTray>

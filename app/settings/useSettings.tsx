@@ -17,7 +17,7 @@ const useSettings = (initialData) => {
   });
   const { mutate: updateSettings, isLoading } = useMutation({
     mutationKey: ["settings"],
-    mutationFn: (newSettings) => {
+    mutationFn: (newSettings: any) => {
       return fetch("/api/settings", {
         method: "PUT",
         body: JSON.stringify(newSettings),
@@ -31,6 +31,8 @@ const useSettings = (initialData) => {
   const submitForm = form.handleSubmit((data) => {
     updateSettings(data);
   });
+
+  console.log(data);
 
   return {
     settings: data,

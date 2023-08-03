@@ -52,6 +52,12 @@ module.exports = {
         port: "",
         pathname: "/a/**",
       },
+      {
+        protocol: "https",
+        hostname: "uploadthing.**",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
@@ -94,5 +100,5 @@ module.exports = withSentryConfig(
         },
       ];
     },
-  }
+  },
 );

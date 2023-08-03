@@ -6,7 +6,10 @@ import prisma from "../lib/prisma";
 import { getSession } from "./api/getSession";
 import BottomTray from "./components/BottomTray";
 import ButtonTray from "./components/ButtonTray";
-import { CircleButtonLinkInset } from "./components/Form/button";
+import {
+  CircleButtonLink,
+  CircleButtonLinkInset,
+} from "./components/Form/button";
 import QuickEvents from "./components/QuickEvents";
 import EventsList from "./events/EventsList";
 import LandingPage from "./LandingPage/LandingPage";
@@ -80,18 +83,28 @@ export default async function Home() {
             />
           </div>
         }
-        actionSlot={
-          <>
-            <CircleButtonLinkInset href="/events">
-              <CalendarIcon className="h-8 w-8" />
-            </CircleButtonLinkInset>
-            <CircleButtonLinkInset href="/groups">
-              <PersonIcon className="h-8 w-8" />
-            </CircleButtonLinkInset>
-          </>
+        actionSlot={<div className="w-14"></div>}
+        secondarySlot={
+          <div className="flex flex-row justify-between">
+            <div className="mr-2 flex flex-col justify-center">
+              <CircleButtonLink href="/events">
+                <CalendarIcon className="h-8 w-8" />
+              </CircleButtonLink>
+              <p className="mx-auto">Events</p>
+            </div>
+            <div className="flex flex-col justify-center">
+              <CircleButtonLink href="/groups">
+                <PersonIcon className="h-8 w-8" />
+              </CircleButtonLink>
+              <p className="mx-auto">Groups</p>
+            </div>
+          </div>
         }
       >
-        <h2>Home</h2>
+        <div>
+          <h2>Home</h2>
+          <p className="text-sm italic text-primary">All good?</p>
+        </div>
       </ButtonTray>
       {/* {events.length === 0 && <></>} */}
       {unansweredEvents.length > 0 ? (
