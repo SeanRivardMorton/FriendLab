@@ -3,24 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 import { AsyncReturnType } from "../../utils/AsyncReturnType";
 import { getSession } from "../getSession";
-
-export const getUser = async (id: string) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id,
-    },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      image: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
-
-  return user;
-};
+import { getUser } from "./getUser";
 
 export type UserSettings = AsyncReturnType<typeof getUser>;
 
