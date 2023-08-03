@@ -135,7 +135,7 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
                 <textarea
                   {...form.register("description")}
                   defaultValue={iEvent?.description || ""}
-                  className="textarea-bordered textarea h-24"
+                  className="w-fill textarea-bordered textarea h-48"
                   placeholder="Description"
                 ></textarea>
               </div>

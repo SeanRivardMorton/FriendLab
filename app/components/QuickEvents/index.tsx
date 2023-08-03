@@ -1,15 +1,10 @@
 "use client";
-import {
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  Cross1Icon,
-} from "@radix-ui/react-icons";
-// import Vial from "../../assets/vial.svg";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import theme from "daisyui/src/theming/themes";
 import { formatDistance } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 import {
@@ -21,6 +16,7 @@ import {
 const { primary } = theme["[data-theme=aqua]"];
 
 const QuickEvents = ({ events, initialIndex, userId }) => {
+  const router = useRouter();
   const [event, setEvent] = React.useState(events?.[initialIndex]);
 
   const previousEvent = () => {
@@ -41,7 +37,7 @@ const QuickEvents = ({ events, initialIndex, userId }) => {
     }
   };
 
-  if (!event) return null;
+  // if (!event) ;
 
   const date = formatDistance(new Date(event?.date ?? null), new Date(), {
     addSuffix: true,
@@ -61,7 +57,7 @@ const QuickEvents = ({ events, initialIndex, userId }) => {
             </button>
 
             <DeclineInviteButton
-              onSuccess={() => {}}
+              onSuccess={() => router.refresh()}
               userId={userId}
               eventId={event.id}
             />
@@ -79,7 +75,7 @@ const QuickEvents = ({ events, initialIndex, userId }) => {
               />
             </Link>
             <AcceptInviteButton
-              onSuccess={() => {}}
+              onSuccess={() => router.refresh()}
               userId={userId}
               eventId={event.id}
             />
