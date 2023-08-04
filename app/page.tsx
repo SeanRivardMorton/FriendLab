@@ -55,7 +55,7 @@ const getEvents = async (userId) => {
 };
 
 const userWithEvents = async (userId): Promise<UserWithEvents> => {
-  const cachedUser: UserWithEvents = await kv.get(userId);
+  const cachedUser: UserWithEvents = await kv.get(`user:${userId}`);
   if (cachedUser) {
     return cachedUser;
   }

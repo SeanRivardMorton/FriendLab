@@ -9,7 +9,6 @@ import BottomTray from "../components/BottomTray";
 import ButtonTray from "../components/ButtonTray";
 import { CircleButtonInset } from "../components/Form/button";
 import { MultiUploader } from "../components/UploadButton";
-import { UploadButton } from "../utils/uploadthing";
 import SignOutButton from "./SignOutButton";
 import useSettings from "./useSettings";
 

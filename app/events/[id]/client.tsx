@@ -23,6 +23,7 @@ import DeleteButton from "../../components/DeleteButton.tsx";
 import { CircleButtonInset } from "../../components/Form/button";
 import { InviteButton } from "../../components/FunctionalButtons/UserEventResponseButtons";
 import { EventType } from "./page";
+
 interface ClientEventPageProps {
   userId: string;
   event: EventType;
@@ -37,18 +38,19 @@ export const responseIconMap = {
 
 const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
   const [iEvent, setIEvent] = useImmer(event);
+  const date = new Date(iEvent?.date || new Date());
   const form = useForm({
     defaultValues: {
       name: iEvent?.name || "",
       description: iEvent?.description || "",
-      date: iEvent?.date?.toJSON().split("T")[0] || "",
+      date: date.toJSON().split("T")[0],
       location: iEvent?.location || "",
     },
   });
 
   const { mutate: updateEvent, isLoading } = useMutation({
     mutationFn: async (d: any) => {
-      const res = await fetch(`/api/events/${event.id}`, {
+      const res = await fetch(`/api/events/${event?.id}`, {
         method: "PUT",
         body: JSON.stringify(d),
       });
@@ -112,13 +114,13 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
                   isCreator ? (
                     <input
                       {...form.register("date")}
-                      defaultValue={iEvent.date.toJSON().split("T")[0]}
+                      defaultValue={date.toJSON().split("T")[0]}
                       type="date"
                       placeholder="Type here"
                       className="input w-full max-w-xs"
                     />
                   ) : (
-                    iEvent.date.toDateString()
+                    date.toDateString()
                   )
                 ) : (
                   ""
