@@ -29,6 +29,7 @@ const useSettings = (initialData) => {
   });
 
   const submitForm = form.handleSubmit((data) => {
+    if (data.image === initialData.image) delete data.image;
     updateSettings(data);
   });
 
