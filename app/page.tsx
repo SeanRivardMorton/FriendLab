@@ -1,4 +1,5 @@
 import { CalendarIcon, PersonIcon } from "@radix-ui/react-icons";
+import { kv } from "@vercel/kv";
 import Image from "next/image";
 import React from "react";
 
@@ -11,7 +12,6 @@ import { CircleButtonLink } from "./components/Form/button";
 import QuickEvents from "./components/QuickEvents";
 import EventsList from "./events/EventsList";
 import LandingPage from "./LandingPage/LandingPage";
-import { kv } from "@vercel/kv";
 
 const userWithEvents = async (userId) => {
   const cachedUser = await kv.get(userId);
