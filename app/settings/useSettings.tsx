@@ -32,8 +32,6 @@ const useSettings = (initialData) => {
     updateSettings(data);
   });
 
-  console.log(data);
-
   return {
     settings: data,
     updateSettings,

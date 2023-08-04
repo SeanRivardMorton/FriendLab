@@ -85,7 +85,10 @@ export default async function Home() {
           </div>
         }
         actionSlot={
-          <Avatar className="border- ml-8 border-base-300" src={user?.image} />
+          <Avatar
+            className="ml-8 border-2 border-base-300"
+            src={user?.image ?? undefined}
+          />
         }
         secondarySlot={
           <div className="flex flex-row justify-between">

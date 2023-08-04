@@ -38,6 +38,5 @@ export async function GET(request: NextRequest, { params }) {
       },
     },
   });
-  console.log(res);
   return NextResponse.json(res);
 }

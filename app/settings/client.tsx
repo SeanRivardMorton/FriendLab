@@ -8,6 +8,7 @@ import Avatar from "../components/Avatar";
 import BottomTray from "../components/BottomTray";
 import ButtonTray from "../components/ButtonTray";
 import { CircleButtonInset } from "../components/Form/button";
+import { MultiUploader } from "../components/UploadButton";
 import { UploadButton } from "../utils/uploadthing";
 import SignOutButton from "./SignOutButton";
 import useSettings from "./useSettings";
@@ -42,11 +43,22 @@ const ClientSettings: React.FC<ClientSettingsProps> = ({ userSettings }) => {
       <form onBlur={submitForm} className="card card-compact">
         <div className="card-body">
           <div className="flex flex-row">
-            <div className="avatar">
-              <div className="my-auto mr-4 h-12 w-12 rounded-xl">
-                {settings?.image && <Avatar src={settings?.image} />}
+            {settings?.image && (
+              <div className="btn-circle btn my-auto mr-4 h-16 w-16 rounded-full">
+                <MultiUploader
+                  endpoint="imageUploader"
+                  onSuccess={(res) => {
+                    if (!res?.[0]?.fileUrl) return;
+                    updateSettings({ image: res?.[0].fileUrl });
+                  }}
+                  onError={(error: Error) => {
+                    console.error(error);
+                  }}
+                >
+                  <Avatar src={settings?.image} />
+                </MultiUploader>
               </div>
-            </div>
+            )}
             <div className="flex flex-col">
               <div className="form-control">
                 <label className="label">
@@ -66,7 +78,8 @@ const ClientSettings: React.FC<ClientSettingsProps> = ({ userSettings }) => {
               </div>
             </div>
           </div>
-          <UploadButton
+
+          {/* <UploadButton
             // style={{ border: "1px solid black", backgroundColor: "white" }}
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
@@ -78,7 +91,7 @@ const ClientSettings: React.FC<ClientSettingsProps> = ({ userSettings }) => {
               // Do something with the error.
               alert(`ERROR! ${error.message}`);
             }}
-          />
+          /> */}
         </div>
       </form>
       <BottomTray>

@@ -1,7 +1,6 @@
 import prisma from "../../../../../lib/prisma";
 
 const addFriend = async (currentUserId: string, friendId: string) => {
-  console.log(currentUserId, friendId);
   const data = prisma.friendship.create({
     data: {
       userId: currentUserId,
