@@ -12,12 +12,11 @@ import { CircleButtonLink } from "./components/Form/button";
 import QuickEvents from "./components/QuickEvents";
 import EventsList from "./events/EventsList";
 import LandingPage from "./LandingPage/LandingPage";
+import { AsyncReturnType } from "./utils/AsyncReturnType";
 
-const userWithEvents = async (userId) => {
-  const cachedUser = await kv.get(userId);
-  if (cachedUser) {
-    return cachedUser;
-  }
+type UserWithEvents = AsyncReturnType<typeof getEvents>;
+
+const getEvents = async (userId) => {
   const res = await prisma.user.findUnique({
     where: {
       id: userId,
@@ -51,6 +50,17 @@ const userWithEvents = async (userId) => {
       },
     },
   });
+
+  return res;
+};
+
+const userWithEvents = async (userId): Promise<UserWithEvents> => {
+  const cachedUser: UserWithEvents = await kv.get(userId);
+  if (cachedUser) {
+    return cachedUser;
+  }
+
+  const res = await getEvents(userId);
 
   // cache the users events
   await kv.set(`user:${userId}`, JSON.stringify(res), {
