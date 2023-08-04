@@ -1,4 +1,4 @@
-import { CalendarIcon, PersonIcon, PlusIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, PersonIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import React from "react";
 
@@ -7,16 +7,18 @@ import { getSession } from "./api/getSession";
 import Avatar from "./components/Avatar";
 import BottomTray from "./components/BottomTray";
 import ButtonTray from "./components/ButtonTray";
-import {
-  CircleButtonLink,
-  CircleButtonLinkInset,
-} from "./components/Form/button";
+import { CircleButtonLink } from "./components/Form/button";
 import QuickEvents from "./components/QuickEvents";
 import EventsList from "./events/EventsList";
 import LandingPage from "./LandingPage/LandingPage";
+import { kv } from "@vercel/kv";
 
 const userWithEvents = async (userId) => {
-  return await prisma.user.findUnique({
+  const cachedUser = await kv.get(userId);
+  if (cachedUser) {
+    return cachedUser;
+  }
+  const res = await prisma.user.findUnique({
     where: {
       id: userId,
     },
@@ -49,6 +51,14 @@ const userWithEvents = async (userId) => {
       },
     },
   });
+
+  // cache the users events
+  await kv.set(`user:${userId}`, JSON.stringify(res), {
+    ex: 100,
+    nx: true,
+  });
+
+  return res;
 };
 
 export default async function Home() {
