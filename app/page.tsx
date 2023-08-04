@@ -4,6 +4,7 @@ import React from "react";
 
 import prisma from "../lib/prisma";
 import { getSession } from "./api/getSession";
+import Avatar from "./components/Avatar";
 import BottomTray from "./components/BottomTray";
 import ButtonTray from "./components/ButtonTray";
 import {
@@ -52,7 +53,7 @@ const userWithEvents = async (userId) => {
 
 export default async function Home() {
   const session = await getSession();
-  if (!session) return <LandingPage />;
+  if (!session?.user) return <LandingPage />;
 
   const user = await userWithEvents(session?.user?.id);
 
@@ -83,7 +84,9 @@ export default async function Home() {
             />
           </div>
         }
-        actionSlot={<div className="w-14"></div>}
+        actionSlot={
+          <Avatar className="border- ml-8 border-base-300" src={user?.image} />
+        }
         secondarySlot={
           <div className="flex flex-row justify-between">
             <div className="mr-2 flex flex-col justify-center">
