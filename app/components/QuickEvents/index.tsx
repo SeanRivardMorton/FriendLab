@@ -1,5 +1,6 @@
 "use client";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { kv } from "@vercel/kv";
 import theme from "daisyui/src/theming/themes";
 import { formatDistance } from "date-fns";
 import Image from "next/image";
@@ -18,6 +19,11 @@ const { primary } = theme["[data-theme=aqua]"];
 const QuickEvents = ({ events, initialIndex, userId }) => {
   const router = useRouter();
   const [event, setEvent] = React.useState(events?.[initialIndex]);
+
+  const onSuccess = async () => {
+    await kv.del(`user:${userId}`);
+    router.refresh();
+  };
 
   const previousEvent = () => {
     const index = events.indexOf(event);
@@ -57,7 +63,7 @@ const QuickEvents = ({ events, initialIndex, userId }) => {
             </button>
 
             <DeclineInviteButton
-              onSuccess={() => router.refresh()}
+              onSuccess={onSuccess}
               userId={userId}
               eventId={event.id}
             />
@@ -75,7 +81,7 @@ const QuickEvents = ({ events, initialIndex, userId }) => {
               />
             </Link>
             <AcceptInviteButton
-              onSuccess={() => router.refresh()}
+              onSuccess={onSuccess}
               userId={userId}
               eventId={event.id}
             />

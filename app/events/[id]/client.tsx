@@ -207,8 +207,14 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
 
               if (!attendee?.eventResponse) return;
 
-              attendee.eventResponse[0].response = ResponseStatus.DECLINED;
-            })
+              if (attendee.eventResponse[0]?.response) {
+                attendee.eventResponse[0].response = ResponseStatus.DECLINED;
+              } else {
+                attendee.eventResponse[0] = {
+                  ...attendee.eventResponse[0],
+                  response: ResponseStatus.DECLINED,
+                };
+              }            })
           }
           userId={userId}
           eventId={event.id}

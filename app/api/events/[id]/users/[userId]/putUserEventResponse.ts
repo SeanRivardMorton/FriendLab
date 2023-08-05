@@ -1,3 +1,5 @@
+import { kv } from "@vercel/kv";
+
 import prisma from "../../../../../../lib/prisma";
 
 const putUserEventResponse = async (userId, eventId, response) => {

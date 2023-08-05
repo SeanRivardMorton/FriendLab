@@ -32,12 +32,7 @@ const fetchEvent = async (id) => {
 };
 
 const getEvent = async (id): Promise<EventType> => {
-  const cachedEvent: EventType = await kv.get(`event:${id}`);
-  if (cachedEvent) {
-    return cachedEvent;
-  }
-
-  const event = await fetchEvent(id);
+  const event: EventType = await fetchEvent(id);
 
   if (!event) return null;
 
@@ -49,11 +44,6 @@ const getEvent = async (id): Promise<EventType> => {
       ...attendee,
       eventResponse: eventResponse,
     };
-  });
-
-  await kv.set(`event:${id}`, {
-    ...event,
-    attendees: filterAttendeesEventResponse,
   });
 
   return { ...event, attendees: filterAttendeesEventResponse };
