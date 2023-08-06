@@ -39,6 +39,7 @@ const primary = daisyuiColors["[data-theme=dracula]"].primary;
 const secondary = daisyuiColors["[data-theme=dracula]"].secondary;
 
 const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
+  const [hasDecision, setHasDecision] = React.useState(false);
   return (
     <main>
       <ButtonTray
@@ -56,19 +57,23 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
         </div>
       </ButtonTray>
       <section className="prose">
-        <h4>What Date Works for you?</h4>
-        <BasicPoll
-          name="Thursday"
-          value={90}
-          color={primary}
-          IconProp={({ ...props }) => <CheckIcon {...props} />}
-        />
-        <BasicPoll
-          name="Friday"
-          value={31}
-          color={secondary}
-          IconProp={({ ...props }) => <Cross1Icon {...props} />}
-        />
+        {hasDecision && (
+          <div>
+            <h4>What Date Works for you?</h4>
+            <BasicPoll
+              name="Thursday"
+              value={90}
+              color={primary}
+              IconProp={({ ...props }) => <CheckIcon {...props} />}
+            />
+            <BasicPoll
+              name="Friday"
+              value={31}
+              color={secondary}
+              IconProp={({ ...props }) => <Cross1Icon {...props} />}
+            />
+          </div>
+        )}
 
         <div className="mx-2">
           <h3>{event?.name}</h3>

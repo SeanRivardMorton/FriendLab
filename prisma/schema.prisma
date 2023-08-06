@@ -22,6 +22,35 @@ model Event {
   group         Group?          @relation(fields: [groupId], references: [id])
   groupId       String?
   eventResponse EventResponse[]
+  Poll          Poll[] // NEW: One event can have many polls
+}
+
+model Poll {
+  id       String       @id @default(cuid())
+  question String
+  eventId  String
+  event    Event        @relation(fields: [eventId], references: [id])
+  options  PollOption[] // One poll can have many options
+}
+
+model PollOption {
+  id        String         @id @default(cuid())
+  text      String
+  pollId    String
+  poll      Poll           @relation(fields: [pollId], references: [id])
+  responses PollResponse[] // One option can be chosen by many users
+}
+
+model PollResponse {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  pollOptionId String
+  pollOption   PollOption @relation(fields: [pollOptionId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([userId, pollOptionId])
 }
 
 model Post {
@@ -55,6 +84,7 @@ model User {
   eventsCreated   Event[]         @relation("EventCreator")
   eventsAttending Event[]         @relation("EventAttendees")
   eventResponse   EventResponse[]
+  PollResponse    PollResponse[]
 }
 
 model Group {
