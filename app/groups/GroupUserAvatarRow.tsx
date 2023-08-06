@@ -5,18 +5,16 @@ import { CircleButtonLink } from "../components/Form/button";
 
 const GroupUserAvatarsRow = ({ group }) => {
   return (
-    <div className="flex flex-row mx-2">
+    <div className="mx-2 flex flex-row">
       {group?.members?.map((member) => (
-        <div key={member.id} className="avatar">
-          <div className="rounded-full ring-1 ring-white -ml-4">
-            <Image
-              src={member.image}
-              width={22}
-              height={22}
-              alt={member.name}
-            />
-            {/* Will this be replaced with CircleButtonLinkInset from form/button.tsx so when they become clickable keyboard works too?*/}
-          </div>
+        <div key={member.id}>
+          <Image
+            className="mx-1 my-0 h-12 w-12 rounded-full border-2 border-base-200"
+            src={member.image}
+            width={22}
+            height={22}
+            alt={member.name}
+          />
         </div>
       ))}
     </div>
@@ -25,7 +23,7 @@ const GroupUserAvatarsRow = ({ group }) => {
 
 export const EventUserAvatarsRow = ({ attendees }) => {
   return (
-    <div className="flex flex-row mx-2">
+    <div className="mx-2 flex flex-row">
       {attendees?.map((member) => (
         <CircleButtonLink key={member.id} href={`/friends/${member.id}`}>
           <Image

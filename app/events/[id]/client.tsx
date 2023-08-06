@@ -2,30 +2,29 @@
 
 import { ResponseStatus } from "@prisma/client";
 import {
-  AvatarIcon,
   ChatBubbleIcon,
   CheckIcon,
   CircleIcon,
   Cross1Icon,
-  Pencil1Icon,
-  SewingPinIcon,
-  TrashIcon,
+  PlusIcon,
 } from "@radix-ui/react-icons";
-import { useMutation } from "@tanstack/react-query";
+import daisyuiColors from "daisyui/src/theming/themes";
 import React from "react";
-import { useForm } from "react-hook-form";
-import { useImmer } from "use-immer";
+import colors from "tailwindcss/colors";
 
 import Avatar from "../../components/Avatar";
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
 import DeleteButton from "../../components/DeleteButton.tsx";
-import { CircleButtonInset } from "../../components/Form/button";
-import { InviteButton } from "../../components/FunctionalButtons/UserEventResponseButtons";
+import {
+  CircleButtonInset,
+  CircleButtonLinkInset,
+} from "../../components/Form/button";
+import GroupUserAvatarsRow from "../../groups/GroupUserAvatarRow";
+import BasicPoll from "./BasicPoll";
 import { EventType } from "./page";
 
 interface ClientEventPageProps {
-  userId: string;
   event: EventType;
 }
 
@@ -36,215 +35,61 @@ export const responseIconMap = {
   [ResponseStatus.PENDING]: <CircleIcon className="h-8 w-8" />,
 };
 
-const ClientEventPage: React.FC<ClientEventPageProps> = ({ userId, event }) => {
-  const [iEvent, setIEvent] = useImmer(event);
-  const date = new Date(iEvent?.date || new Date());
-  const form = useForm({
-    defaultValues: {
-      name: iEvent?.name || "",
-      description: iEvent?.description || "",
-      date: date.toJSON().split("T")[0],
-      location: iEvent?.location || "",
-    },
-  });
+const primary = daisyuiColors["[data-theme=dracula]"].primary;
+const secondary = daisyuiColors["[data-theme=dracula]"].secondary;
 
-  const { mutate: updateEvent, isLoading } = useMutation({
-    mutationFn: async (d: any) => {
-      const res = await fetch(`/api/events/${event?.id}`, {
-        method: "PUT",
-        body: JSON.stringify(d),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || "Something went wrong!");
-      }
-      return data;
-    },
-  });
-
-  if (!event?.id) return <div>Event not found</div>;
-  const isCreator = iEvent?.creator?.id === userId;
-
-  const onChange = form.handleSubmit((e) => {
-    updateEvent({ ...e, date: new Date(e.date) });
-  });
-
+const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
   return (
-    <>
+    <main>
       <ButtonTray
         href="/events"
-        actionSlot={<div className="w-16"></div>}
-        secondarySlot={
-          <>
-            {isCreator && (
-              <DeleteButton
-                deleteUrl={`/api/events/${event.id}`}
-                returnUrl="/events"
-              />
-            )}
-          </>
+        actionSlot={
+          <div className="ml-8">
+            {event?.creator?.image && <Avatar src={event?.creator.image} />}
+          </div>
         }
+        secondarySlot={<div className="prose flex flex-col justify-end"></div>}
       >
-        <h2>Hangout</h2>
+        <div className="prose flex flex-col justify-center">
+          <h2 className="mb-0">Event</h2>
+          <p className="">{event?.date.toDateString()}</p>
+        </div>
       </ButtonTray>
-      <form onBlur={onChange} className="card card-compact">
-        <div className="card-body">
-          <div className="flex flex-row">
-            {iEvent?.creator?.image ? (
-              <Avatar src={iEvent?.creator?.image} />
-            ) : (
-              <AvatarIcon className=" h-14 w-14" />
-            )}
-            <div className="ml-4 flex flex-col">
-              <div className="card-title">
-                {isCreator ? (
-                  <input
-                    {...form.register("name")}
-                    defaultValue={iEvent?.name || ""}
-                    type="text"
-                    placeholder="Type here"
-                    className="input w-full max-w-xs"
-                  />
-                ) : (
-                  iEvent?.name
-                )}
-              </div>
-              <span>
-                {iEvent?.date ? (
-                  isCreator ? (
-                    <input
-                      {...form.register("date")}
-                      defaultValue={date.toJSON().split("T")[0]}
-                      type="date"
-                      placeholder="Type here"
-                      className="input w-full max-w-xs"
-                    />
-                  ) : (
-                    date.toDateString()
-                  )
-                ) : (
-                  ""
-                )}
-              </span>
-            </div>
-            {isLoading && (
-              <span className="loading loading-spinner loading-md ml-auto"></span>
-            )}
-          </div>
-          {/* <div className="divider my-1">What&apos;s going on</div> */}
-          <div className="prose ml-16">
-            {isCreator ? (
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Description</span>
-                </label>
-                <textarea
-                  {...form.register("description")}
-                  defaultValue={iEvent?.description || ""}
-                  className="w-fill textarea-bordered textarea h-48"
-                  placeholder="Description"
-                ></textarea>
-              </div>
-            ) : (
-              <p>{iEvent?.description}</p>
-            )}
-            <div className="flex flex-row">
-              <SewingPinIcon className="my-auto h-6 w-6" />
-              <h3 className="my-auto">
-                {isCreator ? (
-                  <input
-                    {...form.register("location")}
-                    defaultValue={iEvent.location || ""}
-                    type="text"
-                    placeholder="Type here"
-                    className="input w-full max-w-xs"
-                  />
-                ) : (
-                  iEvent?.location
-                )}
-              </h3>
-            </div>
-          </div>
-          <div className="divider">
-            <div className="divider-text">Who&apos;s going</div>
-          </div>
-          <div className="flex flex-col">
-            {iEvent?.attendees?.map((attendee) => (
-              <div key={attendee.id} className="my-1 flex flex-row">
-                {attendee?.image ? (
-                  <Avatar src={attendee?.image} />
-                ) : (
-                  <AvatarIcon className="mr-2 h-10 w-10" />
-                )}
-                <div className="my-auto ml-3 flex flex-col">
-                  <div className="card-title">{attendee.name}</div>
-                </div>
-                <div className="my-auto ml-auto">
-                  {responseIconMap[attendee.eventResponse[0]?.response]}
-                </div>
-              </div>
-            ))}
+      <section className="prose">
+        <h4>What Date Works for you?</h4>
+        <BasicPoll
+          name="Thursday"
+          value={90}
+          color={primary}
+          IconProp={({ ...props }) => <CheckIcon {...props} />}
+        />
+        <BasicPoll
+          name="Friday"
+          value={31}
+          color={secondary}
+          IconProp={({ ...props }) => <Cross1Icon {...props} />}
+        />
+
+        <div className="mx-2">
+          <h3>{event?.name}</h3>
+          <p>{event?.description}</p>
+          <div className="flex flex-row justify-end">
+            <GroupUserAvatarsRow group={event?.group} />
+            <p className="my-auto">{event?.location}</p>
           </div>
         </div>
-      </form>
+        <div className="divider"></div>
+      </section>
       <BottomTray>
-        <div className="my-auto">Make Suggestion</div>
-        <CircleButtonInset>
-          <ChatBubbleIcon className="h-8 w-8 text-warning" />
-        </CircleButtonInset>
-      </BottomTray>
-      <BottomTray>
-        <div className="my-auto">Still Going?</div>
-
-        <InviteButton
-          response={ResponseStatus.DECLINED}
-          onSuccess={(e) =>
-            setIEvent((draft) => {
-              if (!draft?.attendees) return;
-              const attendee = draft?.attendees.find(
-                (attendee) => attendee.id === e.userId,
-              );
-
-              if (!attendee?.eventResponse) return;
-
-              if (attendee.eventResponse[0]?.response) {
-                attendee.eventResponse[0].response = ResponseStatus.DECLINED;
-              } else {
-                attendee.eventResponse[0] = {
-                  ...attendee.eventResponse[0],
-                  response: ResponseStatus.DECLINED,
-                };
-              }            })
-          }
-          userId={userId}
-          eventId={event.id}
+        <DeleteButton
+          deleteUrl={`/api/events/${event?.id}`}
+          returnUrl="/events"
         />
-        <InviteButton
-          response={ResponseStatus.ACCEPTED}
-          onSuccess={(e) =>
-            setIEvent((draft) => {
-              if (!draft?.attendees) return;
-              const attendee = draft?.attendees.find(
-                (attendee) => attendee.id === e.userId,
-              );
-
-              if (!attendee?.eventResponse) return;
-
-              if (attendee.eventResponse[0]?.response) {
-                attendee.eventResponse[0].response = ResponseStatus.ACCEPTED;
-              } else {
-                attendee.eventResponse[0] = {
-                  ...attendee.eventResponse[0],
-                  response: ResponseStatus.ACCEPTED,
-                };
-              }
-            })
-          }
-          userId={userId}
-          eventId={event.id}
-        />
+        {/* <CircleButtonLinkInset href={`/events/${event?.id}/edit`}>
+          <Cross1Icon className="h-8 w-8 text-error" />
+        </CircleButtonLinkInset> */}
       </BottomTray>
-    </>
+    </main>
   );
 };
 

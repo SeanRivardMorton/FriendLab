@@ -110,22 +110,6 @@ export default async function Home() {
             src={user?.image ?? undefined}
           />
         }
-        secondarySlot={
-          <div className="flex flex-row justify-between">
-            <div className="mr-2 flex flex-col justify-center">
-              <CircleButtonLink href="/events">
-                <CalendarIcon className="h-8 w-8" />
-              </CircleButtonLink>
-              <p className="mx-auto">Events</p>
-            </div>
-            <div className="flex flex-col justify-center">
-              <CircleButtonLink href="/groups">
-                <PersonIcon className="h-8 w-8" />
-              </CircleButtonLink>
-              <p className="mx-auto">Groups</p>
-            </div>
-          </div>
-        }
       >
         <div>
           <h2>Home</h2>
@@ -142,10 +126,18 @@ export default async function Home() {
         <EventsList events={events} />
       )}
       <BottomTray>
-        {/* <p className="my-auto text-lg">New Event</p>
-        <CircleButtonLinkInset href="/events/create">
-          <PlusIcon className="h-8 w-8" />
-        </CircleButtonLinkInset> */}
+        <div className="flex flex-row justify-between">
+          <div className="mr-2 flex flex-col justify-center">
+            <CircleButtonLink href="/events">
+              <CalendarIcon className="h-8 w-8" />
+            </CircleButtonLink>
+          </div>
+          <div className="flex flex-col justify-center">
+            <CircleButtonLink href="/groups">
+              <PersonIcon className="h-8 w-8" />
+            </CircleButtonLink>
+          </div>
+        </div>
       </BottomTray>
     </main>
   );

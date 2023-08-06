@@ -1,4 +1,3 @@
-import { kv } from "@vercel/kv";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -8,6 +7,8 @@ import { LOGIN_ROUTE } from "../../constants";
 import { AsyncReturnType } from "../../utils/AsyncReturnType";
 import ClientEventPage from "./client";
 
+export type EventType = AsyncReturnType<typeof fetchEvent>;
+
 const fetchEvent = async (id) => {
   const event = await prisma.event.findUnique({
     where: {
@@ -16,11 +17,19 @@ const fetchEvent = async (id) => {
     include: {
       attendees: {
         include: {
-          eventResponse: true,
+          eventResponse: {
+            where: {
+              eventId: id,
+            },
+          },
         },
       },
       creator: true,
-      group: true,
+      group: {
+        include: {
+          members: true,
+        },
+      },
       eventResponse: {
         include: {
           user: true,
@@ -35,21 +44,8 @@ const getEvent = async (id): Promise<EventType> => {
   const event: EventType = await fetchEvent(id);
 
   if (!event) return null;
-
-  const filterAttendeesEventResponse = event.attendees.map((attendee) => {
-    const eventResponse = attendee.eventResponse.filter(
-      (response) => response.eventId === event?.id,
-    );
-    return {
-      ...attendee,
-      eventResponse: eventResponse,
-    };
-  });
-
-  return { ...event, attendees: filterAttendeesEventResponse };
+  return event;
 };
-
-export type EventType = AsyncReturnType<typeof fetchEvent>;
 
 const Home = async ({ params }) => {
   const session = await getSession();
@@ -59,10 +55,12 @@ const Home = async ({ params }) => {
   }
 
   const event = await getEvent(params.id);
+
   if (!event) return <>Could not find</>;
+
   return (
     <main>
-      <ClientEventPage userId={session.user.id} event={event} />
+      <ClientEventPage event={event} />
     </main>
   );
 };
