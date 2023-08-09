@@ -6,6 +6,7 @@ import {
   CheckIcon,
   CircleIcon,
   Cross1Icon,
+  Pencil1Icon,
   PlusIcon,
 } from "@radix-ui/react-icons";
 import daisyuiColors from "daisyui/src/theming/themes";
@@ -17,7 +18,9 @@ import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
 import DeleteButton from "../../components/DeleteButton.tsx";
 import {
+  CircleButton,
   CircleButtonInset,
+  CircleButtonLink,
   CircleButtonLinkInset,
 } from "../../components/Form/button";
 import GroupUserAvatarsRow from "../../groups/GroupUserAvatarRow";
@@ -49,7 +52,13 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
             {event?.creator?.image && <Avatar src={event?.creator.image} />}
           </div>
         }
-        secondarySlot={<div className="prose flex flex-col justify-end"></div>}
+        secondarySlot={
+          <div className="prose flex flex-col justify-end">
+            <CircleButtonLink href={`/events/${event?.id}/edit`}>
+              <Pencil1Icon className="h-8 w-8 text-secondary" />
+            </CircleButtonLink>
+          </div>
+        }
       >
         <div className="prose flex flex-col justify-center">
           <h2 className="mb-0">Event</h2>

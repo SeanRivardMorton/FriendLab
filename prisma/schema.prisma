@@ -18,11 +18,11 @@ model Event {
   creator       User            @relation("EventCreator", fields: [creatorId], references: [id])
   creatorId     String
   attendees     User[]          @relation("EventAttendees")
-  Post          Post[]
+  post          Post[]
   group         Group?          @relation(fields: [groupId], references: [id])
   groupId       String?
   eventResponse EventResponse[]
-  Poll          Poll[] // NEW: One event can have many polls
+  poll          Poll[] // NEW: One event can have many polls
 }
 
 model Poll {
@@ -84,7 +84,7 @@ model User {
   eventsCreated   Event[]         @relation("EventCreator")
   eventsAttending Event[]         @relation("EventAttendees")
   eventResponse   EventResponse[]
-  PollResponse    PollResponse[]
+  pollResponse    PollResponse[]
 }
 
 model Group {
