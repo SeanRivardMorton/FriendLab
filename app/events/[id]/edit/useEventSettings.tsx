@@ -40,7 +40,9 @@ const getEvent = async (id): Promise<EventType> => {
 export type EventFormType = {
   name: string;
   description: string | null;
+  location: string | null;
   poll: {
+    id?: string;
     question?: string;
     options?: {
       text?: string;
