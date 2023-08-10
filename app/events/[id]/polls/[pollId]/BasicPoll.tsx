@@ -1,5 +1,6 @@
 "use client";
 
+import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
@@ -14,12 +15,19 @@ const putPollVote = async (eventId, pollId, optionId) => {
   return data;
 };
 
-const BasicPoll = ({ name, value, color, IconProp, pollId, optionId }) => {
+const BasicPoll = ({ option, color = "red", totalOptions }) => {
   const { id } = useParams();
+  console.log(id, option);
   const { mutate: updatePollVote } = useMutation({
-    mutationFn: () => putPollVote(id, pollId, optionId),
+    mutationFn: () => putPollVote(id, option.pollId, option.id),
     onSuccess: (e) => console.log(e),
   });
+
+  const value =
+    option._count.pollVote === 0
+      ? 0
+      : (option._count.pollVote / totalOptions) * 100;
+
   return (
     <div
       style={{ width: `${value}%` }}
@@ -27,7 +35,7 @@ const BasicPoll = ({ name, value, color, IconProp, pollId, optionId }) => {
     >
       <div className="flex w-full flex-col">
         <h3 style={{ color: `${color}` }} className="my-0">
-          {name}
+          {option.text}
         </h3>
         <div
           style={{ borderColor: `${color}` }}
@@ -37,10 +45,10 @@ const BasicPoll = ({ name, value, color, IconProp, pollId, optionId }) => {
 
       <div className="my-auto flex flex-row">
         <div style={{ color: `${color}` }} className="mx-2 my-auto">
-          {value}%
+          {Math.floor(value)}%
         </div>
         <CircleButtonInset onClick={updatePollVote}>
-          <IconProp
+          <CheckCircledIcon
             style={{ color: `${color}` }}
             className="my-auto h-8 w-8 text-success"
           />

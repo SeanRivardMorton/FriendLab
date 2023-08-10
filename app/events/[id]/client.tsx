@@ -36,7 +36,14 @@ const secondary = daisyuiColors["[data-theme=night]"].secondary;
 
 const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
   const firstPoll = event?.poll[0];
-  console.log(firstPoll);
+
+  const getTotalNumberOfVotes = () => {
+    return firstPoll?.options.reduce((acc, option) => {
+      console.log(option);
+      return (acc += option._count.pollVote);
+    }, 0);
+  };
+
   return (
     <main>
       <ButtonTray
@@ -65,14 +72,10 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
           {firstPoll?.options.map((option) => {
             return (
               <BasicPoll
-                // option={option}
-                pollId={firstPoll?.id}
-                optionId={option.id}
-                key={option.id}
-                name={option.text}
-                value={90}
                 color={primary}
-                IconProp={({ ...props }) => <CheckIcon {...props} />}
+                key={option.id}
+                option={option}
+                totalOptions={getTotalNumberOfVotes()}
               />
             );
           })}
