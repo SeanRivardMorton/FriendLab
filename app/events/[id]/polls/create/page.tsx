@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import BottomTray from "../../../../components/BottomTray";
 import ButtonTray from "../../../../components/ButtonTray";
 import { CircleButtonInset } from "../../../../components/Form/button";
-import useNewPoll from "../usePoll";
+import { useNewPoll } from "../usePoll";
 
 const PollPage = () => {
   const params = useParams();

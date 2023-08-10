@@ -23,7 +23,6 @@ export async function DELETE(request: NextRequest, { params }) {
 
 export async function GET(res: NextRequest, { params }) {
   const { pollId } = params;
-
   const event = await prisma.poll.findUnique({
     where: {
       id: pollId,
@@ -34,4 +33,33 @@ export async function GET(res: NextRequest, { params }) {
   });
 
   return NextResponse.json(event);
+}
+
+export async function PUT(response: NextRequest, { params }) {
+  const { pollId } = params;
+  const body = await response.json();
+
+  const res = await prisma.poll.update({
+    where: {
+      id: pollId,
+    },
+    data: {
+      question: body.question,
+      options: {
+        upsert: body.options.map((option) => ({
+          where: {
+            id: option.id,
+          },
+          update: {
+            text: option.text,
+          },
+          create: {
+            text: option.text,
+          },
+        })),
+      },
+    },
+  });
+
+  return NextResponse.json({ res });
 }

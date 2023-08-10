@@ -7,25 +7,18 @@ import {
   CircleIcon,
   Cross1Icon,
   Pencil1Icon,
-  PlusIcon,
 } from "@radix-ui/react-icons";
 import daisyuiColors from "daisyui/src/theming/themes";
 import React from "react";
-import colors from "tailwindcss/colors";
 
 import Avatar from "../../components/Avatar";
 import BottomTray from "../../components/BottomTray";
 import ButtonTray from "../../components/ButtonTray";
 import DeleteButton from "../../components/DeleteButton.tsx";
-import {
-  CircleButton,
-  CircleButtonInset,
-  CircleButtonLink,
-  CircleButtonLinkInset,
-} from "../../components/Form/button";
+import { CircleButtonLink } from "../../components/Form/button";
 import GroupUserAvatarsRow from "../../groups/GroupUserAvatarRow";
-import BasicPoll from "./BasicPoll";
 import { EventType } from "./page";
+import BasicPoll from "./polls/[pollId]/BasicPoll";
 
 interface ClientEventPageProps {
   event: EventType;
@@ -38,11 +31,12 @@ export const responseIconMap = {
   [ResponseStatus.PENDING]: <CircleIcon className="h-8 w-8" />,
 };
 
-const primary = daisyuiColors["[data-theme=dracula]"].primary;
-const secondary = daisyuiColors["[data-theme=dracula]"].secondary;
+const primary = daisyuiColors["[data-theme=night]"].primary;
+const secondary = daisyuiColors["[data-theme=night]"].secondary;
 
 const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
-  const [hasDecision, setHasDecision] = React.useState(false);
+  const firstPoll = event?.poll[0];
+  console.log(firstPoll);
   return (
     <main>
       <ButtonTray
@@ -66,23 +60,23 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
         </div>
       </ButtonTray>
       <section className="prose">
-        {hasDecision && (
-          <div>
-            <h4>What Date Works for you?</h4>
-            <BasicPoll
-              name="Thursday"
-              value={90}
-              color={primary}
-              IconProp={({ ...props }) => <CheckIcon {...props} />}
-            />
-            <BasicPoll
-              name="Friday"
-              value={31}
-              color={secondary}
-              IconProp={({ ...props }) => <Cross1Icon {...props} />}
-            />
-          </div>
-        )}
+        <div>
+          <h4>{firstPoll?.question}</h4>
+          {firstPoll?.options.map((option) => {
+            return (
+              <BasicPoll
+                // option={option}
+                pollId={firstPoll?.id}
+                optionId={option.id}
+                key={option.id}
+                name={option.text}
+                value={90}
+                color={primary}
+                IconProp={({ ...props }) => <CheckIcon {...props} />}
+              />
+            );
+          })}
+        </div>
 
         <div className="mx-2">
           <h3>{event?.name}</h3>

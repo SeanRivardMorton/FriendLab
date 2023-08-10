@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export type NewPollPayload = typeof defaultValues;
@@ -40,23 +39,47 @@ export const useNewPoll = (eventId) => {
   });
 
   const onSubmit = newPollForm.handleSubmit((data) => {
-    console.log("SUBMIT:", data);
     createPoll(data);
   });
 
   return { form: newPollForm, createPoll, submit: onSubmit };
 };
 
-const getPoll = async (eventId, pollId) => {
+export const getPoll = async (eventId, pollId) => {
   const res = await fetch(`/api/events/${eventId}/polls/${pollId}`);
   const poll = await res.json();
   return poll;
 };
 
-export const usePoll = (eventId, pollId, initialData = undefined) => {
+const putPoll = async (eventId, pollId, data) => {
+  const res = await fetch(`/api/events/${eventId}/polls/${pollId}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+  const poll = await res.json();
+
+  return poll;
+};
+
+export const usePoll = (eventId, pollId, initialData) => {
   const pollQuery = useQuery({
     queryKey: ["poll", pollId],
     queryFn: () => getPoll(eventId, pollId),
+    initialData,
   });
-  return { data: pollQuery.data };
+
+  const form = useForm({
+    defaultValues: initialData || pollQuery.data,
+  });
+
+  const { mutate: updatePoll } = useMutation({
+    mutationFn: (data: NewPollPayload) => putPoll(eventId, pollId, data),
+    onSuccess: (res) => console.log("API SUCCESS:", res),
+  });
+
+  const onSubmit = form.handleSubmit((data) => {
+    updatePoll(data);
+  });
+
+  return { data: pollQuery.data, form, onSubmit };
 };

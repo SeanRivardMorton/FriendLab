@@ -1,18 +1,25 @@
-import { PlusIcon } from "@radix-ui/react-icons";
-import React from "react";
-import { twMerge } from "tailwind-merge";
+"use client";
 
-import ButtonTray from "../../components/ButtonTray";
-import { CircleButtonInset } from "../../components/Form/button";
+import { useMutation } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
-interface BasicPollProps {
-  name: string;
-  value: number;
-  color: string;
-  iconProp: React.ReactNode;
-}
+import { CircleButtonInset } from "../../../../components/Form/button";
 
-const BasicPoll = ({ name, value, color, IconProp }) => {
+const putPollVote = async (eventId, pollId, optionId) => {
+  const res = await fetch(`/events/${eventId}/polls/${pollId}/vote`, {
+    method: "PUT",
+    body: JSON.stringify({ optionId }),
+  });
+  const data = await res.json();
+  return data;
+};
+
+const BasicPoll = ({ name, value, color, IconProp, pollId, optionId }) => {
+  const { id } = useParams();
+  const { mutate: updatePollVote } = useMutation({
+    mutationFn: () => putPollVote(id, pollId, optionId),
+    onSuccess: (e) => console.log(e),
+  });
   return (
     <div
       style={{ width: `${value}%` }}
@@ -32,7 +39,7 @@ const BasicPoll = ({ name, value, color, IconProp }) => {
         <div style={{ color: `${color}` }} className="mx-2 my-auto">
           {value}%
         </div>
-        <CircleButtonInset>
+        <CircleButtonInset onClick={updatePollVote}>
           <IconProp
             style={{ color: `${color}` }}
             className="my-auto h-8 w-8 text-success"

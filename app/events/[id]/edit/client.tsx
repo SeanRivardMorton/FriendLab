@@ -9,7 +9,6 @@ import useEventSettings from "./useEventSettings";
 
 const ClientEventSettingsPage = (props) => {
   const { event, addPoll, form, handleSubmit } = useEventSettings(props.event);
-  console.log(form.watch("poll"));
   return (
     <>
       <ButtonTray
@@ -34,12 +33,14 @@ const ClientEventSettingsPage = (props) => {
                 </CircleButtonLinkInset>
               </div>
             </div>
-            {poll?.options &&
-              poll.options.map((option, j) => (
-                <div key={j}>
-                  <p>{option?.text}</p>
-                </div>
-              ))}
+            <ul>
+              {poll?.options &&
+                poll.options.map((option, j) => (
+                  <li key={option.id}>
+                    <p>{option?.text}</p>
+                  </li>
+                ))}
+            </ul>
           </div>
         ))}
       </div>

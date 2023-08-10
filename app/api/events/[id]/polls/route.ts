@@ -29,7 +29,7 @@ export async function GET(res: NextRequest, { params }) {
 export async function POST(request: NextRequest, { params }) {
   const body: NewPollPayload = await request.json();
   const id = params.id;
-  console.log(body, id);
+
   const res = await prisma.poll.create({
     data: {
       event: {
@@ -48,8 +48,9 @@ export async function POST(request: NextRequest, { params }) {
 }
 
 export async function PUT(request: NextRequest, { params }) {
-  //   const body: NewPollPayload  = await request.json();
-  //   const id = params.id;
+  const body: NewPollPayload = await request.json();
+  const { id, pollId } = params;
+  console.log(body, id, pollId);
   //   const res = await prisma.event.update({
   //     where: {
   //       id: id,

@@ -15,6 +15,20 @@ const fetchEvent = async (id) => {
       id: id,
     },
     include: {
+      poll: {
+        include: {
+          options: {
+            include: {
+              _count: {
+                select: {
+                  pollVote: true,
+                },
+              },
+              pollVote: true,
+            },
+          },
+        },
+      },
       attendees: {
         include: {
           eventResponse: {
@@ -37,6 +51,7 @@ const fetchEvent = async (id) => {
       },
     },
   });
+
   return event;
 };
 

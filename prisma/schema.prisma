@@ -39,6 +39,7 @@ model PollOption {
   pollId    String
   poll      Poll           @relation(fields: [pollId], references: [id])
   responses PollResponse[] // One option can be chosen by many users
+  pollVote  PollVote[]
 }
 
 model PollResponse {
@@ -51,6 +52,17 @@ model PollResponse {
   updatedAt    DateTime   @updatedAt
 
   @@unique([userId, pollOptionId])
+}
+
+model PollVote {
+  id        String     @id @default(cuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  optionId  String
+  option    PollOption @relation(fields: [optionId], references: [id])
+  createdAt DateTime   @default(now())
+
+  @@unique([userId, optionId]) // To ensure a user can vote only once for a specific option
 }
 
 model Post {
@@ -85,6 +97,7 @@ model User {
   eventsAttending Event[]         @relation("EventAttendees")
   eventResponse   EventResponse[]
   pollResponse    PollResponse[]
+  pollVote        PollVote[]
 }
 
 model Group {

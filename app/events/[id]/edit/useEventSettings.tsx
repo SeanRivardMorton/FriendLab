@@ -46,6 +46,7 @@ export type EventFormType = {
     question?: string;
     options?: {
       text?: string;
+      id?: string;
     }[];
   }[];
 };
@@ -76,7 +77,6 @@ const useEventSettings = (event: EventType) => {
   };
 
   const handleSubmit = form.handleSubmit((data) => {
-    console.log("SUBMIT:", data);
     updateForm(data);
   });
 
