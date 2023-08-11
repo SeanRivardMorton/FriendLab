@@ -74,7 +74,7 @@ export const usePoll = (eventId, pollId, initialData) => {
     defaultValues: initialData || pollQuery.data,
   });
 
-  const { mutate: updatePoll } = useMutation({
+  const { mutate: updatePoll, isLoading: isUpdateLoading } = useMutation({
     mutationFn: (data: NewPollPayload) => putPoll(eventId, pollId, data),
     onSuccess: (res) => console.log("API SUCCESS:", res),
   });
@@ -83,5 +83,7 @@ export const usePoll = (eventId, pollId, initialData) => {
     updatePoll(data);
   });
 
-  return { data: pollQuery.data, form, onSubmit };
+  const isLoading = pollQuery.isLoading || isUpdateLoading;
+
+  return { data: pollQuery.data, form, onSubmit, isLoading };
 };

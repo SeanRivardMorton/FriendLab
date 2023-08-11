@@ -23,21 +23,22 @@ const ClientEventSettingsPage = (props) => {
         <p>{form.getValues("description")}</p>
         {form.watch("poll").map((poll, i) => (
           <div key={poll.id}>
-            <div className="flex flex-row justify-between">
-              <h4 className="text-lg font-normal">{poll?.question}</h4>
-              <div className="mx-4 flex flex-row justify-between rounded-full bg-base-200 p-4 px-3 shadow-xl">
-                <CircleButtonLinkInset
-                  href={`/events/${event.id}/polls/${poll.id}`}
-                >
-                  <Pencil1Icon className="my-auto h-8 w-8 rotate-90 text-primary" />
-                </CircleButtonLinkInset>
-              </div>
+            <div className="flex flex-row justify-start">
+              <CircleButtonLinkInset
+                className="my-auto bg-base-200"
+                href={`/events/${event.id}/polls/${poll.id}`}
+              >
+                <Pencil1Icon className="h-8 w-8 rotate-90 text-primary" />
+              </CircleButtonLinkInset>
+              <h4 className="my-2 ml-2 text-lg font-normal">
+                {poll?.question}
+              </h4>
             </div>
-            <ul>
+            <ul className="my-2">
               {poll?.options &&
                 poll.options.map((option, j) => (
                   <li key={option.id}>
-                    <p>{option?.text}</p>
+                    <p className="my-0">{option?.text}</p>
                   </li>
                 ))}
             </ul>

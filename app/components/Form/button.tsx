@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 export const CircleButton = ({ children, ...props }) => (
   <button className="btn-circle btn bg-base-200" {...props}>
@@ -12,8 +13,17 @@ export const CircleButtonLink = ({ children, href = "/", ...props }) => (
   </Link>
 );
 
-export const CircleButtonLinkInset = ({ children, href = "/", ...props }) => (
-  <Link href={href} className="btn-circle btn bg-base-100" {...props}>
+export const CircleButtonLinkInset = ({
+  children,
+  href = "/",
+  className = "",
+  ...props
+}) => (
+  <Link
+    href={href}
+    className={twMerge("btn-circle btn bg-base-100", className)}
+    {...props}
+  >
     {children}
   </Link>
 );

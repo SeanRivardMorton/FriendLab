@@ -5,11 +5,21 @@ import DeleteButton from "../../../../components/DeleteButton.tsx";
 import { usePoll } from "../usePoll";
 
 const ClientUpdatePollPage = ({ eventId, pollId, poll }) => {
-  const { data, form, onSubmit } = usePoll(eventId, pollId, poll);
+  const { data, form, onSubmit, isLoading } = usePoll(eventId, pollId, poll);
 
   return (
     <>
-      <ButtonTray href={`/events/${eventId}/edit`}>
+      <ButtonTray
+        href={`/events/${eventId}/edit`}
+        actionSlot={<div className="w-4"></div>}
+        secondarySlot={
+          <>
+            {isLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : null}
+          </>
+        }
+      >
         <h2>Update Poll</h2>
       </ButtonTray>
       <form onBlur={onSubmit} className="mx-2 my-4">
