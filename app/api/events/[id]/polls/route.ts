@@ -50,7 +50,7 @@ export async function POST(request: NextRequest, { params }) {
 export async function PUT(request: NextRequest, { params }) {
   const body: NewPollPayload = await request.json();
   const { id, pollId } = params;
-  console.log(body, id, pollId);
+
   //   const res = await prisma.event.update({
   //     where: {
   //       id: id,

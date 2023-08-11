@@ -54,7 +54,6 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
 
   const getTotalNumberOfVotes = () => {
     return firstPoll?.options.reduce((acc, option) => {
-      console.log(option);
       return (acc += option._count.pollVote);
     }, 0);
   };

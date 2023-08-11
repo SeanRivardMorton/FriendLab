@@ -26,7 +26,6 @@ export function MultiUploader({
 
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: (res) => {
-      console.log(res);
       onSuccess?.(res);
     },
     onUploadError: (res) => {

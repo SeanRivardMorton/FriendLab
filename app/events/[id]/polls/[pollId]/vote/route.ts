@@ -14,8 +14,6 @@ export async function PUT(request: NextRequest, { params }) {
       body: { message: "Unauthorized" },
     });
 
-  //   console.log(option);
-
   const res = await prisma.pollVote.create({
     data: {
       userId: session?.user.id,

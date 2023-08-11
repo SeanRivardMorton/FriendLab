@@ -4,8 +4,8 @@ import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
-import { CircleButtonInset } from "../../../../components/Form/button";
 import Avatar from "../../../../components/Avatar";
+import { CircleButtonInset } from "../../../../components/Form/button";
 
 const putPollVote = async (eventId, pollId, optionId) => {
   const res = await fetch(`/events/${eventId}/polls/${pollId}/vote`, {
@@ -18,14 +18,12 @@ const putPollVote = async (eventId, pollId, optionId) => {
 
 const BasicPoll = ({ option, color = "red", totalOptions }) => {
   const { id } = useParams();
-  // console.log(id, option);
   const { mutate: updatePollVote } = useMutation({
     mutationFn: () => putPollVote(id, option.pollId, option.id),
     onSuccess: (e) => console.log(e),
   });
 
   const usersThatHaveVoted = option.pollVote.map((vote) => vote.user);
-  console.log(usersThatHaveVoted);
 
   const value =
     option._count.pollVote === 0
