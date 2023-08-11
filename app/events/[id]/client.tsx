@@ -4,6 +4,8 @@ import { ResponseStatus } from "@prisma/client";
 import {
   ChatBubbleIcon,
   CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   CircleIcon,
   Cross1Icon,
   Pencil1Icon,
@@ -35,7 +37,20 @@ const primary = daisyuiColors["[data-theme=night]"].primary;
 const secondary = daisyuiColors["[data-theme=night]"].secondary;
 
 const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
-  const firstPoll = event?.poll[0];
+  const [pollIndex, setPollIndex] = React.useState(0);
+  const firstPoll = event?.poll[pollIndex];
+
+  const incrementPollIndex = () => {
+    if (event?.poll.length && pollIndex < event?.poll.length - 1) {
+      setPollIndex(pollIndex + 1);
+    }
+  };
+
+  const decrementPollIndex = () => {
+    if (pollIndex > 0) {
+      setPollIndex(pollIndex - 1);
+    }
+  };
 
   const getTotalNumberOfVotes = () => {
     return firstPoll?.options.reduce((acc, option) => {
@@ -68,7 +83,15 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
       </ButtonTray>
       <section className="prose">
         <div>
-          <h4>{firstPoll?.question}</h4>
+          <div className="flex flex-row justify-between">
+            <button onClick={decrementPollIndex} className="btn-ghost btn">
+              <ChevronLeftIcon className="mx-2 h-8 w-8" />
+            </button>
+            <h4 className="my-auto">{firstPoll?.question}</h4>
+            <button onClick={incrementPollIndex} className="btn-ghost btn">
+              <ChevronRightIcon className="mx-2 h-8 w-8" />
+            </button>
+          </div>
           {firstPoll?.options.map((option) => {
             return (
               <BasicPoll
