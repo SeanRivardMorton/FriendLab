@@ -36,8 +36,6 @@ export function MultiUploader({
   });
 
   const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
-    // setFiles(acceptedFiles);
-    // console.log(acceptedFiles);
     startUpload(acceptedFiles);
   }, []);
 

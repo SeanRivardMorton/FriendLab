@@ -29,7 +29,7 @@ const ButtonTray: React.FC<ButtonTrayProps> = ({
 }) => {
   return (
     <div className="flex flex-row justify-between">
-      <div className="card card-compact mb-4 w-fit -translate-x-2 translate-y-3 rounded-e-full bg-base-200 shadow-xl shadow-base-100">
+      <div className="card card-compact mb-4 w-fit -translate-x-2 translate-y-3 rounded-e-full bg-base-200">
         <div className="card-body">
           <div className="card-title flex flex-row justify-between">
             {backSlot}

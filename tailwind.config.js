@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      transitionProperty: {
+        width: "width",
+      },
       keyframes: {
         slideDownAndFade: {
           from: { opacity: 0, transform: "translateY(-2px)" },
@@ -40,7 +43,7 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["luxury"],
+    themes: ["dracula"],
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };

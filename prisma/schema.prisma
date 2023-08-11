@@ -18,10 +18,51 @@ model Event {
   creator       User            @relation("EventCreator", fields: [creatorId], references: [id])
   creatorId     String
   attendees     User[]          @relation("EventAttendees")
-  Post          Post[]
+  post          Post[]
   group         Group?          @relation(fields: [groupId], references: [id])
   groupId       String?
   eventResponse EventResponse[]
+  poll          Poll[] // NEW: One event can have many polls
+}
+
+model Poll {
+  id       String       @id @default(cuid())
+  question String
+  eventId  String
+  event    Event        @relation(fields: [eventId], references: [id])
+  options  PollOption[] // One poll can have many options
+}
+
+model PollOption {
+  id        String         @id @default(cuid())
+  text      String
+  pollId    String
+  poll      Poll           @relation(fields: [pollId], references: [id])
+  responses PollResponse[] // One option can be chosen by many users
+  pollVote  PollVote[]
+}
+
+model PollResponse {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  pollOptionId String
+  pollOption   PollOption @relation(fields: [pollOptionId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([userId, pollOptionId])
+}
+
+model PollVote {
+  id        String     @id @default(cuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  optionId  String
+  option    PollOption @relation(fields: [optionId], references: [id])
+  createdAt DateTime   @default(now())
+
+  @@unique([userId, optionId]) // To ensure a user can vote only once for a specific option
 }
 
 model Post {
@@ -55,6 +96,8 @@ model User {
   eventsCreated   Event[]         @relation("EventCreator")
   eventsAttending Event[]         @relation("EventAttendees")
   eventResponse   EventResponse[]
+  pollResponse    PollResponse[]
+  pollVote        PollVote[]
 }
 
 model Group {
