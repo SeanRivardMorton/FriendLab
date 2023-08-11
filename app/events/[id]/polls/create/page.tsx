@@ -9,7 +9,7 @@ import { useNewPoll } from "../usePoll";
 
 const PollPage = () => {
   const params = useParams();
-  const { form, submit } = useNewPoll(params.id);
+  const { form, submit, isLoading } = useNewPoll(params.id);
   return (
     <>
       <ButtonTray href={`/events/${params.id}/edit`}>
@@ -41,9 +41,15 @@ const PollPage = () => {
           className="input-bordered input my-2 w-full"
         />
         <BottomTray>
-          <CircleButtonInset>
-            <CheckIcon className="h-8 w-8 text-success" />
-          </CircleButtonInset>
+          <>
+            {isLoading ? (
+              <span className="loading loading-spinner loading-md text-success"></span>
+            ) : (
+              <CircleButtonInset>
+                <CheckIcon className="h-8 w-8 text-success" />
+              </CircleButtonInset>
+            )}
+          </>
         </BottomTray>
       </form>
     </>

@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export type NewPollPayload = typeof defaultValues;
@@ -29,9 +30,10 @@ const postPoll = async (id: string, data: NewPollPayload) => {
 };
 
 export const useNewPoll = (eventId) => {
-  const { mutate: createPoll } = useMutation({
+  const router = useRouter();
+  const { mutate: createPoll, isLoading } = useMutation({
     mutationFn: (data: NewPollPayload) => postPoll(eventId, data),
-    onSuccess: (res) => console.log("API SUCCESS:", res),
+    onSuccess: (res) => router.push(`/events/${eventId}/edit`),
   });
 
   const newPollForm = useForm({
@@ -42,7 +44,7 @@ export const useNewPoll = (eventId) => {
     createPoll(data);
   });
 
-  return { form: newPollForm, createPoll, submit: onSubmit };
+  return { form: newPollForm, createPoll, submit: onSubmit, isLoading };
 };
 
 export const getPoll = async (eventId, pollId) => {

@@ -67,16 +67,15 @@ const NewDecisionPoll = ({ event }) => {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
       <div className="flex flex-row">
         <div className="card card-compact w-screen px-0">
           <div className="card-body">
             <div className="card-title">New Poll</div>
             <form onBlur={submitForm}>
               <div className="form-control prose">
-                {poll.map((poll, idx) => {
+                {poll.map((poll, i) => {
                   return (
-                    <div key={idx}>
+                    <div key={poll.id}>
                       <label className="label">
                         <span className="label-text">Question</span>
                       </label>
@@ -85,11 +84,11 @@ const NewDecisionPoll = ({ event }) => {
                         type="text"
                         placeholder="Title"
                         className="input-bordered input"
-                        {...form.register(`poll.${idx}.question`)}
+                        {...form.register(`poll.${i}.question`)}
                       />
                       {poll.options?.map((option, idx) => {
                         return (
-                          <div key={idx} className="form-control">
+                          <div key={option.id} className="form-control">
                             <label className="label">
                               <span className="label-text">
                                 Option {idx + 1}

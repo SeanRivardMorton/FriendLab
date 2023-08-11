@@ -6,27 +6,6 @@ import { Event } from "../getEventById";
 import updateEventPoll from "./updatePoll";
 
 export async function PUT(request: Request, { params }) {
-  // const data: Event = await request.json();
-
-  // const res = await updateEventPoll(params.id, data);
-  // const res = await prisma.event.update({
-  //   where: {
-  //     id: params.id,
-  //   },
-  //   data: {
-  //     name: data.name,
-  //     description: data.description,
-  //     location: data.location,
-  //     date: data.date,
-  //     poll: {
-  //       update: {
-  //         options: {
-  //           update: data.poll.options,
-  //         },
-  //       },
-  //     }
-  //   },
-  // });
   return NextResponse.json({ status: 202, body: { message: "ok" } });
 }
 
