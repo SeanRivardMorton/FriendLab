@@ -83,15 +83,17 @@ const ClientEventPage: React.FC<ClientEventPageProps> = ({ event }) => {
       </ButtonTray>
       <section className="prose">
         <div>
-          <div className="flex flex-row justify-between">
-            <button onClick={decrementPollIndex} className="btn-ghost btn">
-              <ChevronLeftIcon className="mx-2 h-8 w-8" />
-            </button>
-            <h4 className="my-auto">{firstPoll?.question}</h4>
-            <button onClick={incrementPollIndex} className="btn-ghost btn">
-              <ChevronRightIcon className="mx-2 h-8 w-8" />
-            </button>
-          </div>
+          {firstPoll && (
+            <div className="flex flex-row justify-between">
+              <button onClick={decrementPollIndex} className="btn-ghost btn">
+                <ChevronLeftIcon className="mx-2 h-8 w-8" />
+              </button>
+              <h4 className="my-auto">{firstPoll?.question}</h4>
+              <button onClick={incrementPollIndex} className="btn-ghost btn">
+                <ChevronRightIcon className="mx-2 h-8 w-8" />
+              </button>
+            </div>
+          )}
           {firstPoll?.options.map((option) => {
             return (
               <BasicPoll
