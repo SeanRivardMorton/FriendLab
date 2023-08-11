@@ -24,7 +24,11 @@ const fetchEvent = async (id) => {
                   pollVote: true,
                 },
               },
-              pollVote: true,
+              pollVote: {
+                select: {
+                  user: true,
+                },
+              },
             },
           },
         },
